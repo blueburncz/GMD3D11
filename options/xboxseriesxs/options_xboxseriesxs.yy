@@ -6,7 +6,7 @@
   "option_xboxseriesxs_description": "Your Description",
   "option_xboxseriesxs_publisher": "Company Name",
   "option_xboxseriesxs_publisher_display_name": "Company Display Name",
-  "option_xboxseriesxs_version": "1.0.0.0",
+  "option_xboxseriesxs_version": "0.1.0.0",
   "option_xboxseriesxs_product_id": "",
   "option_xboxseriesxs_title_id": "01234567",
   "option_xboxseriesxs_service_config_id": "00000000-0000-0000-0000-000000000000",

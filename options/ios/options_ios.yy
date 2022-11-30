@@ -4,7 +4,7 @@
   "name": "iOS",
   "option_ios_display_name": "Created with GameMaker",
   "option_ios_bundle_name": "com.company.game",
-  "option_ios_version": "1.0.0.0",
+  "option_ios_version": "0.1.0.0",
   "option_ios_output_dir": "~/gamemakerstudio2",
   "option_ios_team_id": "",
   "option_ios_orientation_portrait": true,
