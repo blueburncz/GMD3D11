@@ -1,0 +1,23 @@
+{
+  "_version": 2,
+  "project": "GMD3D11",
+  "project_name": "GMD3D11",
+  "version": "0.1.0",
+  "title": "GMD3D11 Docs",
+  "author": "BlueBurn",
+  "prefix": ["__d3d11"],
+  "analytics": "",
+  "api": {
+    "rating": ""
+  },
+  "toc": {
+    "GMD3D11 Docs": "index.md",
+    "Changelog": {
+      "file": "Changelog/Changelog_.md",
+      "pages": {
+        "0.1.0": "Changelog/Changelog0.1.0.md"
+      }
+    },
+    "Scripting API": {}
+  }
+}
