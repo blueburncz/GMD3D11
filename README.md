@@ -18,3 +18,5 @@ cmake ../CMakeLists.txt
 cmake --build . --config=Release
 Copy-Item -Path ./Release/GMD3D11.dll -Destination ../../datafiles
 ```
+## Links
+* [Documentation](https://blueburn.cz/gmd3d11/docs)
