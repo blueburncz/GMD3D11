@@ -3,10 +3,14 @@
   "resourceVersion": "1.6",
   "name": "GMD3D11",
   "resources": [
+    {"id":{"name":"SprTerrain","path":"sprites/SprTerrain/SprTerrain.yy",},"order":3,},
+    {"id":{"name":"RmTerrain","path":"rooms/RmTerrain/RmTerrain.yy",},"order":1,},
+    {"id":{"name":"ShTerrain","path":"shaders/ShTerrain/ShTerrain.yy",},"order":2,},
     {"id":{"name":"RmVTF","path":"rooms/RmVTF/RmVTF.yy",},"order":1,},
     {"id":{"name":"OVTF","path":"objects/OVTF/OVTF.yy",},"order":0,},
     {"id":{"name":"SprVTF","path":"sprites/SprVTF/SprVTF.yy",},"order":3,},
     {"id":{"name":"ShVTF","path":"shaders/ShVTF/ShVTF.yy",},"order":2,},
+    {"id":{"name":"OTerrain","path":"objects/OTerrain/OTerrain.yy",},"order":0,},
     {"id":{"name":"__d3d11","path":"scripts/__d3d11/__d3d11.yy",},"order":0,},
   ],
   "Options": [
@@ -31,12 +35,14 @@
     "children": [],
   },
   "RoomOrderNodes": [
+    {"roomId":{"name":"RmTerrain","path":"rooms/RmTerrain/RmTerrain.yy",},},
     {"roomId":{"name":"RmVTF","path":"rooms/RmVTF/RmVTF.yy",},},
   ],
   "Folders": [
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Examples","folderPath":"folders/Examples.yy","order":1,},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"VTF","folderPath":"folders/Examples/VTF.yy","order":4,},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"GMD3D11","folderPath":"folders/GMD3D11.yy","order":0,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Terrain","folderPath":"folders/Examples/Terrain.yy","order":5,},
   ],
   "AudioGroups": [
     {"resourceType":"GMAudioGroup","resourceVersion":"1.3","name":"audiogroup_default","targets":-1,},
@@ -48,6 +54,6 @@
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"GMD3D11.dll","CopyToMask":64,"filePath":"datafiles",},
   ],
   "MetaData": {
-    "IDEVersion": "2022.11.0.54",
+    "IDEVersion": "2022.11.1.56",
   },
 }
