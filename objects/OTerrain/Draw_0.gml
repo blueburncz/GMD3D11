@@ -17,7 +17,7 @@ gpu_set_cullmode(cull_counterclockwise);
 
 shader_set(_shader);
 texture_set_stage(shader_get_sampler_index(_shader, "u_texHeightmap"), surface_get_texture(terrainHeight));
-shader_set_uniform_f(shader_get_uniform(_shader, "u_fHeightmapTexel"), 1 / TERRAIN_SIZE);
+shader_set_uniform_f(shader_get_uniform(_shader, "u_vHeightmapTexel"), 1 / TERRAIN_SIZE, 1 / TERRAIN_SIZE);
 vertex_submit(terrainVBuffer, pr_trianglelist, -1);
 shader_reset();
 

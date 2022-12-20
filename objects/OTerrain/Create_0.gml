@@ -1,3 +1,5 @@
+show_debug_overlay(true);
+
 z = 256;
 direction = -45;
 directionUp = -45;
