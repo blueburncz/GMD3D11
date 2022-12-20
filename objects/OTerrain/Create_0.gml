@@ -1,4 +1,6 @@
 show_debug_overlay(true);
+application_surface_enable(true);
+application_surface_draw_enable(false);
 
 z = 256;
 direction = -45;
@@ -6,9 +8,18 @@ directionUp = -45;
 mouseLastX = 0;
 mouseLastY = 0;
 
+var _windowWidth = window_get_width();
+var _windowHeight = window_get_height();
+
 camera = camera_create();
+fov = 60;
+aspect = _windowWidth / _windowHeight;
+clipNear = 1;
+clipFar = 8192;
 camera_set_proj_mat(camera, matrix_build_projection_perspective_fov(
-	-60, -window_get_width() / window_get_height(), 1, 8192));
+	-fov, -aspect, clipNear, clipFar));
+
+depthSurface = noone;
 
 vertex_format_begin();
 vertex_format_add_position();

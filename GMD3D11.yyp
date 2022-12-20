@@ -3,8 +3,11 @@
   "resourceVersion": "1.6",
   "name": "GMD3D11",
   "resources": [
+    {"id":{"name":"screen_point_to_vec3","path":"scripts/screen_point_to_vec3/screen_point_to_vec3.yy",},"order":5,},
+    {"id":{"name":"ShCursor","path":"shaders/ShCursor/ShCursor.yy",},"order":6,},
     {"id":{"name":"SprTerrain","path":"sprites/SprTerrain/SprTerrain.yy",},"order":3,},
     {"id":{"name":"RmTerrain","path":"rooms/RmTerrain/RmTerrain.yy",},"order":1,},
+    {"id":{"name":"decode_float_vec3","path":"scripts/decode_float_vec3/decode_float_vec3.yy",},"order":4,},
     {"id":{"name":"ShTerrain","path":"shaders/ShTerrain/ShTerrain.yy",},"order":2,},
     {"id":{"name":"RmVTF","path":"rooms/RmVTF/RmVTF.yy",},"order":1,},
     {"id":{"name":"OVTF","path":"objects/OVTF/OVTF.yy",},"order":0,},
