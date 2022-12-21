@@ -43,9 +43,9 @@
   ],
   "Folders": [
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Examples","folderPath":"folders/Examples.yy","order":1,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Terrain","folderPath":"folders/Examples/Terrain.yy","order":5,},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"VTF","folderPath":"folders/Examples/VTF.yy","order":4,},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"GMD3D11","folderPath":"folders/GMD3D11.yy","order":0,},
-    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Terrain","folderPath":"folders/Examples/Terrain.yy","order":5,},
   ],
   "AudioGroups": [
     {"resourceType":"GMAudioGroup","resourceVersion":"1.3","name":"audiogroup_default","targets":-1,},

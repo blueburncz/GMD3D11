@@ -28,7 +28,7 @@ camera_apply(camera);
 var _shader = ShTerrain;
 shader_set(_shader);
 var _uTexHeightmap = shader_get_sampler_index(_shader, "u_texHeightmap");
-texture_set_stage(_uTexHeightmap, surface_get_texture(terrainHeight));
+texture_set_stage_vs(_uTexHeightmap, surface_get_texture(terrainHeight));
 gpu_set_tex_repeat_ext(_uTexHeightmap, false);
 shader_set_uniform_f(shader_get_uniform(_shader, "u_vHeightmapTexel"), 1 / TERRAIN_SIZE, 1 / TERRAIN_SIZE);
 shader_set_uniform_f(shader_get_uniform(_shader, "u_fClipFar"), clipFar);
@@ -61,7 +61,7 @@ if (keyboard_check(vk_space))
 	var _shader = ShCursor;
 	shader_set(_shader);
 	var _uTexHeightmap = shader_get_sampler_index(_shader, "u_texHeightmap");
-	texture_set_stage(_uTexHeightmap, surface_get_texture(terrainHeight));
+	texture_set_stage_vs(_uTexHeightmap, surface_get_texture(terrainHeight));
 	gpu_set_tex_repeat_ext(_uTexHeightmap, false);
 	draw_circle_color(_mousePosition[0], _mousePosition[1], 32, c_yellow, c_yellow, true);
 	shader_reset();
