@@ -49,7 +49,7 @@
     "PhysicsWorldPixToMetres": 0.1,
   },
   "parent": {
-    "name": "Terrain",
-    "path": "folders/Examples/Terrain.yy",
+    "name": "Rooms",
+    "path": "folders/Examples/Terrain/Rooms.yy",
   },
 }

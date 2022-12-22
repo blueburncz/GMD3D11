@@ -9,3 +9,7 @@ if (surface_exists(terrainHeight))
 	surface_free(terrainHeight);
 }
 vertex_delete_buffer(terrainVBuffer);
+if (surface_exists(brushSurface))
+{
+	surface_free(brushSurface);
+}

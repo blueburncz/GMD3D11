@@ -57,3 +57,8 @@ for (var i = 0; i < TERRAIN_SIZE; ++i)
 }
 vertex_end(terrainVBuffer);
 vertex_freeze(terrainVBuffer);
+
+brushSprite = SprBrush;
+brushSize = 64;
+brushStrength = 1;
+brushSurface = noone;

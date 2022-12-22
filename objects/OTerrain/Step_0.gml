@@ -43,3 +43,5 @@ camera_set_view_mat(camera, matrix_build_lookat(
 	y - dsin(direction),
 	z + dtan(directionUp),
 	0, 0, 1));
+
+brushSize = max(brushSize + (mouse_wheel_up() - mouse_wheel_down()), 1);

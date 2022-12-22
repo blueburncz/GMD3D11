@@ -1,7 +1,7 @@
 {
   "resourceType": "GMShader",
   "resourceVersion": "1.0",
-  "name": "ShTerrain",
+  "name": "ShBrushAddEnc24",
   "type": 1,
   "parent": {
     "name": "Shaders",

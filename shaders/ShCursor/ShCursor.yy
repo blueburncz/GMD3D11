@@ -4,7 +4,7 @@
   "name": "ShCursor",
   "type": 1,
   "parent": {
-    "name": "Terrain",
-    "path": "folders/Examples/Terrain.yy",
+    "name": "Shaders",
+    "path": "folders/Examples/Terrain/Shaders.yy",
   },
 }
