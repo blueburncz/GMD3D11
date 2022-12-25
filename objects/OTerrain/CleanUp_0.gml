@@ -4,9 +4,9 @@ if (surface_exists(depthSurface))
 	surface_free(depthSurface);
 }
 vertex_format_delete(terrainVFormat);
-if (surface_exists(terrainHeight))
+if (surface_exists(terrainHeightmap))
 {
-	surface_free(terrainHeight);
+	surface_free(terrainHeightmap);
 }
 vertex_delete_buffer(terrainVBuffer);
 if (surface_exists(brushSurface))

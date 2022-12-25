@@ -6,10 +6,11 @@ if (!surface_exists(depthSurface))
 	depthSurface = surface_create(_windowWidth, _windowHeight);
 }
 
-if (!surface_exists(terrainHeight))
+if (!surface_exists(terrainHeightmap))
 {
-	terrainHeight = surface_create(TERRAIN_SIZE, TERRAIN_SIZE);
-	surface_set_target(terrainHeight);
+	terrainHeightmap = surface_create(terrainWidth, terrainHeight);
+	surface_set_target(terrainHeightmap);
+	draw_clear(c_black);
 	shader_set(ShGrayscaleToEnc24);
 	draw_sprite(SprTerrain, 0, 0, 0);
 	shader_reset();
@@ -30,9 +31,9 @@ camera_apply(camera);
 var _shader = ShTerrain;
 shader_set(_shader);
 var _uTexHeightmap = shader_get_sampler_index(_shader, "u_texHeightmap");
-texture_set_stage_vs(_uTexHeightmap, surface_get_texture(terrainHeight));
+texture_set_stage_vs(_uTexHeightmap, surface_get_texture(terrainHeightmap));
 gpu_set_tex_repeat_ext(_uTexHeightmap, false);
-shader_set_uniform_f(shader_get_uniform(_shader, "u_vHeightmapTexel"), 1 / TERRAIN_SIZE, 1 / TERRAIN_SIZE);
+shader_set_uniform_f(shader_get_uniform(_shader, "u_vHeightmapTexel"), 1 / terrainWidth, 1 / terrainHeight);
 shader_set_uniform_f(shader_get_uniform(_shader, "u_fClipFar"), clipFar);
 vertex_submit(terrainVBuffer, pr_trianglelist, -1);
 shader_reset();
@@ -63,8 +64,9 @@ if (keyboard_check(vk_space))
 	var _shader = ShCursor;
 	shader_set(_shader);
 	var _uTexHeightmap = shader_get_sampler_index(_shader, "u_texHeightmap");
-	texture_set_stage_vs(_uTexHeightmap, surface_get_texture(terrainHeight));
+	texture_set_stage_vs(_uTexHeightmap, surface_get_texture(terrainHeightmap));
 	gpu_set_tex_repeat_ext(_uTexHeightmap, false);
+	shader_set_uniform_f(shader_get_uniform(_shader, "u_vHeightmapTexel"), 1 / terrainWidth, 1 / terrainHeight);
 	draw_circle_color(_mousePosition[0], _mousePosition[1], brushSize / 2, c_yellow, c_yellow, true);
 	shader_reset();
 	surface_reset_target();
@@ -72,24 +74,6 @@ if (keyboard_check(vk_space))
 	// Edit terrain heightmap
 	if (mouse_check_button(mb_left))
 	{
-		//surface_set_target(terrainHeight);
-		////gpu_push_state();
-		////gpu_set_blendmode(keyboard_check(vk_shift) ? bm_subtract : bm_add);
-		//var _alpha = draw_get_alpha();
-		//draw_set_alpha(delta_time / 1000000);
-		//var _color = c_white;
-		//if (keyboard_check(vk_shift))
-		//{
-		//	_color = make_color_rgb(
-		//		255 - color_get_red(_color),
-		//		255 - color_get_green(_color),
-		//		255 - color_get_blue(_color));
-		//}
-		//draw_circle_color(_mousePosition[0], _mousePosition[1], 32, _color, _color, false);
-		//draw_set_alpha(_alpha);
-		////gpu_pop_state();
-		//surface_reset_target();
-
 		if (!surface_exists(brushSurface))
 		{
 			brushSurface = surface_create(brushSize, brushSize);
@@ -100,23 +84,24 @@ if (keyboard_check(vk_space))
 			surface_resize(brushSurface, brushSize, brushSize);
 		}
 
-		var _terrainWidth = TERRAIN_SIZE; //surface_get_width(terrainHeight);
-		var _terrainHeight = TERRAIN_SIZE; //surface_get_height(terrainHeight);
+		var _brushX = round(_mousePosition[0] - (brushSize / 2));
+		var _brushY = round(_mousePosition[1] - (brushSize / 2));
+
 		surface_set_target(brushSurface);
 		var _shader = ShBrushAddEnc24;
 		shader_set(_shader);
 		var _uTexHeightmap = shader_get_sampler_index(_shader, "u_texHeightmap");
-		texture_set_stage(_uTexHeightmap, surface_get_texture(terrainHeight));
+		texture_set_stage(_uTexHeightmap, surface_get_texture(terrainHeightmap));
 		gpu_set_tex_repeat_ext(_uTexHeightmap, false);
 		gpu_set_tex_filter_ext(_uTexHeightmap, false);
 		shader_set_uniform_f(
 			shader_get_uniform(_shader, "u_vOffset"),
-			(_mousePosition[0] - (brushSize / 2)) / TERRAIN_SIZE,
-			(_mousePosition[1] - (brushSize / 2)) / TERRAIN_SIZE);
+			_brushX / terrainWidth,
+			_brushY / terrainHeight);
 		shader_set_uniform_f(
 			shader_get_uniform(_shader, "u_vScale"),
-			brushSize / _terrainWidth,
-			brushSize / _terrainHeight);
+			brushSize / terrainWidth,
+			brushSize / terrainHeight);
 		shader_set_uniform_f(
 			shader_get_uniform(_shader, "u_fStrength"),
 			brushStrength * (delta_time / 1000000) * (keyboard_check(vk_shift) ? -1 : 1));
@@ -124,8 +109,8 @@ if (keyboard_check(vk_space))
 		shader_reset();
 		surface_reset_target();
 
-		surface_set_target(terrainHeight);
-		draw_surface(brushSurface, _mousePosition[0] - (brushSize / 2), _mousePosition[1] - (brushSize / 2));
+		surface_set_target(terrainHeightmap);
+		draw_surface(brushSurface, _brushX, _brushY);
 		surface_reset_target();
 	}
 }
