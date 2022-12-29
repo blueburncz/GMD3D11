@@ -23,6 +23,7 @@ depthSurface = noone;
 
 vertex_format_begin();
 vertex_format_add_position();
+vertex_format_add_custom(vertex_type_float1, vertex_usage_texcoord);
 vertex_format_add_texcoord();
 terrainVFormat = vertex_format_end();
 
@@ -46,13 +47,13 @@ for (var i = 0; i < terrainWidth; ++i)
 		var _c1 = i + 1, _c2 = j + 1, _cu = _c1 / terrainWidth, _cv = _c2 / terrainHeight;
 		var _d1 = i,     _d2 = j + 1, _du = _d1 / terrainWidth, _dv = _d2 / terrainHeight;
 
-		vertex_position(terrainVBuffer, _a1, _a2); vertex_texcoord(terrainVBuffer, _au, _av);
-		vertex_position(terrainVBuffer, _c1, _c2); vertex_texcoord(terrainVBuffer, _cu, _cv);
-		vertex_position(terrainVBuffer, _d1, _d2); vertex_texcoord(terrainVBuffer, _du, _dv);
+		vertex_position(terrainVBuffer, _a1, _a2); vertex_float1(terrainVBuffer, 0); vertex_texcoord(terrainVBuffer, _au, _av);
+		vertex_position(terrainVBuffer, _c1, _c2); vertex_float1(terrainVBuffer, 1); vertex_texcoord(terrainVBuffer, _cu, _cv);
+		vertex_position(terrainVBuffer, _d1, _d2); vertex_float1(terrainVBuffer, 2); vertex_texcoord(terrainVBuffer, _du, _dv);
 
-		vertex_position(terrainVBuffer, _a1, _a2); vertex_texcoord(terrainVBuffer, _au, _av);
-		vertex_position(terrainVBuffer, _b1, _b2); vertex_texcoord(terrainVBuffer, _bu, _bv);
-		vertex_position(terrainVBuffer, _c1, _c2); vertex_texcoord(terrainVBuffer, _cu, _cv);
+		vertex_position(terrainVBuffer, _a1, _a2); vertex_float1(terrainVBuffer, 3); vertex_texcoord(terrainVBuffer, _au, _av);
+		vertex_position(terrainVBuffer, _b1, _b2); vertex_float1(terrainVBuffer, 4); vertex_texcoord(terrainVBuffer, _bu, _bv);
+		vertex_position(terrainVBuffer, _c1, _c2); vertex_float1(terrainVBuffer, 5); vertex_texcoord(terrainVBuffer, _cu, _cv);
 	}
 }
 vertex_end(terrainVBuffer);

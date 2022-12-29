@@ -34,6 +34,7 @@ void main()
 
 	gl_FragData[0].rgb = LinearToGamma(
 		GammaToLinear(baseColor.rgb) * mix(GammaToLinear(vec3(0.2)), vec3(1.0), NdotL));
+	//gl_FragData[0].rgb = N * 0.5 + 0.5;
 	gl_FragData[0].a = baseColor.a;
 
 	gl_FragData[1].rgb = EncodeFloatVec3(v_fDepth / u_fClipFar);
