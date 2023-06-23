@@ -5,4 +5,9 @@ project(GMD3D11)
 set(CMAKE_CXX_STANDARD 17)
 
 add_library(GMD3D11 SHARED
-    src/exports.cpp)
+    src/exports.cpp
+    )
+
+target_include_directories(GMD3D11 PRIVATE
+    include/
+    )
