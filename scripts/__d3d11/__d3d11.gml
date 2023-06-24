@@ -20,6 +20,7 @@
 /// @return {Real} Returns 1 on success or 0 on fail.
 function d3d11_texture_set_stage_vs(_slot, _texture)
 {
+	gml_pragma("forceinline");
 	static _fn = external_define(
 		GMD3D11_PATH, "d3d11_texture_set_stage_vs", dll_cdecl, ty_real,
 		1, ty_real);
@@ -59,11 +60,30 @@ function texture_set_stage_vs(_slot, _texture)
 /// @return {Real} Returns 1 on success or 0 on fail.
 function d3d11_texture_set_stage_ps(_slot, _texture)
 {
+	gml_pragma("forceinline");
 	static _fn = external_define(
 		GMD3D11_PATH, "d3d11_texture_set_stage_ps", dll_cdecl, ty_real,
 		1, ty_real);
 	texture_set_stage(0, _texture);
 	return external_call(_fn, _slot);
+}
+
+function d3d11_shader_compile_ps(_file, _entryPoint, _profile)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_compile_ps", dll_cdecl, ty_real,
+		3, ty_string, ty_string, ty_string);
+	return external_call(_fn, _file, _entryPoint, _profile);
+}
+
+function d3d11_shader_override_ps(_ps)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_override_ps", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _ps);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
