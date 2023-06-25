@@ -1,14 +1,13 @@
 #include <d3d11.h>
 #include <d3dcompiler.h>
+#include <exports.hpp>
 #include <iostream>
-#include <Windows.h>
-#include <VMTHookManager.hpp>
 #include <vector>
+#include <VMTHookManager.hpp>
+#include <Windows.h>
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d3dcompiler.lib")
-
-#define GM_EXPORT extern "C" __declspec(dllexport)
 
 ID3D11Device* gDevice = nullptr;
 ID3D11DeviceContext* gContext = nullptr;
@@ -106,7 +105,7 @@ GM_EXPORT double d3d11_init(char* device, char* context)
 	gContextHookManager.bInitialize((_pdword*)gContext);
 	gContextHookManager.dwHookMethod((_dword)Draw, (UINT)ID3D11DeviceContextVtbl::Draw);
 
-	return 1.0;
+	return GM_TRUE;
 }
 
 GM_EXPORT double d3d11_texture_set_stage_vs(double index)
@@ -115,12 +114,12 @@ GM_EXPORT double d3d11_texture_set_stage_vs(double index)
 	if (startSlot < 0
 		|| startSlot >= D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT)
 	{
-		return 0.0;
+		return GM_FALSE;
 	}
 	ID3D11ShaderResourceView* shaderResourceView;
 	gContext->PSGetShaderResources(0, 1, &shaderResourceView);
 	gContext->VSSetShaderResources(startSlot, 1, &shaderResourceView);
-	return 1.0;
+	return GM_TRUE;
 }
 
 GM_EXPORT double d3d11_texture_set_stage_ps(double index)
@@ -129,12 +128,12 @@ GM_EXPORT double d3d11_texture_set_stage_ps(double index)
 	if (startSlot < 0
 		|| startSlot >= D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT)
 	{
-		return 0.0;
+		return GM_FALSE;
 	}
 	ID3D11ShaderResourceView* shaderResourceView;
 	gContext->PSGetShaderResources(0, 1, &shaderResourceView);
 	gContext->PSSetShaderResources(startSlot, 1, &shaderResourceView);
-	return 1.0;
+	return GM_TRUE;
 }
 
 GM_EXPORT double d3d11_shader_compile_ps(char* file, char* entryPoint, char* profile)
@@ -208,16 +207,16 @@ GM_EXPORT double d3d11_shader_compile_vs(char* file, char* entryPoint, char* pro
 GM_EXPORT double d3d11_shader_override_ps(double ps)
 {
 	gOverridePS = (ps >= 0.0) ? gPShaders[(size_t)ps] : nullptr;
-	return 1.0;
+	return GM_TRUE;
 }
 
 GM_EXPORT double d3d11_shader_override_vs(double vs)
 {
 	gOverrideVS = (vs >= 0.0) ? gVShaders[(size_t)vs] : nullptr;
-	return 1.0;
+	return GM_TRUE;
 }
 
-GM_EXPORT char* d3d11_get_error()
+GM_EXPORT char* d3d11_get_error_string()
 {
 	if (!gErrorBlob)
 	{

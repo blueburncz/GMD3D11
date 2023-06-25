@@ -5,6 +5,7 @@
   "ResourceOrderSettings": [
     {"name":"RmShaderOverride","order":1,"path":"rooms/RmShaderOverride/RmShaderOverride.yy",},
     {"name":"RmVTF","order":1,"path":"rooms/RmVTF/RmVTF.yy",},
+    {"name":"__d3d11_cbuffer","order":1,"path":"scripts/__d3d11_cbuffer/__d3d11_cbuffer.yy",},
     {"name":"SprVTF","order":3,"path":"sprites/SprVTF/SprVTF.yy",},
     {"name":"ShVTF","order":2,"path":"shaders/ShVTF/ShVTF.yy",},
   ],

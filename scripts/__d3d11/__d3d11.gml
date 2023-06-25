@@ -104,11 +104,11 @@ function d3d11_shader_override_vs(_vs)
 	return external_call(_fn, _vs);
 }
 
-function d3d11_get_error()
+function d3d11_get_error_string()
 {
 	gml_pragma("forceinline");
 	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_get_error", dll_cdecl, ty_string,
+		GMD3D11_PATH, "d3d11_get_error_string", dll_cdecl, ty_string,
 		0);
 	return external_call(_fn);
 }
