@@ -77,6 +77,15 @@ function d3d11_shader_compile_ps(_file, _entryPoint, _profile)
 	return external_call(_fn, _file, _entryPoint, _profile);
 }
 
+function d3d11_shader_compile_vs(_file, _entryPoint, _profile)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_compile_vs", dll_cdecl, ty_real,
+		3, ty_string, ty_string, ty_string);
+	return external_call(_fn, _file, _entryPoint, _profile);
+}
+
 function d3d11_shader_override_ps(_ps)
 {
 	gml_pragma("forceinline");
@@ -84,6 +93,24 @@ function d3d11_shader_override_ps(_ps)
 		GMD3D11_PATH, "d3d11_shader_override_ps", dll_cdecl, ty_real,
 		1, ty_real);
 	return external_call(_fn, _ps);
+}
+
+function d3d11_shader_override_vs(_vs)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_override_vs", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _vs);
+}
+
+function d3d11_get_error()
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_get_error", dll_cdecl, ty_string,
+		0);
+	return external_call(_fn);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
