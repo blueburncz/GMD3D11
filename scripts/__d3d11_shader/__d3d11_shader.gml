@@ -120,7 +120,9 @@ function d3d11_shader_override_ps(_ps)
 /// @desc Hooks into `ID3D11DeviceContext::Draw` and replaces the current vertex
 /// shader with a custom one.
 ///
-/// @param {Real} _vs The ID of the shader or -1 to disable the override.
+/// @param {Real} _vs The ID of the shader or -1 to disable the override. The
+/// vertex format expected by the shader must be compatible with the overriden
+/// shader!
 function d3d11_shader_override_vs(_vs)
 {
 	gml_pragma("forceinline");
