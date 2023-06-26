@@ -12,12 +12,6 @@
   },
   "toc": {
     "GMD3D11 Docs": "index.md",
-    "Changelog": {
-      "file": "Changelog/Changelog_.md",
-      "pages": {
-        "0.1.0": "Changelog/Changelog0.1.0.md"
-      }
-    },
     "Scripting API": {}
   }
 }
