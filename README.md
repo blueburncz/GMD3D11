@@ -8,7 +8,7 @@
 * Set up to 128 vertex and pixel shader samplers. Compatible with `surface_get_texture` and `sprite_get_texture`!
 * Compile vertex and pixel shaders from files.
 * Hook into `ID3D11DeviceContext::Draw` calls to swap out used vertex and pixel shaders with custom ones.
-* Commands buffers.
+* Constant buffers.
 
 ## Building the DLL
 Requires [CMake](https://cmake.org/) 3.23 at least!
