@@ -1,6 +1,6 @@
 /// @func d3d11_cbuffer_begin()
 ///
-/// @desc Starts building a command buffer.
+/// @desc Starts building a constant buffer.
 ///
 /// @see d3d11_cbuffer_end
 function d3d11_cbuffer_begin()
@@ -14,9 +14,9 @@ function d3d11_cbuffer_begin()
 
 /// @func d3d11_cbuffer_end()
 ///
-/// @desc Finishes building a command buffer.
+/// @desc Finishes building a constant buffer.
 ///
-/// @return {Real} The ID of the created command buffer or -1 on fail.
+/// @return {Real} The ID of the created constant buffer or -1 on fail.
 ///
 /// @see d3d11_cbuffer_exists
 /// @see d3d11_cbuffer_update
@@ -31,9 +31,9 @@ function d3d11_cbuffer_end()
 
 /// @func d3d11_cbuffer_add_bool(_count)
 ///
-/// @desc Adds a bool into a command buffer that is currently being built.
+/// @desc Adds a bool into a constant buffer that is currently being built.
 ///
-/// @param {Real} _count Number of bools to add into the command buffer.
+/// @param {Real} _count Number of bools to add into the constant buffer.
 ///
 /// @see d3d11_cbuffer_begin
 function d3d11_cbuffer_add_bool(_count)
@@ -47,9 +47,9 @@ function d3d11_cbuffer_add_bool(_count)
 
 /// @func d3d11_cbuffer_add_int(_count)
 ///
-/// @desc Adds an int into a command buffer that is currently being built.
+/// @desc Adds an int into a constant buffer that is currently being built.
 ///
-/// @param {Real} _count Number of ints to add into the command buffer.
+/// @param {Real} _count Number of ints to add into the constant buffer.
 ///
 /// @see d3d11_cbuffer_begin
 function d3d11_cbuffer_add_int(_count)
@@ -63,9 +63,9 @@ function d3d11_cbuffer_add_int(_count)
 
 /// @func d3d11_cbuffer_add_uint(_count)
 ///
-/// @desc Adds an uint into a command buffer that is currently being built.
+/// @desc Adds an uint into a constant buffer that is currently being built.
 ///
-/// @param {Real} _count Number of uints to add into the command buffer.
+/// @param {Real} _count Number of uints to add into the constant buffer.
 ///
 /// @see d3d11_cbuffer_begin
 function d3d11_cbuffer_add_uint(_count)
@@ -79,9 +79,9 @@ function d3d11_cbuffer_add_uint(_count)
 
 /// @func d3d11_cbuffer_add_float(_count)
 ///
-/// @desc Adds a float into a command buffer that is currently being built.
+/// @desc Adds a float into a constant buffer that is currently being built.
 ///
-/// @param {Real} _count Number of floats to add into the command buffer.
+/// @param {Real} _count Number of floats to add into the constant buffer.
 ///
 /// @see d3d11_cbuffer_begin
 function d3d11_cbuffer_add_float(_count)
@@ -95,9 +95,9 @@ function d3d11_cbuffer_add_float(_count)
 
 /// @func d3d11_cbuffer_get_size(_cbuffer)
 ///
-/// @desc Retrieves size of a command buffer in bytes.
+/// @desc Retrieves size of a constant buffer in bytes.
 ///
-/// @param {Real} The size of the command buffer in bytes.
+/// @param {Real} The size of the constant buffer in bytes.
 function d3d11_cbuffer_get_size(_cbuffer)
 {
 	gml_pragma("forceinline");
@@ -109,9 +109,9 @@ function d3d11_cbuffer_get_size(_cbuffer)
 
 /// @func d3d11_cbuffer_update(_cbuffer, _buffer)
 ///
-/// @desc Updates data of a command buffer.
+/// @desc Updates data of a constant buffer.
 ///
-/// @param {Real} _cbuffer The ID of the command buffer.
+/// @param {Real} _cbuffer The ID of the constant buffer.
 /// @param {Id.Buffer} _buffer A buffer with new data.
 function d3d11_cbuffer_update(_cbuffer, _buffer)
 {
@@ -124,10 +124,10 @@ function d3d11_cbuffer_update(_cbuffer, _buffer)
 
 /// @func d3d11_shader_set_cbuffer_ps(_slot, _cbuffer)
 ///
-/// @desc Binds a command buffer to a pixel shader.
+/// @desc Binds a constant buffer to a pixel shader.
 ///
-/// @param {Real} _slot The slot to bind the command buffer to.
-/// @param {Real} _cbuffer The ID of the command buffer or -1 to ubind the slot.
+/// @param {Real} _slot The slot to bind the constant buffer to.
+/// @param {Real} _cbuffer The ID of the constant buffer or -1 to ubind the slot.
 function d3d11_shader_set_cbuffer_ps(_slot, _cbuffer)
 {
 	gml_pragma("forceinline");
@@ -139,10 +139,10 @@ function d3d11_shader_set_cbuffer_ps(_slot, _cbuffer)
 
 /// @func d3d11_shader_set_cbuffer_vs(_slot, _cbuffer)
 ///
-/// @desc Binds a command buffer to a vertex shader.
+/// @desc Binds a constant buffer to a vertex shader.
 ///
-/// @param {Real} _slot The slot to bind the command buffer to.
-/// @param {Real} _cbuffer The ID of the command buffer or -1 to ubind the slot.
+/// @param {Real} _slot The slot to bind the constant buffer to.
+/// @param {Real} _cbuffer The ID of the constant buffer or -1 to ubind the slot.
 function d3d11_shader_set_cbuffer_vs(_slot, _cbuffer)
 {
 	gml_pragma("forceinline");
@@ -154,11 +154,11 @@ function d3d11_shader_set_cbuffer_vs(_slot, _cbuffer)
 
 /// @func d3d11_cbuffer_exists(_cbuffer)
 ///
-/// @desc Checks whether a command buffer exists.
+/// @desc Checks whether a constant buffer exists.
 ///
 /// @param {Real} _cbuffer The ID of the comand buffer.
 ///
-/// @return {Bool} Returns true if the command buffer exists.
+/// @return {Bool} Returns true if the constant buffer exists.
 function d3d11_cbuffer_exists(_cbuffer)
 {
 	gml_pragma("forceinline");
@@ -170,9 +170,9 @@ function d3d11_cbuffer_exists(_cbuffer)
 
 /// @func d3d11_cbuffer_destroy(_cbuffer)
 ///
-/// @desc Destroys a command buffer.
+/// @desc Destroys a constant buffer.
 ///
-/// @param {Real} _cbuffer The ID of the command buffer to destroy.
+/// @param {Real} _cbuffer The ID of the constant buffer to destroy.
 function d3d11_cbuffer_destroy(_cbuffer)
 {
 	gml_pragma("forceinline");
