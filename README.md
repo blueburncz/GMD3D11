@@ -5,7 +5,10 @@
 [![Discord](https://img.shields.io/discord/298884075585011713?label=Discord)](https://discord.gg/ep2BGPm)
 
 ## Features
-* Setting up to 128 vertex and pixel shader samplers. Compatible with `surface_get_texture` and `sprite_get_texture`!
+* Set up to 128 vertex and pixel shader samplers. Compatible with `surface_get_texture` and `sprite_get_texture`!
+* Compile vertex and pixel shaders from files.
+* Hook into `ID3D11DeviceContext::Draw` calls to swap out used vertex and pixel shaders with custom ones.
+* Commands buffers.
 
 ## Building the DLL
 Requires [CMake](https://cmake.org/) 3.23 at least!
