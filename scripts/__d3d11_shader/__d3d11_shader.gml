@@ -60,6 +60,17 @@ function d3d11_texture_set_stage_ps(_slot, _texture)
 	return external_call(_fn, _slot);
 }
 
+/// @func d3d11_shader_compile_ps(_file, _entryPoint, _profile)
+///
+/// @desc Compiles a pixel shader from file.
+///
+/// @param {String} _file The path to file to compile.
+/// @param {String} _entryPoint The name of the entry point function, e.g. "main".
+/// @param {String} _profile The pixel shader profile, e.g. "ps_4_0".
+///
+/// @return {Real} The ID of the pixel shader or -1 on fail.
+///
+/// @see d3d11_get_error_string
 function d3d11_shader_compile_ps(_file, _entryPoint, _profile)
 {
 	gml_pragma("forceinline");
@@ -69,6 +80,17 @@ function d3d11_shader_compile_ps(_file, _entryPoint, _profile)
 	return external_call(_fn, _file, _entryPoint, _profile);
 }
 
+/// @func d3d11_shader_compile_vs(_file, _entryPoint, _profile)
+///
+/// @desc Compiles a vertex shader from file.
+///
+/// @param {String} _file The path to file to compile.
+/// @param {String} _entryPoint The name of the entry point function, e.g. "main".
+/// @param {String} _profile The vertex shader profile, e.g. "vs_4_0".
+///
+/// @return {Real} The ID of the vertex shader or -1 on fail.
+///
+/// @see d3d11_get_error_string
 function d3d11_shader_compile_vs(_file, _entryPoint, _profile)
 {
 	gml_pragma("forceinline");
@@ -78,6 +100,12 @@ function d3d11_shader_compile_vs(_file, _entryPoint, _profile)
 	return external_call(_fn, _file, _entryPoint, _profile);
 }
 
+/// @func d3d11_shader_override_ps(_ps)
+///
+/// @desc Hooks into `ID3D11DeviceContext::Draw` and replaces the current pixel
+/// shader with a custom one.
+///
+/// @param {Real} _ps The ID of the shader or -1 to disable the override.
 function d3d11_shader_override_ps(_ps)
 {
 	gml_pragma("forceinline");
@@ -87,6 +115,12 @@ function d3d11_shader_override_ps(_ps)
 	return external_call(_fn, _ps);
 }
 
+/// @func d3d11_shader_override_vs(_vs)
+///
+/// @desc Hooks into `ID3D11DeviceContext::Draw` and replaces the current vertex
+/// shader with a custom one.
+///
+/// @param {Real} _vs The ID of the shader or -1 to disable the override.
 function d3d11_shader_override_vs(_vs)
 {
 	gml_pragma("forceinline");
@@ -96,6 +130,13 @@ function d3d11_shader_override_vs(_vs)
 	return external_call(_fn, _vs);
 }
 
+/// @func d3d11_shader_exists_ps(_ps)
+///
+/// @desc Checks whether a pixel shader exists.
+///
+/// @param {Real} _ps The ID of the pixel shader.
+///
+/// @return {Bool} Returns true if the pixel shader exists.
 function d3d11_shader_exists_ps(_ps)
 {
 	gml_pragma("forceinline");
@@ -105,6 +146,13 @@ function d3d11_shader_exists_ps(_ps)
 	return external_call(_fn, _ps);
 }
 
+/// @func d3d11_shader_exists_vs(_vs)
+///
+/// @desc Checks whether a vertex shader exists.
+///
+/// @param {Real} _ps The ID of the vertex shader.
+///
+/// @return {Bool} Returns true if the vertex shader exists.
 function d3d11_shader_exists_vs(_vs)
 {
 	gml_pragma("forceinline");
@@ -114,6 +162,11 @@ function d3d11_shader_exists_vs(_vs)
 	return external_call(_fn, _vs);
 }
 
+/// @func d3d11_shader_destroy_ps(_ps)
+///
+/// @desc Destroys a pixel shader.
+///
+/// @param {Real} _ps The ID of the pixel shader to destroy.
 function d3d11_shader_destroy_ps(_ps)
 {
 	gml_pragma("forceinline");
@@ -123,6 +176,11 @@ function d3d11_shader_destroy_ps(_ps)
 	return external_call(_fn, _ps);
 }
 
+/// @func d3d11_shader_destroy_vs(_vs)
+///
+/// @desc Destroys a vertex shader.
+///
+/// @param {Real} _vs The ID of the vertex shader to destroy.
 function d3d11_shader_destroy_vs(_vs)
 {
 	gml_pragma("forceinline");
