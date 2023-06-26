@@ -2,7 +2,17 @@
 #include <d3d11.h>
 #include <exports.hpp>
 #include <iostream>
-#include <vector>
+#include <unordered_map>
+
+extern ID3D11Device* gDevice;
+
+extern ID3D11DeviceContext* gContext;
+
+std::unordered_map<size_t, class CBuffer*> gCBuffers;
+
+size_t gCBufferID = 0;
+
+class CBuffer* gCBufferCurrent = nullptr;
 
 enum class CBufferElementType
 {
@@ -11,6 +21,27 @@ enum class CBufferElementType
 	Uint,
 	Float
 };
+
+static size_t GetCBufferElementSize(CBufferElementType type)
+{
+	switch (type)
+	{
+	case CBufferElementType::Bool:
+		return sizeof(bool);
+
+	case CBufferElementType::Int:
+		return sizeof(int32_t);
+
+	case CBufferElementType::Uint:
+		return sizeof(uint32_t);
+
+	case CBufferElementType::Float:
+		return sizeof(float);
+	
+	default:
+		return 0;
+	}
+}
 
 class CBuffer
 {
@@ -29,55 +60,20 @@ public:
 		{
 			return false;
 		}
-		Types.push_back(type);
-		Counts.push_back(count);
+		Size += GetCBufferElementSize(type) * count;
 		return true;
 	}
 
 	size_t GetSize() const
 	{
-		size_t size = 0;
-
-		for (size_t i = 0; i < Types.size(); ++i)
-		{
-			size_t elementSize = 0;
-
-			switch (Types[i])
-			{
-			case CBufferElementType::Bool:
-				elementSize += sizeof(bool);
-				break;
-
-			case CBufferElementType::Int:
-				elementSize += sizeof(int32_t);
-				break;
-
-			case CBufferElementType::Uint:
-				elementSize += sizeof(uint32_t);
-				break;
-
-			case CBufferElementType::Float:
-				elementSize += sizeof(float);
-				break;
-			}
-
-			size += elementSize * Counts[i];
-		}
-
-		return size;
+		return Size;
 	}
 
 	ID3D11Buffer* Buffer = nullptr;
 
 private:
-	std::vector<CBufferElementType> Types;
-	std::vector<uint32_t> Counts;
+	size_t Size = 0;
 };
-
-extern ID3D11Device* gDevice;
-extern ID3D11DeviceContext* gContext;
-std::vector<CBuffer*> gCBuffers;
-CBuffer* gCBufferCurrent = nullptr;
 
 GM_EXPORT double d3d11_cbuffer_begin()
 {
@@ -106,8 +102,8 @@ GM_EXPORT double d3d11_cbuffer_end()
 		return -1.0;
 	}
 
-	size_t index = gCBuffers.size();
-	gCBuffers.push_back(gCBufferCurrent);
+	size_t index = gCBufferID++;
+	gCBuffers[index] = gCBufferCurrent;
 	gCBufferCurrent = nullptr;
 
 	return (double)index;
@@ -133,6 +129,11 @@ GM_EXPORT double d3d11_cbuffer_add_float(double count)
 	return gCBufferCurrent->AddElement(CBufferElementType::Float, (uint32_t)count) ? GM_TRUE : GM_FALSE;
 }
 
+GM_EXPORT double d3d11_cbuffer_get_size(double cbuffer)
+{
+	return gCBuffers[(size_t)cbuffer]->GetSize();
+}
+
 GM_EXPORT double d3d11_cbuffer_update(double cbuffer, char* data)
 {
 	gContext->UpdateSubresource(
@@ -142,24 +143,43 @@ GM_EXPORT double d3d11_cbuffer_update(double cbuffer, char* data)
 		(void*)data,
 		0,
 		0);
-	return 1.0;
+	return GM_TRUE;
 }
 
 GM_EXPORT double d3d11_shader_set_cbuffer_ps(double slot, double cbuffer)
 {
-	gContext->PSSetConstantBuffers((UINT)slot, 1, &gCBuffers[(size_t)cbuffer]->Buffer);
-	return 1.0;
+	if (cbuffer >= 0.0)
+	{
+		gContext->PSSetConstantBuffers((UINT)slot, 1, &gCBuffers[(size_t)cbuffer]->Buffer);
+	}
+	else
+	{
+		gContext->PSSetConstantBuffers((UINT)slot, 0, nullptr);
+	}
+	return GM_TRUE;
 }
 
 GM_EXPORT double d3d11_shader_set_cbuffer_vs(double slot, double cbuffer)
 {
-	gContext->VSSetConstantBuffers((UINT)slot, 1, &gCBuffers[(size_t)cbuffer]->Buffer);
-	return 1.0;
+	if (cbuffer >= 0.0)
+	{
+		gContext->VSSetConstantBuffers((UINT)slot, 1, &gCBuffers[(size_t)cbuffer]->Buffer);
+	}
+	else
+	{
+		gContext->VSSetConstantBuffers((UINT)slot, 0, nullptr);
+	}
+	return GM_TRUE;
+}
+
+GM_EXPORT double d3d11_cbuffer_exists(double cbuffer)
+{
+	return (cbuffer >= 0.0 && gCBuffers.find((size_t)cbuffer) != gCBuffers.end()) ? GM_TRUE : GM_FALSE;
 }
 
 GM_EXPORT double d3d11_cbuffer_destroy(double cbuffer)
 {
 	delete gCBuffers[(size_t)cbuffer];
-	gCBuffers[(size_t)cbuffer] = nullptr;
-	return 1.0;
+	gCBuffers.erase((size_t)cbuffer);
+	return GM_TRUE;
 }

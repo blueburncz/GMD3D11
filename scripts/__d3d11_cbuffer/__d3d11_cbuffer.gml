@@ -52,6 +52,15 @@ function d3d11_cbuffer_add_float(_count)
 	return external_call(_fn, _count);
 }
 
+function d3d11_cbuffer_get_size(_cbuffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_cbuffer_get_size", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _cbuffer);
+}
+
 function d3d11_cbuffer_update(_cbuffer, _buffer)
 {
 	gml_pragma("forceinline");
@@ -77,6 +86,15 @@ function d3d11_shader_set_cbuffer_vs(_slot, _cbuffer)
 		GMD3D11_PATH, "d3d11_shader_set_cbuffer_vs", dll_cdecl, ty_real,
 		2, ty_real, ty_real);
 	return external_call(_fn, _slot, _cbuffer);
+}
+
+function d3d11_cbuffer_exists(_cbuffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_cbuffer_exists", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _cbuffer);
 }
 
 function d3d11_cbuffer_destroy(_cbuffer)

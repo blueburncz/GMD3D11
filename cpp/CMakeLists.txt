@@ -6,7 +6,8 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_library(GMD3D11 SHARED
     src/cbuffer.cpp
-    src/exports.cpp
+    src/main.cpp
+    src/shader.cpp
     )
 
 target_include_directories(GMD3D11 PRIVATE
