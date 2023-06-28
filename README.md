@@ -9,6 +9,7 @@
 * Compile vertex and pixel shaders from files.
 * Hook into `ID3D11DeviceContext::Draw` calls to swap out used vertex and pixel shaders with custom ones.
 * Constant buffers.
+* Instanced rendering.
 
 ## Building the DLL
 Requires [CMake](https://cmake.org/) 3.23 at least!
@@ -27,3 +28,4 @@ Copy-Item -Path ./Release/GMD3D11.dll -Destination ../../datafiles
 
 ## Credits
 * https://github.com/ParinovYT/cVmtHook-x64 - x64 VMT hook
+* https://polyhaven.com/a/rubber_duck_toy - model used in instanced rendering example

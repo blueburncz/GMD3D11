@@ -73,5 +73,5 @@
   "option_android_tv_banner": "${base_options_dir}/android/tv_banner.png",
   "option_android_tv_isgame": true,
   "option_android_use_facebook": false,
-  "option_android_version": "0.2.0.0",
+  "option_android_version": "0.3.0.0",
 }

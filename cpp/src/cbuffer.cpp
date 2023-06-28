@@ -1,79 +1,16 @@
-#include <cstdint>
-#include <d3d11.h>
+#include <CBuffer.hpp>
+
 #include <exports.hpp>
-#include <iostream>
-#include <unordered_map>
 
 extern ID3D11Device* gDevice;
 
 extern ID3D11DeviceContext* gContext;
 
-std::unordered_map<size_t, class CBuffer*> gCBuffers;
+std::unordered_map<size_t, CBuffer*> gCBuffers;
 
 size_t gCBufferID = 0;
 
-class CBuffer* gCBufferCurrent = nullptr;
-
-enum class CBufferElementType
-{
-	Bool,
-	Int,
-	Uint,
-	Float
-};
-
-static size_t GetCBufferElementSize(CBufferElementType type)
-{
-	switch (type)
-	{
-	case CBufferElementType::Bool:
-		return sizeof(bool);
-
-	case CBufferElementType::Int:
-		return sizeof(int32_t);
-
-	case CBufferElementType::Uint:
-		return sizeof(uint32_t);
-
-	case CBufferElementType::Float:
-		return sizeof(float);
-	
-	default:
-		return 0;
-	}
-}
-
-class CBuffer
-{
-public:
-	~CBuffer()
-	{
-		if (Buffer)
-		{
-			Buffer->Release();
-		}
-	}
-
-	bool AddElement(CBufferElementType type, uint32_t count)
-	{
-		if (count < 1)
-		{
-			return false;
-		}
-		Size += GetCBufferElementSize(type) * count;
-		return true;
-	}
-
-	size_t GetSize() const
-	{
-		return Size;
-	}
-
-	ID3D11Buffer* Buffer = nullptr;
-
-private:
-	size_t Size = 0;
-};
+CBuffer* gCBufferCurrent = nullptr;
 
 GM_EXPORT double d3d11_cbuffer_begin()
 {
@@ -111,22 +48,22 @@ GM_EXPORT double d3d11_cbuffer_end()
 
 GM_EXPORT double d3d11_cbuffer_add_bool(double count)
 {
-	return gCBufferCurrent->AddElement(CBufferElementType::Bool, (uint32_t)count) ? GM_TRUE : GM_FALSE;
+	return gCBufferCurrent->AddElement(ElementType::Bool, (uint32_t)count) ? GM_TRUE : GM_FALSE;
 }
 
 GM_EXPORT double d3d11_cbuffer_add_int(double count)
 {
-	return gCBufferCurrent->AddElement(CBufferElementType::Int, (uint32_t)count) ? GM_TRUE : GM_FALSE;
+	return gCBufferCurrent->AddElement(ElementType::Int, (uint32_t)count) ? GM_TRUE : GM_FALSE;
 }
 
 GM_EXPORT double d3d11_cbuffer_add_uint(double count)
 {
-	return gCBufferCurrent->AddElement(CBufferElementType::Uint, (uint32_t)count) ? GM_TRUE : GM_FALSE;
+	return gCBufferCurrent->AddElement(ElementType::Uint, (uint32_t)count) ? GM_TRUE : GM_FALSE;
 }
 
 GM_EXPORT double d3d11_cbuffer_add_float(double count)
 {
-	return gCBufferCurrent->AddElement(CBufferElementType::Float, (uint32_t)count) ? GM_TRUE : GM_FALSE;
+	return gCBufferCurrent->AddElement(ElementType::Float, (uint32_t)count) ? GM_TRUE : GM_FALSE;
 }
 
 GM_EXPORT double d3d11_cbuffer_get_size(double cbuffer)

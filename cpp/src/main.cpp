@@ -1,17 +1,19 @@
+#include <exports.hpp>
+#include <VMTHookManager.hpp>
+
 #include <d3d11.h>
 #include <d3dcompiler.h>
-#include <exports.hpp>
 #include <iostream>
 #include <vector>
-#include <VMTHookManager.hpp>
 #include <Windows.h>
 
 #pragma comment(lib, "d3d11.lib")
-#pragma comment(lib, "d3dcompiler.lib")
 
 extern ID3D11PixelShader* gOverridePS;
 
 extern ID3D11VertexShader* gOverrideVS;
+
+extern ID3D11InputLayout* gOverrideInputLayout;
 
 ID3D11Device* gDevice = nullptr;
 
@@ -20,6 +22,8 @@ ID3D11DeviceContext* gContext = nullptr;
 VMTHookManager gContextHookManager;
 
 char* gErrorString = nullptr;
+
+size_t gDrawInstanced = 0;
 
 enum class ID3D11DeviceContextVtbl
 {
@@ -47,6 +51,13 @@ void __stdcall Draw(ID3D11DeviceContext* Context, UINT VertexCount, UINT StartVe
 		Context->PSSetShader(gOverridePS, nullptr, 0);
 	}
 
+	if (gDrawInstanced > 0)
+	{
+		Context->DrawInstanced(VertexCount, gDrawInstanced, StartVertexLocation, 0);
+		gDrawInstanced = 0;
+		return;
+	}
+
 	fn(Context, VertexCount, StartVertexLocation);
 }
 
@@ -64,4 +75,39 @@ GM_EXPORT double d3d11_init(char* device, char* context)
 GM_EXPORT char* d3d11_get_error_string()
 {
 	return gErrorString ? gErrorString : "";
+}
+
+
+GM_EXPORT double d3d11_texture_set_stage_vs(double index)
+{
+	UINT startSlot = (UINT)index;
+	if (startSlot < 0
+		|| startSlot >= D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT)
+	{
+		return GM_FALSE;
+	}
+	ID3D11ShaderResourceView* shaderResourceView;
+	gContext->PSGetShaderResources(0, 1, &shaderResourceView);
+	gContext->VSSetShaderResources(startSlot, 1, &shaderResourceView);
+	return GM_TRUE;
+}
+
+GM_EXPORT double d3d11_texture_set_stage_ps(double index)
+{
+	UINT startSlot = (UINT)index;
+	if (startSlot < 0
+		|| startSlot >= D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT)
+	{
+		return GM_FALSE;
+	}
+	ID3D11ShaderResourceView* shaderResourceView;
+	gContext->PSGetShaderResources(0, 1, &shaderResourceView);
+	gContext->PSSetShaderResources(startSlot, 1, &shaderResourceView);
+	return GM_TRUE;
+}
+
+GM_EXPORT double d3d11_draw_instanced(double count)
+{
+	gDrawInstanced = (size_t)count;
+	return GM_TRUE;
 }
