@@ -24,7 +24,7 @@ function d3d11_get_error_string()
 ///
 /// @desc Passes a texture to a vertex shader.
 ///
-/// @param {Real} _slot The vertex texture slot index. Must be in range
+/// @param {Id.Sampler} _slot The vertex texture slot index. Must be in range
 /// 0..{@link D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT}-1.
 /// @param {Pointer.Texture} _texture The texture to pass.
 ///
@@ -45,7 +45,7 @@ function d3d11_texture_set_stage_vs(_slot, _texture)
 /// to pass a texture to a vertex shader, otherwise uses `texture_set_stage`
 /// (which should work on OpenGL platforms).
 ///
-/// @param {Real} _slot The vertex texture slot index. Must be in range 0..7.
+/// @param {Id.Sampler} _slot The vertex texture slot index. Must be in range 0..7.
 /// @param {Pointer.Texture} _texture The texture to pass.
 ///
 /// @see GMD3D11_IS_SUPPORTED
@@ -64,7 +64,7 @@ function texture_set_stage_vs(_slot, _texture)
 ///
 /// @desc Passes a texture to a pixel shader.
 ///
-/// @param {Real} _slot The pixel texture slot index. Must be in range
+/// @param {Id.Sampler} _slot The pixel texture slot index. Must be in range
 /// 0..{@link D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT}-1.
 /// @param {Pointer.Texture} _texture The texture to pass.
 ///

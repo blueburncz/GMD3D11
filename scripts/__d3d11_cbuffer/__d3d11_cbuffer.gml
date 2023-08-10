@@ -97,7 +97,7 @@ function d3d11_cbuffer_add_float(_count)
 ///
 /// @desc Retrieves size of a constant buffer in bytes.
 ///
-/// @param {Real} The size of the constant buffer in bytes.
+/// @param {Real} _cbuffer The size of the constant buffer in bytes.
 function d3d11_cbuffer_get_size(_cbuffer)
 {
 	gml_pragma("forceinline");
@@ -156,7 +156,7 @@ function d3d11_shader_set_cbuffer_vs(_slot, _cbuffer)
 ///
 /// @desc Checks whether a constant buffer exists.
 ///
-/// @param {Real} _cbuffer The ID of the comand buffer.
+/// @param {Real} _cbuffer The ID of the constant buffer.
 ///
 /// @return {Bool} Returns true if the constant buffer exists.
 function d3d11_cbuffer_exists(_cbuffer)
