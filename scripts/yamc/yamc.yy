@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "yamc",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "GMD3D11",
-    "path": "GMD3D11.yyp",
+  "$GMScript":"",
+  "%Name":"yamc",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"yamc",
+  "parent":{
+    "name":"GMD3D11",
+    "path":"GMD3D11.yyp",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

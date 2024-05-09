@@ -1,41 +1,32 @@
 #pragma once 
 
-#include <element.hpp>
+#include <common.hpp>
+
+#include <Trackable.hpp>
 
 #include <cstdint>
 #include <d3d11.h>
-#include <unordered_map>
 
-extern std::unordered_map<size_t, class CBuffer*> gCBuffers;
-
-class CBuffer
+class CBuffer final : public Trackable<CBuffer>
 {
 public:
-	~CBuffer()
-	{
-		if (Buffer)
-		{
-			Buffer->Release();
-		}
-	}
+    enum class Element
+    {
+        Bool = 0,
+        Int,
+        Uint,
+        Float,
+        SIZE
+    };
 
-	bool AddElement(ElementType type, uint32_t count)
-	{
-		if (count < 1)
-		{
-			return false;
-		}
-		Size += GetElementSize(type) * count;
-		return true;
-	}
+    ~CBuffer();
 
-	size_t GetSize() const
-	{
-		return Size;
-	}
+    bool AddElement(Element type, uint32_t count);
 
-	ID3D11Buffer* Buffer = nullptr;
+    size_t GetSize() const { return Size; }
+
+    ID3D11Buffer* Buffer = nullptr;
 
 private:
-	size_t Size = 0;
+    size_t Size = 0;
 };

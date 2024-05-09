@@ -18,7 +18,7 @@ Requires [CMake](https://cmake.org/) 3.23 at least!
 cd cpp
 mkdir build
 cd build
-cmake ../CMakeLists.txt
+cmake ..
 cmake --build . --config=Release
 Copy-Item -Path ./Release/GMD3D11.dll -Destination ../../datafiles
 ```

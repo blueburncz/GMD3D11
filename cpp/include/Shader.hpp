@@ -1,33 +1,22 @@
 #pragma once
 
+#include <common.hpp>
+
+#include <Trackable.hpp>
+
 #include <d3d11.h>
-#include <unordered_map>
 
-extern std::unordered_map<size_t, class Shader*> gShaders;
-
-class Shader
+class Shader : public Trackable<Shader>
 {
 public:
-	Shader(ID3DBlob* blob)
-		: Blob(blob)
-	{
-	}
+    Shader(ID3DBlob* blob);
 
-	virtual ~Shader()
-	{
-		if (Blob)
-		{
-			Blob->Release();
-		}
-	}
+    virtual ~Shader();
 
-	ID3DBlob* GetBlob() const
-	{
-		return Blob;
-	}
+    ID3DBlob* GetBlob() const { return Blob; }
 
 private:
-	ID3DBlob* Blob = nullptr;
+    ID3DBlob* Blob = nullptr;
 };
 
 // Source: https://learn.microsoft.com/en-us/windows/win32/direct3d11/how-to--compile-a-shader

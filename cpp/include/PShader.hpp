@@ -1,29 +1,18 @@
 #pragma once
 
+#include <common.hpp>
+
 #include <Shader.hpp>
 
-class PShader : public Shader
+class PShader final : public Shader
 {
 public:
-	PShader(ID3DBlob* blob, ID3D11PixelShader* shader)
-		: Raw(shader)
-		, Shader(blob)
-	{
-	}
+    PShader(ID3DBlob* blob, ID3D11PixelShader* shader);
 
-	~PShader()
-	{
-		if (Raw)
-		{
-			Raw->Release();
-		}
-	}
+    ~PShader();
 
-	ID3D11PixelShader* GetShader() const
-	{
-		return Raw;
-	}
+    ID3D11PixelShader* GetShader() const { return Raw; }
 
 private:
-	ID3D11PixelShader* Raw = nullptr;
+    ID3D11PixelShader* Raw = nullptr;
 };
