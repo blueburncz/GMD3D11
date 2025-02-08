@@ -28,11 +28,11 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.4.0.137",
+    "IDEVersion":"2024.11.0.179",
   },
   "name":"GMD3D11",
   "resources":[
-    {"id":{"name":"OInstanedRendering","path":"objects/OInstanedRendering/OInstanedRendering.yy",},},
+    {"id":{"name":"OInstancedRendering","path":"objects/OInstancedRendering/OInstancedRendering.yy",},},
     {"id":{"name":"OVTF","path":"objects/OVTF/OVTF.yy",},},
     {"id":{"name":"RmInstancedRendering","path":"rooms/RmInstancedRendering/RmInstancedRendering.yy",},},
     {"id":{"name":"RmVTF","path":"rooms/RmVTF/RmVTF.yy",},},
