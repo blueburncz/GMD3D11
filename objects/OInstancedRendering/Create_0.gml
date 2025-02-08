@@ -12,14 +12,14 @@ vs = d3d11_shader_compile_vs(working_directory + "shaders/TestVS.hlsl", "main", 
 
 if (!d3d11_shader_exists(vs))
 {
-	show_error(d3d11_get_error_string(), true);
+	assert(false, $"Vertex shader compilation failed! {d3d11_get_error_string()}");
 }
 
 ps = d3d11_shader_compile_ps(working_directory + "shaders/TestPS.hlsl", "main", "ps_4_0");
 
 if (!d3d11_shader_exists(ps))
 {
-	show_error(d3d11_get_error_string(), true);
+	assert(false, $"Pixel shader compilation failed! {d3d11_get_error_string()}");
 }
 
 instanceNumber = 2000;
@@ -31,7 +31,7 @@ instanceData = d3d11_cbuffer_end();
 
 if (!d3d11_cbuffer_exists(instanceData))
 {
-	show_error("Could not create instanceData!", true);
+	assert(false, "Could not create instanceData!");
 }
 
 var _buffer = buffer_create(d3d11_cbuffer_get_size(instanceData), buffer_fixed, 1);

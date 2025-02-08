@@ -15,5 +15,5 @@ struct PS_out
 
 void main(in VS_out IN, out PS_out OUT)
 {
-	OUT.Color = gm_BaseTextureObject.Sample(gm_BaseTexture, IN.TexCoord);
+	OUT.Color = IN.Color * gm_BaseTextureObject.Sample(gm_BaseTexture, IN.TexCoord);
 }

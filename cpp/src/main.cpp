@@ -69,7 +69,6 @@ GM_EXPORT char* d3d11_get_error_string()
     return g_ErrorString ? g_ErrorString : "";
 }
 
-
 GM_EXPORT double d3d11_texture_set_stage_vs(double index)
 {
     UINT startSlot = static_cast<UINT>(index);
@@ -81,6 +80,20 @@ GM_EXPORT double d3d11_texture_set_stage_vs(double index)
     ID3D11ShaderResourceView* shaderResourceView;
     g_Context->PSGetShaderResources(0, 1, &shaderResourceView);
     g_Context->VSSetShaderResources(startSlot, 1, &shaderResourceView);
+    return GM_TRUE;
+}
+
+GM_EXPORT double d3d11_texture_set_stage_gs(double index)
+{
+    UINT startSlot = static_cast<UINT>(index);
+    if (startSlot < 0
+        || startSlot >= D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT)
+    {
+        return GM_FALSE;
+    }
+    ID3D11ShaderResourceView* shaderResourceView;
+    g_Context->PSGetShaderResources(0, 1, &shaderResourceView);
+    g_Context->GSSetShaderResources(startSlot, 1, &shaderResourceView);
     return GM_TRUE;
 }
 

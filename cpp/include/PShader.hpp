@@ -9,7 +9,7 @@ class PShader final : public Shader
 public:
     PShader(ID3DBlob* blob, ID3D11PixelShader* shader);
 
-    ~PShader();
+    virtual ~PShader();
 
     ID3D11PixelShader* GetShader() const { return Raw; }
 

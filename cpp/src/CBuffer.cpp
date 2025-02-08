@@ -120,19 +120,6 @@ GM_EXPORT double d3d11_cbuffer_update(double cbuffer, char* data)
     return GM_TRUE;
 }
 
-GM_EXPORT double d3d11_shader_set_cbuffer_ps(double slot, double cbuffer)
-{
-    if (cbuffer >= 0.0)
-    {
-        g_Context->PSSetConstantBuffers(static_cast<UINT>(slot), 1, &CBuffer::Get(static_cast<size_t>(cbuffer))->Buffer);
-    }
-    else
-    {
-        g_Context->PSSetConstantBuffers(static_cast<UINT>(slot), 0, nullptr);
-    }
-    return GM_TRUE;
-}
-
 GM_EXPORT double d3d11_shader_set_cbuffer_vs(double slot, double cbuffer)
 {
     if (cbuffer >= 0.0)
@@ -142,6 +129,32 @@ GM_EXPORT double d3d11_shader_set_cbuffer_vs(double slot, double cbuffer)
     else
     {
         g_Context->VSSetConstantBuffers(static_cast<UINT>(slot), 0, nullptr);
+    }
+    return GM_TRUE;
+}
+
+GM_EXPORT double d3d11_shader_set_cbuffer_gs(double slot, double cbuffer)
+{
+    if (cbuffer >= 0.0)
+    {
+        g_Context->GSSetConstantBuffers(static_cast<UINT>(slot), 1, &CBuffer::Get(static_cast<size_t>(cbuffer))->Buffer);
+    }
+    else
+    {
+        g_Context->GSSetConstantBuffers(static_cast<UINT>(slot), 0, nullptr);
+    }
+    return GM_TRUE;
+}
+
+GM_EXPORT double d3d11_shader_set_cbuffer_ps(double slot, double cbuffer)
+{
+    if (cbuffer >= 0.0)
+    {
+        g_Context->PSSetConstantBuffers(static_cast<UINT>(slot), 1, &CBuffer::Get(static_cast<size_t>(cbuffer))->Buffer);
+    }
+    else
+    {
+        g_Context->PSSetConstantBuffers(static_cast<UINT>(slot), 0, nullptr);
     }
     return GM_TRUE;
 }

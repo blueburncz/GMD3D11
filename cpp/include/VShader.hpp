@@ -9,7 +9,7 @@ class VShader final : public Shader
 public:
     VShader(ID3DBlob* blob, ID3D11VertexShader* shader);
 
-    ~VShader();
+    virtual ~VShader();
 
     ID3D11VertexShader* GetShader() const { return Raw; }
 

@@ -122,32 +122,47 @@ function d3d11_cbuffer_update(_cbuffer, _buffer)
 	return external_call(_fn, _cbuffer, buffer_get_address(_buffer));
 }
 
-/// @func d3d11_shader_set_cbuffer_ps(_slot, _cbuffer)
-///
-/// @desc Binds a constant buffer to a pixel shader.
-///
-/// @param {Real} _slot The slot to bind the constant buffer to.
-/// @param {Real} _cbuffer The ID of the constant buffer or -1 to ubind the slot.
-function d3d11_shader_set_cbuffer_ps(_slot, _cbuffer)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_shader_set_cbuffer_ps", dll_cdecl, ty_real,
-		2, ty_real, ty_real);
-	return external_call(_fn, _slot, _cbuffer);
-}
-
 /// @func d3d11_shader_set_cbuffer_vs(_slot, _cbuffer)
 ///
 /// @desc Binds a constant buffer to a vertex shader.
 ///
 /// @param {Real} _slot The slot to bind the constant buffer to.
-/// @param {Real} _cbuffer The ID of the constant buffer or -1 to ubind the slot.
+/// @param {Real} _cbuffer The ID of the constant buffer or -1 to unbind the slot.
 function d3d11_shader_set_cbuffer_vs(_slot, _cbuffer)
 {
 	gml_pragma("forceinline");
 	static _fn = external_define(
 		GMD3D11_PATH, "d3d11_shader_set_cbuffer_vs", dll_cdecl, ty_real,
+		2, ty_real, ty_real);
+	return external_call(_fn, _slot, _cbuffer);
+}
+
+/// @func d3d11_shader_set_cbuffer_gs(_slot, _cbuffer)
+///
+/// @desc Binds a constant buffer to a geometry shader.
+///
+/// @param {Real} _slot The slot to bind the constant buffer to.
+/// @param {Real} _cbuffer The ID of the constant buffer or -1 to unbind the slot.
+function d3d11_shader_set_cbuffer_gs(_slot, _cbuffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_set_cbuffer_gs", dll_cdecl, ty_real,
+		2, ty_real, ty_real);
+	return external_call(_fn, _slot, _cbuffer);
+}
+
+/// @func d3d11_shader_set_cbuffer_ps(_slot, _cbuffer)
+///
+/// @desc Binds a constant buffer to a pixel shader.
+///
+/// @param {Real} _slot The slot to bind the constant buffer to.
+/// @param {Real} _cbuffer The ID of the constant buffer or -1 to unbind the slot.
+function d3d11_shader_set_cbuffer_ps(_slot, _cbuffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_set_cbuffer_ps", dll_cdecl, ty_real,
 		2, ty_real, ty_real);
 	return external_call(_fn, _slot, _cbuffer);
 }
