@@ -5,6 +5,7 @@
 #include <Trackable.hpp>
 
 #include <d3d11.h>
+#include <vector>
 
 class Shader : public Trackable<Shader>
 {
@@ -14,6 +15,10 @@ public:
     virtual ~Shader();
 
     ID3DBlob* GetBlob() const { return Blob; }
+
+    bool SaveBlob(const char* filePath) const;
+
+    static std::vector<char> LoadBlob(const char* filePath);
 
 private:
     ID3DBlob* Blob = nullptr;

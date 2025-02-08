@@ -21,6 +21,22 @@ function d3d11_shader_compile_vs(_file, _entryPoint, _profile)
 	return external_call(_fn, _file, _entryPoint, _profile);
 }
 
+/// @func d3d11_shader_load_vs(_file)
+///
+/// @desc Loads a compiled vertex shader from a file.
+///
+/// @param {String} _file The path to the compiled vertex shader.
+///
+/// @return {Real} The ID of the vertex shader or -1 on fail.
+function d3d11_shader_load_vs(_file)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_load_vs", dll_cdecl, ty_real,
+		1, ty_string);
+	return external_call(_fn, _file);
+}
+
 /// @func d3d11_shader_compile_gs(_file, _entryPoint, _profile)
 ///
 /// @desc Compiles a geometry shader from file.
@@ -41,6 +57,22 @@ function d3d11_shader_compile_gs(_file, _entryPoint, _profile)
 	return external_call(_fn, _file, _entryPoint, _profile);
 }
 
+/// @func d3d11_shader_load_gs(_file)
+///
+/// @desc Loads a compiled geometry shader from a file.
+///
+/// @param {String} _file The path to the compiled geometry shader.
+///
+/// @return {Real} The ID of the geometry shader or -1 on fail.
+function d3d11_shader_load_gs(_file)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_load_gs", dll_cdecl, ty_real,
+		1, ty_string);
+	return external_call(_fn, _file);
+}
+
 /// @func d3d11_shader_compile_ps(_file, _entryPoint, _profile)
 ///
 /// @desc Compiles a pixel shader from file.
@@ -59,6 +91,22 @@ function d3d11_shader_compile_ps(_file, _entryPoint, _profile)
 		GMD3D11_PATH, "d3d11_shader_compile_ps", dll_cdecl, ty_real,
 		3, ty_string, ty_string, ty_string);
 	return external_call(_fn, _file, _entryPoint, _profile);
+}
+
+/// @func d3d11_shader_load_ps(_file)
+///
+/// @desc Loads a compiled pixel shader from a file.
+///
+/// @param {String} _file The path to the compiled pixel shader.
+///
+/// @return {Real} The ID of the pixel shader or -1 on fail.
+function d3d11_shader_load_ps(_file)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_load_ps", dll_cdecl, ty_real,
+		1, ty_string);
+	return external_call(_fn, _file);
 }
 
 /// @func d3d11_shader_override_vs(_vs)
@@ -135,4 +183,21 @@ function d3d11_shader_destroy(_shader)
 		GMD3D11_PATH, "d3d11_shader_destroy", dll_cdecl, ty_real,
 		1, ty_real);
 	return external_call(_fn, _shader);
+}
+
+/// @func d3d11_shader_save(_shader, _filePath)
+///
+/// @desc Saves a compiled shader.
+///
+/// @param {Real} _shader The ID of the shader to save.
+/// @param {String} _filePath The file to save the shader to.
+///
+/// @return {Bool} Returns `true` on success.
+function d3d11_shader_save(_shader, _filePath)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_save", dll_cdecl, ty_real,
+		2, ty_real, ty_string);
+	return external_call(_fn, _shader, _filePath);
 }

@@ -52,8 +52,8 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"RmGeometryShader","path":"rooms/RmGeometryShader/RmGeometryShader.yy",},},
     {"roomId":{"name":"RmInstancedRendering","path":"rooms/RmInstancedRendering/RmInstancedRendering.yy",},},
+    {"roomId":{"name":"RmGeometryShader","path":"rooms/RmGeometryShader/RmGeometryShader.yy",},},
     {"roomId":{"name":"RmVTF","path":"rooms/RmVTF/RmVTF.yy",},},
   ],
   "templateType":null,

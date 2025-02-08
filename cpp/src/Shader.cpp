@@ -1,6 +1,7 @@
 #include <Shader.hpp>
 
 #include <d3dcompiler.h>
+#include <fstream>
 
 #pragma comment(lib, "d3dcompiler.lib")
 
@@ -19,6 +20,41 @@ Shader::~Shader()
     }
 }
 
+bool Shader::SaveBlob(const char* filePath) const
+{
+    std::ofstream file(filePath, std::ios::binary);
+
+    if (!file)
+    {
+        return false;
+    }
+
+    file.write(static_cast<const char*>(Blob->GetBufferPointer()), Blob->GetBufferSize());
+
+    return !file.fail();
+}
+
+std::vector<char> Shader::LoadBlob(const char* filePath)
+{
+    std::ifstream file(filePath, std::ios::binary | std::ios::ate);
+
+    if (!file)
+    {
+        return {};
+    }
+
+    std::streamsize size = file.tellg();
+    file.seekg(0, std::ios::beg);
+
+    std::vector<char> buffer(size);
+    if (!file.read(buffer.data(), size))
+    {
+        return {};
+    }
+
+    return buffer;
+}
+
 HRESULT CompileShader(_In_ LPCWSTR srcFile, _In_ LPCSTR entryPoint, _In_ LPCSTR profile, _Outptr_ ID3DBlob** blob)
 {
     if (!srcFile || !entryPoint || !profile || !blob)
@@ -31,6 +67,8 @@ HRESULT CompileShader(_In_ LPCWSTR srcFile, _In_ LPCSTR entryPoint, _In_ LPCSTR 
     UINT flags = D3DCOMPILE_ENABLE_STRICTNESS;
 #if defined(DEBUG) || defined(_DEBUG)
     flags |= D3DCOMPILE_DEBUG;
+#else
+    flags |= D3DCOMPILE_OPTIMIZATION_LEVEL3;
 #endif
 
     const D3D_SHADER_MACRO defines[] =
@@ -80,4 +118,9 @@ GM_EXPORT double d3d11_shader_destroy(double shader)
 {
     delete Shader::Get(static_cast<size_t>(shader));
     return GM_TRUE;
+}
+
+GM_EXPORT double d3d11_shader_save(double shader, const char* filePath)
+{
+    return Shader::Get(static_cast<size_t>(shader))->SaveBlob(filePath) ? GM_TRUE : GM_FALSE;
 }

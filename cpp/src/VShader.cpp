@@ -3,6 +3,7 @@
 #include <Shader.hpp>
 #include <utils.hpp>
 
+#include <d3dcompiler.h>
 #include <iostream>
 
 extern ID3D11Device* g_Device;
@@ -60,6 +61,41 @@ GM_EXPORT double d3d11_shader_compile_vs(char* file, char* entryPoint, char* pro
         return -1.0;
     }
     return static_cast<double>(shader->GetID());
+}
+
+GM_EXPORT double d3d11_shader_load_vs(char* file)
+{
+    std::vector<char> bytecode = Shader::LoadBlob(file);
+    if (bytecode.empty())
+    {
+        std::cout << "Failed loading VS " << file << "!" << std::endl;
+        return -1.0;
+    }
+
+    ID3D11VertexShader* vs = nullptr;
+    HRESULT hr = g_Device->CreateVertexShader(bytecode.data(), bytecode.size(), nullptr, &vs);
+
+    if (FAILED(hr))
+    {
+        std::cout << "Failed creating loaded VS " << file << "!" << std::endl;
+        return -1.0;
+    }
+
+    ID3DBlob* blob = nullptr;
+    hr = D3DCreateBlob(bytecode.size(), &blob);
+
+    if (FAILED(hr))
+    {
+        std::cout << "Failed creating blob for loaded VS " << file << "!" << std::endl;
+        vs->Release();
+        return -1.0;
+    }
+
+    memcpy(blob->GetBufferPointer(), bytecode.data(), bytecode.size());
+
+    std::cout << "Loaded VS " << file << std::endl;
+
+    return static_cast<double>((new VShader(blob, vs))->GetID());
 }
 
 GM_EXPORT double d3d11_shader_override_vs(double vs)

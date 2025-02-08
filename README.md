@@ -8,8 +8,10 @@
 ## Features
 
 * Set up to 128 vertex and pixel shader samplers. Compatible with `surface_get_texture` and `sprite_get_texture`!
-* Compile shaders from files - vertex, geometry and pixel.
+* Compile shaders from files (optimization level 3).
+* Save and load compiled shaders.
 * Hook into `ID3D11DeviceContext::Draw` calls to swap out used vertex and pixel shaders with custom ones.
+* Geometry shaders.
 * Constant buffers.
 * Instanced rendering.
 
