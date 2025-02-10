@@ -53,10 +53,10 @@ void __stdcall Draw(ID3D11DeviceContext* Context, UINT VertexCount, UINT StartVe
     fn(Context, VertexCount, StartVertexLocation);
 }
 
-GM_EXPORT double d3d11_init(char* device, char* context)
+GM_EXPORT ty_real d3d11_init(ty_string _device, ty_string _context)
 {
-    g_Device = (ID3D11Device*)device;
-    g_Context = (ID3D11DeviceContext*)context;
+    g_Device = (ID3D11Device*)_device;
+    g_Context = (ID3D11DeviceContext*)_context;
 
     g_ContextHookManager.bInitialize((_pdword*)g_Context);
     g_ContextHookManager.dwHookMethod((_dword)Draw, (UINT)ID3D11DeviceContextVtbl::Draw);
@@ -64,14 +64,14 @@ GM_EXPORT double d3d11_init(char* device, char* context)
     return GM_TRUE;
 }
 
-GM_EXPORT char* d3d11_get_error_string()
+GM_EXPORT ty_string d3d11_get_error_string()
 {
     return g_ErrorString ? g_ErrorString : "";
 }
 
-GM_EXPORT double d3d11_texture_set_stage_vs(double index)
+GM_EXPORT ty_real d3d11_texture_copy_vs(ty_real _index)
 {
-    UINT startSlot = static_cast<UINT>(index);
+    UINT startSlot = static_cast<UINT>(_index);
     if (startSlot < 0
         || startSlot >= D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT)
     {
@@ -83,9 +83,9 @@ GM_EXPORT double d3d11_texture_set_stage_vs(double index)
     return GM_TRUE;
 }
 
-GM_EXPORT double d3d11_texture_set_stage_gs(double index)
+GM_EXPORT ty_real d3d11_texture_copy_gs(ty_real _index)
 {
-    UINT startSlot = static_cast<UINT>(index);
+    UINT startSlot = static_cast<UINT>(_index);
     if (startSlot < 0
         || startSlot >= D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT)
     {
@@ -97,9 +97,9 @@ GM_EXPORT double d3d11_texture_set_stage_gs(double index)
     return GM_TRUE;
 }
 
-GM_EXPORT double d3d11_texture_set_stage_ps(double index)
+GM_EXPORT ty_real d3d11_texture_copy_ps(ty_real _index)
 {
-    UINT startSlot = static_cast<UINT>(index);
+    UINT startSlot = static_cast<UINT>(_index);
     if (startSlot < 0
         || startSlot >= D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT)
     {
@@ -111,8 +111,14 @@ GM_EXPORT double d3d11_texture_set_stage_ps(double index)
     return GM_TRUE;
 }
 
-GM_EXPORT double d3d11_draw_instanced(double count)
+/// @func d3d11_draw_instanced(_count)
+///
+/// @desc Configures the number of instances to draw the next time a vertex buffer is submitted. After that the number
+/// is reset back to 0!
+///
+/// @param {Real} _count Number of instances to draw. Use 0 to disable instanced rendering.
+GM_EXPORT ty_real d3d11_draw_instanced(ty_real _count)
 {
-    g_DrawInstanced = static_cast<size_t>(count);
+    g_DrawInstanced = static_cast<size_t>(_count);
     return GM_TRUE;
 }

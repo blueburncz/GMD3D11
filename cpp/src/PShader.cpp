@@ -53,22 +53,40 @@ static PShader* CompilePS(char* file, char* entryPoint, char* profile)
     return new PShader(blob, ps);
 }
 
-GM_EXPORT double d3d11_shader_compile_ps(char* file, char* entryPoint, char* profile)
+/// @func d3d11_shader_compile_ps(_file, _entryPoint, _profile)
+///
+/// @desc Compiles a pixel shader from file.
+///
+/// @param {String} _file The path to file to compile.
+/// @param {String} _entryPoint The name of the entry point function, e.g. "main".
+/// @param {String} _profile The pixel shader profile, e.g. "ps_4_0".
+///
+/// @return {Real} The ID of the pixel shader or -1 on fail.
+///
+/// @see d3d11_get_error_string
+GM_EXPORT ty_real d3d11_shader_compile_ps(ty_string _file, ty_string _entryPoint, ty_string _profile)
 {
-    PShader* shader = CompilePS(file, entryPoint, profile);
+    PShader* shader = CompilePS(_file, _entryPoint, _profile);
     if (!shader)
     {
         return -1.0;
     }
-    return static_cast<double>(shader->GetID());
+    return static_cast<ty_real>(shader->GetID());
 }
 
-GM_EXPORT double d3d11_shader_load_ps(char* file)
+/// @func d3d11_shader_load_ps(_file)
+///
+/// @desc Loads a compiled pixel shader from a file.
+///
+/// @param {String} _file The path to the compiled pixel shader.
+///
+/// @return {Real} The ID of the pixel shader or -1 on fail.
+GM_EXPORT ty_real d3d11_shader_load_ps(ty_string _file)
 {
-    std::vector<char> bytecode = Shader::LoadBlob(file);
+    std::vector<char> bytecode = Shader::LoadBlob(_file);
     if (bytecode.empty())
     {
-        std::cout << "Failed loading PS " << file << "!" << std::endl;
+        std::cout << "Failed loading PS " << _file << "!" << std::endl;
         return -1.0;
     }
 
@@ -77,7 +95,7 @@ GM_EXPORT double d3d11_shader_load_ps(char* file)
 
     if (FAILED(hr))
     {
-        std::cout << "Failed creating loaded PS " << file << "!" << std::endl;
+        std::cout << "Failed creating loaded PS " << _file << "!" << std::endl;
         return -1.0;
     }
 
@@ -86,20 +104,25 @@ GM_EXPORT double d3d11_shader_load_ps(char* file)
 
     if (FAILED(hr))
     {
-        std::cout << "Failed creating blob for loaded PS " << file << "!" << std::endl;
+        std::cout << "Failed creating blob for loaded PS " << _file << "!" << std::endl;
         ps->Release();
         return -1.0;
     }
 
     memcpy(blob->GetBufferPointer(), bytecode.data(), bytecode.size());
 
-    std::cout << "Loaded PS " << file << std::endl;
+    std::cout << "Loaded PS " << _file << std::endl;
 
-    return static_cast<double>((new PShader(blob, ps))->GetID());
+    return static_cast<ty_real>((new PShader(blob, ps))->GetID());
 }
 
-GM_EXPORT double d3d11_shader_override_ps(double ps)
+/// @func d3d11_shader_override_ps(_ps)
+///
+/// @desc Hooks into `ID3D11DeviceContext::Draw` and replaces the current pixel shader with a custom one.
+///
+/// @param {Real} _ps The ID of the shader or -1 to disable the override.
+GM_EXPORT ty_real d3d11_shader_override_ps(ty_real _ps)
 {
-    g_OverridePS = (ps >= 0.0) ? ((PShader*)Shader::Get(static_cast<size_t>(ps)))->GetShader() : nullptr;
+    g_OverridePS = (_ps >= 0.0) ? ((PShader*)Shader::Get(static_cast<size_t>(_ps)))->GetShader() : nullptr;
     return GM_TRUE;
 }

@@ -6,44 +6,83 @@
 /// platform.
 #macro GMD3D11_IS_SUPPORTED (os_type == os_windows)
 
-/// @func d3d11_get_error_string()
-///
-/// @desc Retrieves the last error message.
-///
-/// @return {String} The last error message.
-function d3d11_get_error_string()
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_get_error_string", dll_cdecl, ty_string,
-		0);
-	return external_call(_fn);
-}
+/// @macro {Real} Maximum number of slots for shader resources.
+#macro D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT 128
 
-/// @func d3d11_texture_set_stage_vs(_slot, _texture)
-///
-/// @desc Passes a texture to a vertex shader.
-///
-/// @param {Id.Sampler} _slot The vertex texture slot index. Must be in range
-/// 0..{@link D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT}-1.
-/// @param {Pointer.Texture} _texture The texture to pass.
-///
-/// @return {Real} Returns 1 on success or 0 on fail.
-function d3d11_texture_set_stage_vs(_slot, _texture)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_texture_set_stage_vs", dll_cdecl, ty_real,
-		1, ty_real);
-	texture_set_stage(0, _texture);
-	return external_call(_fn, _slot);
-}
+/// @macro {Real} A boolean value.
+/// @see d3d11_struct_add_member
+/// @see d3d11_struct_get_member_type
+#macro D3D11_BOOL 0
+
+/// @macro {Real} An integer value.
+/// @see d3d11_struct_add_member
+/// @see d3d11_struct_get_member_type
+#macro D3D11_INT 1
+
+/// @macro {Real} A 2D vector of integers.
+/// @see d3d11_struct_add_member
+/// @see d3d11_struct_get_member_type
+#macro D3D11_INT2 2
+
+/// @macro {Real} A 3D vector of integers.
+/// @see d3d11_struct_add_member
+/// @see d3d11_struct_get_member_type
+#macro D3D11_INT3 3
+
+/// @macro {Real} A 4D vector of integers.
+/// @see d3d11_struct_add_member
+/// @see d3d11_struct_get_member_type
+#macro D3D11_INT4 4
+
+/// @macro {Real} An unsigned integer.
+/// @see d3d11_struct_add_member
+/// @see d3d11_struct_get_member_type
+#macro D3D11_UINT 5
+
+/// @macro {Real} A 2D vector of unsigned integers.
+/// @see d3d11_struct_add_member
+/// @see d3d11_struct_get_member_type
+#macro D3D11_UINT2 6
+
+/// @macro {Real} A 3D vector of unsigned integers.
+/// @see d3d11_struct_add_member
+/// @see d3d11_struct_get_member_type
+#macro D3D11_UINT3 7
+
+/// @macro {Real} A 4D vector of unsigned integers.
+/// @see d3d11_struct_add_member
+/// @see d3d11_struct_get_member_type
+#macro D3D11_UINT4 8
+
+/// @macro {Real} A floating-point value.
+/// @see d3d11_struct_add_member
+/// @see d3d11_struct_get_member_type
+#macro D3D11_FLOAT 9
+
+/// @macro {Real} A 2D vector of floats.
+/// @see d3d11_struct_add_member
+/// @see d3d11_struct_get_member_type
+#macro D3D11_FLOAT2 10
+
+/// @macro {Real} A 3D vector of floats.
+/// @see d3d11_struct_add_member
+/// @see d3d11_struct_get_member_type
+#macro D3D11_FLOAT3 11
+
+/// @macro {Real} A 4D vector of floats.
+/// @see d3d11_struct_add_member
+/// @see d3d11_struct_get_member_type
+#macro D3D11_FLOAT4 12
+
+/// @macro {Real} A 4x4 matrix of floats.
+/// @see d3d11_struct_add_member
+/// @see d3d11_struct_get_member_type
+#macro D3D11_FLOAT4X4 13
 
 /// @func texture_set_stage_vs(_slot, _texture)
 ///
-/// @desc If GMD3D11 is supported, then uses {@link d3d11_texture_set_stage_vs}
-/// to pass a texture to a vertex shader, otherwise uses `texture_set_stage`
-/// (which should work on OpenGL platforms).
+/// @desc If GMD3D11 is supported, then uses {@link d3d11_texture_set_stage_vs} to pass a texture to a vertex shader,
+/// otherwise uses `texture_set_stage` (which should work on OpenGL platforms).
 ///
 /// @param {Id.Sampler} _slot The vertex texture slot index. Must be in range 0..7.
 /// @param {Pointer.Texture} _texture The texture to pass.
@@ -58,59 +97,6 @@ function texture_set_stage_vs(_slot, _texture)
 		return;
 	}
 	texture_set_stage(_slot, _texture);
-}
-
-/// @func d3d11_texture_set_stage_gs(_slot, _texture)
-///
-/// @desc Passes a texture to a geometry shader.
-///
-/// @param {Id.Sampler} _slot The geometry texture slot index. Must be in range
-/// 0..{@link D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT}-1.
-/// @param {Pointer.Texture} _texture The texture to pass.
-///
-/// @return {Real} Returns 1 on success or 0 on fail.
-function d3d11_texture_set_stage_gs(_slot, _texture)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_texture_set_stage_gs", dll_cdecl, ty_real,
-		1, ty_real);
-	texture_set_stage(0, _texture);
-	return external_call(_fn, _slot);
-}
-
-/// @func d3d11_texture_set_stage_ps(_slot, _texture)
-///
-/// @desc Passes a texture to a pixel shader.
-///
-/// @param {Id.Sampler} _slot The pixel texture slot index. Must be in range
-/// 0..{@link D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT}-1.
-/// @param {Pointer.Texture} _texture The texture to pass.
-///
-/// @return {Real} Returns 1 on success or 0 on fail.
-function d3d11_texture_set_stage_ps(_slot, _texture)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_texture_set_stage_ps", dll_cdecl, ty_real,
-		1, ty_real);
-	texture_set_stage(0, _texture);
-	return external_call(_fn, _slot);
-}
-
-/// @func d3d11_draw_instanced(_count)
-///
-/// @desc Configures the number of instances to draw the next time a vertex buffer
-/// is submitted. After that the number is reset back to 0!
-///
-/// @param {Real} _count Number of instances to draw. Use 0 to disable instanced rendering.
-function d3d11_draw_instanced(_count)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_draw_instanced", dll_cdecl, ty_real,
-		1, ty_real);
-	return external_call(_fn, _count);
 }
 
 /// @func vertex_submit_instanced(_vbuff, _prim, _texture, _count)

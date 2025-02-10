@@ -2,7 +2,8 @@
 
 #include <common.hpp>
 
-#include <Trackable.hpp>
+#include <Struct.hpp>
+// #include <Trackable.hpp>
 
 #include <cstdint>
 #include <d3d11.h>
@@ -10,23 +11,15 @@
 class CBuffer final : public Trackable<CBuffer>
 {
 public:
-    enum class Element
-    {
-        Bool = 0,
-        Int,
-        Uint,
-        Float,
-        SIZE
-    };
+    CBuffer(ID3D11Buffer* buffer, size_t size) : Buffer(buffer), Size(size) {}
 
-    ~CBuffer();
+    virtual ~CBuffer();
 
-    bool AddElement(Element type, uint32_t count);
+    ID3D11Buffer* GetBuffer() const { return Buffer; }
 
     size_t GetSize() const { return Size; }
 
-    ID3D11Buffer* Buffer = nullptr;
-
 private:
+    ID3D11Buffer* Buffer = nullptr;
     size_t Size = 0;
 };

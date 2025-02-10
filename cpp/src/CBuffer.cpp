@@ -1,11 +1,10 @@
 #include <CBuffer.hpp>
 
 #include <cstdint>
+#include <iostream>
 
 extern ID3D11Device* g_Device;
 extern ID3D11DeviceContext* g_Context;
-
-static CBuffer* g_CBufferCurrent = nullptr;
 
 CBuffer::~CBuffer()
 {
@@ -15,157 +14,153 @@ CBuffer::~CBuffer()
     }
 }
 
-bool CBuffer::AddElement(CBuffer::Element type, uint32_t count)
+/// @func d3d11_cbuffer_create(_struct, _count)
+///
+/// @desc Creates a new constant buffer.
+///
+/// @param {Real} _struct A struct that defines data stored in the constant buffer.
+/// @param {Real} _count 
+///
+/// @return {Real} The ID of the created constant buffer or -1 on fail.
+///
+/// @see d3d11_struct_begin
+/// @see d3d11_cbuffer_exists
+/// @see d3d11_cbuffer_update
+GM_EXPORT ty_real d3d11_cbuffer_create(ty_real _struct, ty_real _count)
 {
-    if (count < 1)
-    {
-        return false;
-    }
-
-    size_t elementSize = 0;
-
-    switch (type)
-    {
-    case Element::Bool:
-        elementSize = sizeof(bool);
-        break;
-
-    case Element::Int:
-        elementSize = sizeof(int32_t);
-        break;
-
-    case Element::Uint:
-        elementSize = sizeof(uint32_t);
-        break;
-
-    case Element::Float:
-        elementSize = sizeof(float);
-        break;
-
-    default:
-        break;
-    }
-
-    Size += elementSize * count;
-
-    return true;
-}
-
-GM_EXPORT double d3d11_cbuffer_begin()
-{
-    if (g_CBufferCurrent)
-    {
-        return GM_FALSE;
-    }
-    g_CBufferCurrent = new CBuffer();
-    return GM_TRUE;
-}
-
-GM_EXPORT double d3d11_cbuffer_end()
-{
-    if (!g_CBufferCurrent)
+    if (_count <= 0.0)
     {
         return -1.0;
     }
 
-    CD3D11_BUFFER_DESC cbDesc(g_CBufferCurrent->GetSize(), D3D11_BIND_CONSTANT_BUFFER);
-    HRESULT hr = g_Device->CreateBuffer(&cbDesc, NULL, &g_CBufferCurrent->Buffer);
+    Struct* pStruct = Struct::Get(static_cast<size_t>(_struct));
+
+    if (pStruct->GetSize16() != pStruct->GetSize())
+    {
+        std::cout << "Failed to create a constant buffer - struct size must be aligned to 16 bytes!" << std::endl;
+        return -1;
+    }
+
+    size_t size = pStruct->GetSize16() * static_cast<size_t>(_count);
+    CD3D11_BUFFER_DESC cbDesc(size, D3D11_BIND_CONSTANT_BUFFER);
+    ID3D11Buffer* buffer = nullptr;
+    HRESULT hr = g_Device->CreateBuffer(&cbDesc, NULL, &buffer);
 
     if (FAILED(hr))
     {
-        delete g_CBufferCurrent;
-        g_CBufferCurrent = nullptr;
         return -1.0;
     }
 
-    size_t id = g_CBufferCurrent->GetID();
-    g_CBufferCurrent = nullptr;
-    return static_cast<double>(id);
+    return static_cast<ty_real>((new CBuffer(buffer, size))->GetID());
 }
 
-GM_EXPORT double d3d11_cbuffer_add_bool(double count)
+/// @func d3d11_cbuffer_get_size(_cbuffer)
+///
+/// @desc Retrieves size of a constant buffer in bytes.
+///
+/// @param {Real} _cbuffer The size of the constant buffer in bytes.
+GM_EXPORT ty_real d3d11_cbuffer_get_size(ty_real _cbuffer)
 {
-    return g_CBufferCurrent->AddElement(CBuffer::Element::Bool, static_cast<uint32_t>(count)) ? GM_TRUE : GM_FALSE;
+    return CBuffer::Get(static_cast<size_t>(_cbuffer))->GetSize();
 }
 
-GM_EXPORT double d3d11_cbuffer_add_int(double count)
-{
-    return g_CBufferCurrent->AddElement(CBuffer::Element::Int, static_cast<uint32_t>(count)) ? GM_TRUE : GM_FALSE;
-}
-
-GM_EXPORT double d3d11_cbuffer_add_uint(double count)
-{
-    return g_CBufferCurrent->AddElement(CBuffer::Element::Uint, static_cast<uint32_t>(count)) ? GM_TRUE : GM_FALSE;
-}
-
-GM_EXPORT double d3d11_cbuffer_add_float(double count)
-{
-    return g_CBufferCurrent->AddElement(CBuffer::Element::Float, static_cast<uint32_t>(count)) ? GM_TRUE : GM_FALSE;
-}
-
-GM_EXPORT double d3d11_cbuffer_get_size(double cbuffer)
-{
-    return CBuffer::Get(static_cast<size_t>(cbuffer))->GetSize();
-}
-
-GM_EXPORT double d3d11_cbuffer_update(double cbuffer, char* data)
+/// @func d3d11_cbuffer_write_data(_cbuffer, _data)
+///
+/// @desc Writes data from a GM buffer into a D3D11 constant buffer.
+///
+/// @param {Real} _cbuffer The ID of the constant buffer.
+/// @param {Pointer} _data An address of a GM buffer to update the constant buffer from.
+GM_EXPORT ty_real d3d11_cbuffer_write_data(ty_real _cbuffer, ty_string _data)
 {
     g_Context->UpdateSubresource(
-        CBuffer::Get(static_cast<size_t>(cbuffer))->Buffer,
+        CBuffer::Get(static_cast<size_t>(_cbuffer))->GetBuffer(),
         0,
         nullptr,
-        (void*)data,
+        (void*)_data,
         0,
         0);
     return GM_TRUE;
 }
 
-GM_EXPORT double d3d11_shader_set_cbuffer_vs(double slot, double cbuffer)
+/// @func d3d11_shader_set_cbuffer_vs(_slot, _cbuffer)
+///
+/// @desc Binds a constant buffer to a vertex shader.
+///
+/// @param {Real} _slot The slot to bind the constant buffer to.
+/// @param {Real} _cbuffer The ID of the constant buffer or -1 to unbind the slot.
+GM_EXPORT ty_real d3d11_shader_set_cbuffer_vs(ty_real _slot, ty_real _cbuffer)
 {
-    if (cbuffer >= 0.0)
+    if (_cbuffer >= 0.0)
     {
-        g_Context->VSSetConstantBuffers(static_cast<UINT>(slot), 1, &CBuffer::Get(static_cast<size_t>(cbuffer))->Buffer);
+        ID3D11Buffer* buffer = CBuffer::Get(static_cast<size_t>(_cbuffer))->GetBuffer();
+        g_Context->VSSetConstantBuffers(static_cast<UINT>(_slot), 1, &buffer);
     }
     else
     {
-        g_Context->VSSetConstantBuffers(static_cast<UINT>(slot), 0, nullptr);
+        g_Context->VSSetConstantBuffers(static_cast<UINT>(_slot), 0, nullptr);
     }
     return GM_TRUE;
 }
 
-GM_EXPORT double d3d11_shader_set_cbuffer_gs(double slot, double cbuffer)
+/// @func d3d11_shader_set_cbuffer_gs(_slot, _cbuffer)
+///
+/// @desc Binds a constant buffer to a geometry shader.
+///
+/// @param {Real} _slot The slot to bind the constant buffer to.
+/// @param {Real} _cbuffer The ID of the constant buffer or -1 to unbind the slot.
+GM_EXPORT ty_real d3d11_shader_set_cbuffer_gs(ty_real _slot, ty_real _cbuffer)
 {
-    if (cbuffer >= 0.0)
+    if (_cbuffer >= 0.0)
     {
-        g_Context->GSSetConstantBuffers(static_cast<UINT>(slot), 1, &CBuffer::Get(static_cast<size_t>(cbuffer))->Buffer);
+        ID3D11Buffer* buffer = CBuffer::Get(static_cast<size_t>(_cbuffer))->GetBuffer();
+        g_Context->GSSetConstantBuffers(static_cast<UINT>(_slot), 1, &buffer);
     }
     else
     {
-        g_Context->GSSetConstantBuffers(static_cast<UINT>(slot), 0, nullptr);
+        g_Context->GSSetConstantBuffers(static_cast<UINT>(_slot), 0, nullptr);
     }
     return GM_TRUE;
 }
 
-GM_EXPORT double d3d11_shader_set_cbuffer_ps(double slot, double cbuffer)
+/// @func d3d11_shader_set_cbuffer_ps(_slot, _cbuffer)
+///
+/// @desc Binds a constant buffer to a pixel shader.
+///
+/// @param {Real} _slot The slot to bind the constant buffer to.
+/// @param {Real} _cbuffer The ID of the constant buffer or -1 to unbind the slot.
+GM_EXPORT ty_real d3d11_shader_set_cbuffer_ps(ty_real _slot, ty_real _cbuffer)
 {
-    if (cbuffer >= 0.0)
+    if (_cbuffer >= 0.0)
     {
-        g_Context->PSSetConstantBuffers(static_cast<UINT>(slot), 1, &CBuffer::Get(static_cast<size_t>(cbuffer))->Buffer);
+        ID3D11Buffer* buffer = CBuffer::Get(static_cast<size_t>(_cbuffer))->GetBuffer();
+        g_Context->PSSetConstantBuffers(static_cast<UINT>(_slot), 1, &buffer);
     }
     else
     {
-        g_Context->PSSetConstantBuffers(static_cast<UINT>(slot), 0, nullptr);
+        g_Context->PSSetConstantBuffers(static_cast<UINT>(_slot), 0, nullptr);
     }
     return GM_TRUE;
 }
 
-GM_EXPORT double d3d11_cbuffer_exists(double cbuffer)
+/// @func d3d11_cbuffer_exists(_cbuffer)
+///
+/// @desc Checks whether a constant buffer exists.
+///
+/// @param {Real} _cbuffer The ID of the constant buffer.
+///
+/// @return {Bool} Returns true if the constant buffer exists.
+GM_EXPORT ty_real d3d11_cbuffer_exists(ty_real _cbuffer)
 {
-    return (cbuffer >= 0.0 && CBuffer::Exists(static_cast<size_t>(cbuffer))) ? GM_TRUE : GM_FALSE;
+    return (_cbuffer >= 0.0 && CBuffer::Exists(static_cast<size_t>(_cbuffer))) ? GM_TRUE : GM_FALSE;
 }
 
-GM_EXPORT double d3d11_cbuffer_destroy(double cbuffer)
+/// @func d3d11_cbuffer_destroy(_cbuffer)
+///
+/// @desc Destroys a constant buffer.
+///
+/// @param {Real} _cbuffer The ID of the constant buffer to destroy.
+GM_EXPORT ty_real d3d11_cbuffer_destroy(ty_real _cbuffer)
 {
-    delete CBuffer::Get(static_cast<size_t>(cbuffer));
+    delete CBuffer::Get(static_cast<size_t>(_cbuffer));
     return GM_TRUE;
 }

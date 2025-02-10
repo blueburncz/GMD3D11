@@ -51,22 +51,40 @@ static GShader* CompileGS(char* file, char* entryPoint, char* profile)
     return new GShader(blob, gs);
 }
 
-GM_EXPORT double d3d11_shader_compile_gs(char* file, char* entryPoint, char* profile)
+/// @func d3d11_shader_compile_gs(_file, _entryPoint, _profile)
+///
+/// @desc Compiles a geometry shader from file.
+///
+/// @param {String} _file The path to file to compile.
+/// @param {String} _entryPoint The name of the entry point function, e.g. "main".
+/// @param {String} _profile The geometry shader profile, e.g. "gs_4_0".
+///
+/// @return {Real} The ID of the geometry shader or -1 on fail.
+///
+/// @see d3d11_get_error_string
+GM_EXPORT ty_real d3d11_shader_compile_gs(ty_string _file, ty_string _entryPoint, ty_string _profile)
 {
-    GShader* shader = CompileGS(file, entryPoint, profile);
+    GShader* shader = CompileGS(_file, _entryPoint, _profile);
     if (!shader)
     {
         return -1.0;
     }
-    return static_cast<double>(shader->GetID());
+    return static_cast<ty_real>(shader->GetID());
 }
 
-GM_EXPORT double d3d11_shader_load_gs(char* file)
+/// @func d3d11_shader_load_gs(_file)
+///
+/// @desc Loads a compiled geometry shader from a file.
+///
+/// @param {String} _file The path to the compiled geometry shader.
+///
+/// @return {Real} The ID of the geometry shader or -1 on fail.
+GM_EXPORT ty_real d3d11_shader_load_gs(ty_string _file)
 {
-    std::vector<char> bytecode = Shader::LoadBlob(file);
+    std::vector<char> bytecode = Shader::LoadBlob(_file);
     if (bytecode.empty())
     {
-        std::cout << "Failed loading GS " << file << "!" << std::endl;
+        std::cout << "Failed loading GS " << _file << "!" << std::endl;
         return -1.0;
     }
 
@@ -75,7 +93,7 @@ GM_EXPORT double d3d11_shader_load_gs(char* file)
 
     if (FAILED(hr))
     {
-        std::cout << "Failed creating loaded GS " << file << "!" << std::endl;
+        std::cout << "Failed creating loaded GS " << _file << "!" << std::endl;
         return -1.0;
     }
 
@@ -84,21 +102,26 @@ GM_EXPORT double d3d11_shader_load_gs(char* file)
 
     if (FAILED(hr))
     {
-        std::cout << "Failed creating blob for loaded GS " << file << "!" << std::endl;
+        std::cout << "Failed creating blob for loaded GS " << _file << "!" << std::endl;
         gs->Release();
         return -1.0;
     }
 
     memcpy(blob->GetBufferPointer(), bytecode.data(), bytecode.size());
 
-    std::cout << "Loaded GS " << file << std::endl;
+    std::cout << "Loaded GS " << _file << std::endl;
 
-    return static_cast<double>((new GShader(blob, gs))->GetID());
+    return static_cast<ty_real>((new GShader(blob, gs))->GetID());
 }
 
-GM_EXPORT double d3d11_shader_set_gs(double gs)
+/// @func d3d11_shader_set_gs(_gs)
+///
+/// @desc Changes the current geometry shader.
+///
+/// @param {Real} _gs The ID of the shader or -1 to disable the geometry stage.
+GM_EXPORT ty_real d3d11_shader_set_gs(ty_real _gs)
 {
-    ID3D11GeometryShader* shader = (gs >= 0.0) ? ((GShader*)Shader::Get(static_cast<size_t>(gs)))->GetShader() : nullptr;
+    ID3D11GeometryShader* shader = (_gs >= 0.0) ? ((GShader*)Shader::Get(static_cast<size_t>(_gs)))->GetShader() : nullptr;
     g_Context->GSSetShader(shader, nullptr, 0);
     return GM_TRUE;
 }

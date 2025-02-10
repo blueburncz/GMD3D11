@@ -8,6 +8,11 @@ if (d3d11_shader_exists(vs))
 	d3d11_shader_destroy(vs);
 }
 
+if (d3d11_struct_exists(instanceDataStruct))
+{
+	d3d11_struct_destroy(instanceDataStruct);
+}
+
 if (d3d11_cbuffer_exists(instanceData))
 {
 	d3d11_cbuffer_destroy(instanceData);

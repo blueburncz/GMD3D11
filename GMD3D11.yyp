@@ -41,7 +41,8 @@
     {"id":{"name":"RmInstancedRendering","path":"rooms/RmInstancedRendering/RmInstancedRendering.yy",},},
     {"id":{"name":"RmVTF","path":"rooms/RmVTF/RmVTF.yy",},},
     {"id":{"name":"__d3d11_cbuffer","path":"scripts/__d3d11_cbuffer/__d3d11_cbuffer.yy",},},
-    {"id":{"name":"__d3d11_shader","path":"scripts/__d3d11_shader/__d3d11_shader.yy",},},
+    {"id":{"name":"__d3d11_generated","path":"scripts/__d3d11_generated/__d3d11_generated.yy",},},
+    {"id":{"name":"__d3d11_texture","path":"scripts/__d3d11_texture/__d3d11_texture.yy",},},
     {"id":{"name":"__d3d11","path":"scripts/__d3d11/__d3d11.yy",},},
     {"id":{"name":"assert","path":"scripts/assert/assert.yy",},},
     {"id":{"name":"yamc","path":"scripts/yamc/yamc.yy",},},
@@ -53,8 +54,8 @@
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
     {"roomId":{"name":"RmInstancedRendering","path":"rooms/RmInstancedRendering/RmInstancedRendering.yy",},},
-    {"roomId":{"name":"RmGeometryShader","path":"rooms/RmGeometryShader/RmGeometryShader.yy",},},
     {"roomId":{"name":"RmVTF","path":"rooms/RmVTF/RmVTF.yy",},},
+    {"roomId":{"name":"RmGeometryShader","path":"rooms/RmGeometryShader/RmGeometryShader.yy",},},
   ],
   "templateType":null,
   "TextureGroups":[

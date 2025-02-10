@@ -10,6 +10,7 @@ add_library(GMD3D11 SHARED
     src/main.cpp
     src/PShader.cpp
     src/Shader.cpp
+    src/Struct.cpp
     src/utils.cpp
     src/VShader.cpp
     )
