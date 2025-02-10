@@ -17,16 +17,10 @@
 
 ## Building the DLL
 
-Requires [CMake](https://cmake.org/) 3.23 at least!
+> Requires [CMake](https://cmake.org/) 3.23 at least and [Python 3](https://www.python.org/downloads/)!
 
-```sh
-cd cpp
-mkdir build
-cd build
-cmake ..
-cmake --build . --config=Release
-Copy-Item -Path ./Release/GMD3D11.dll -Destination ../../datafiles
-```
+Simply run `./build.ps1` from the root directory to build the DLL, copy it into `datafiles` and generate
+`__d3d11_generated.gml`.
 
 ## Links
 
