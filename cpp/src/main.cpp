@@ -2,6 +2,7 @@
 
 #include <d3d11.h>
 #include <d3dcompiler.h>
+#include <DirectXMath.h>
 #include <iostream>
 #include <vector>
 #include <Windows.h>
@@ -121,4 +122,132 @@ GM_EXPORT ty_real d3d11_draw_instanced(ty_real _count)
 {
     g_DrawInstanced = static_cast<size_t>(_count);
     return GM_TRUE;
+}
+
+enum class EType : uint32_t
+{
+    Bool = 0,
+    Int,
+    Int2,
+    Int3,
+    Int4,
+    Uint,
+    Uint2,
+    Uint3,
+    Uint4,
+    Float,
+    Float2,
+    Float3,
+    Float4,
+    Float4x4,
+    SIZE
+};
+
+/// @func d3d11_sizeof(_type)
+///
+/// @desc Retrieves size of given type, in bytes.
+///
+/// @param {Real} _type The type to get the byte-size of. 
+///
+/// @return {Real} The size of given type or -1 if the type is not valid.
+///
+/// @see D3D11_BOOL
+/// @see D3D11_INT
+/// @see D3D11_INT2
+/// @see D3D11_INT3
+/// @see D3D11_INT4
+/// @see D3D11_UINT
+/// @see D3D11_UINT2
+/// @see D3D11_UINT3
+/// @see D3D11_UINT4
+/// @see D3D11_FLOAT
+/// @see D3D11_FLOAT2
+/// @see D3D11_FLOAT3
+/// @see D3D11_FLOAT4
+/// @see D3D11_FLOAT4X4
+GM_EXPORT ty_real d3d11_sizeof(ty_real _type)
+{
+    if (_type < 0.0 || _type >= static_cast<ty_real>(EType::SIZE))
+    {
+        return -1.0;
+    }
+
+    switch (static_cast<EType>(_type))
+    {
+    case EType::Bool:
+        return sizeof(bool);
+
+    case EType::Int:
+        return sizeof(int32_t);
+
+    case EType::Int2:
+        return sizeof(DirectX::XMINT2);
+
+    case EType::Int3:
+        return sizeof(DirectX::XMINT3);
+    
+    case EType::Int4:
+        return sizeof(DirectX::XMINT4);
+
+    case EType::Uint:
+        return sizeof(uint32_t);
+
+    case EType::Uint2:
+        return sizeof(DirectX::XMUINT2);
+
+    case EType::Uint3:
+        return sizeof(DirectX::XMUINT3);
+    
+    case EType::Uint4:
+        return sizeof(DirectX::XMUINT4);
+
+    case EType::Float:
+        return sizeof(float);
+    
+    case EType::Float2:
+        return sizeof(DirectX::XMFLOAT2);
+
+    case EType::Float3:
+        return sizeof(DirectX::XMFLOAT3);
+
+    case EType::Float4:
+        return sizeof(DirectX::XMFLOAT4);
+
+    case EType::Float4x4:
+        return sizeof(DirectX::XMFLOAT4X4);
+
+    default:
+        return -1.0;
+    }
+}
+
+/// @func d3d11_sizeof16(_type)
+///
+/// @desc Retrieves 16 byte-aligned size of given type, in bytes.
+///
+/// @param {Real} _type The type to get the byte-size of. 
+///
+/// @return {Real} The 16 byte-aligned size of given type or -1 if the type is not valid.
+///
+/// @see D3D11_BOOL
+/// @see D3D11_INT
+/// @see D3D11_INT2
+/// @see D3D11_INT3
+/// @see D3D11_INT4
+/// @see D3D11_UINT
+/// @see D3D11_UINT2
+/// @see D3D11_UINT3
+/// @see D3D11_UINT4
+/// @see D3D11_FLOAT
+/// @see D3D11_FLOAT2
+/// @see D3D11_FLOAT3
+/// @see D3D11_FLOAT4
+/// @see D3D11_FLOAT4X4
+GM_EXPORT ty_real d3d11_sizeof16(ty_real _type)
+{
+    if (_type < 0.0 || _type >= static_cast<ty_real>(EType::SIZE))
+    {
+        return -1.0;
+    }
+    return static_cast<ty_real>(RoundUp16(static_cast<size_t>(d3d11_sizeof(_type))));
 }

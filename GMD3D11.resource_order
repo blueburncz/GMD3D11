@@ -9,6 +9,7 @@
     {"name":"RmVTF","order":1,"path":"rooms/RmVTF/RmVTF.yy",},
     {"name":"__d3d11_cbuffer","order":6,"path":"scripts/__d3d11_cbuffer/__d3d11_cbuffer.yy",},
     {"name":"__d3d11_generated","order":4,"path":"scripts/__d3d11_generated/__d3d11_generated.yy",},
+    {"name":"__d3d11_sbuffer","order":7,"path":"scripts/__d3d11_sbuffer/__d3d11_sbuffer.yy",},
     {"name":"__d3d11_texture","order":5,"path":"scripts/__d3d11_texture/__d3d11_texture.yy",},
     {"name":"assert","order":3,"path":"scripts/assert/assert.yy",},
     {"name":"yamc","order":1,"path":"scripts/yamc/yamc.yy",},

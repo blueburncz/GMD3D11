@@ -9,6 +9,9 @@
 /// @macro {Real} Maximum number of slots for shader resources.
 #macro D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT 128
 
+/// @macro {Real} Maximum number of workgroup size in {@link d3d11_compute_dispatch}.
+#macro D3D11_CS_DISPATCH_MAX_THREAD_GROUPS_PER_DIMENSION 65535
+
 /// @macro {Real} A boolean value.
 /// @see d3d11_struct_add_member
 /// @see d3d11_struct_get_member_type

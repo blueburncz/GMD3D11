@@ -11,8 +11,10 @@
 * Compile shaders from files (optimization level 3).
 * Save and load compiled shaders.
 * Hook into `ID3D11DeviceContext::Draw` calls to swap out used vertex and pixel shaders with custom ones.
-* Geometry shaders.
 * Constant buffers.
+* Structured buffers (with SRV and UAV).
+* Geometry shaders.
+* Compute shaders.
 * Instanced rendering.
 
 ## Building the DLL

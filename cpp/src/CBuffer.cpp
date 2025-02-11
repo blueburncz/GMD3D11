@@ -6,6 +6,12 @@
 extern ID3D11Device* g_Device;
 extern ID3D11DeviceContext* g_Context;
 
+CBuffer::CBuffer(ID3D11Buffer* buffer, size_t size)
+    : Buffer(buffer)
+    , Size(size)
+{
+}
+
 CBuffer::~CBuffer()
 {
     if (Buffer)
@@ -14,34 +20,27 @@ CBuffer::~CBuffer()
     }
 }
 
-/// @func d3d11_cbuffer_create(_struct, _count)
+/// @func d3d11_cbuffer_create(_size)
 ///
 /// @desc Creates a new constant buffer.
 ///
-/// @param {Real} _struct A struct that defines data stored in the constant buffer.
-/// @param {Real} _count 
+/// @param {Real} _size The size of the buffer, in bytes. Must be a multiple of 16!
 ///
 /// @return {Real} The ID of the created constant buffer or -1 on fail.
 ///
-/// @see d3d11_struct_begin
+/// @see d3d11_sizeof16
 /// @see d3d11_cbuffer_exists
 /// @see d3d11_cbuffer_update
-GM_EXPORT ty_real d3d11_cbuffer_create(ty_real _struct, ty_real _count)
+GM_EXPORT ty_real d3d11_cbuffer_create(ty_real _size)
 {
-    if (_count <= 0.0)
-    {
-        return -1.0;
-    }
+    size_t size = static_cast<size_t>(_size);
 
-    Struct* pStruct = Struct::Get(static_cast<size_t>(_struct));
-
-    if (pStruct->GetSize16() != pStruct->GetSize())
+    if (size <= 0 || size != RoundUp16(size))
     {
         std::cout << "Failed to create a constant buffer - struct size must be aligned to 16 bytes!" << std::endl;
         return -1;
     }
 
-    size_t size = pStruct->GetSize16() * static_cast<size_t>(_count);
     CD3D11_BUFFER_DESC cbDesc(size, D3D11_BIND_CONSTANT_BUFFER);
     ID3D11Buffer* buffer = nullptr;
     HRESULT hr = g_Device->CreateBuffer(&cbDesc, NULL, &buffer);

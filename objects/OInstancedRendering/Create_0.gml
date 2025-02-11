@@ -24,17 +24,8 @@ if (!d3d11_shader_exists(ps))
 
 instanceNumber = 2000;
 
-d3d11_struct_begin();
 // Instance position could be just float3, but cbuffer size must be divisible by 16!
-d3d11_struct_add_member(D3D11_FLOAT4);
-instanceDataStruct = d3d11_struct_end();
-
-if (!d3d11_struct_exists(instanceDataStruct))
-{
-	assert(false, "Could not create instanceDataStruct!");
-}
-
-instanceData = d3d11_cbuffer_create(instanceDataStruct, instanceNumber);
+instanceData = d3d11_cbuffer_create(d3d11_sizeof16(D3D11_FLOAT4) * instanceNumber);
 
 if (!d3d11_cbuffer_exists(instanceData))
 {

@@ -6,3 +6,8 @@
 
 typedef char* ty_string;
 typedef double ty_real;
+
+static inline size_t RoundUp16(size_t value)
+{
+    return ((value + 15) & ~static_cast<size_t>(15));
+}
