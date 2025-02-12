@@ -7,15 +7,28 @@
 
 ## Features
 
-* Set up to 128 vertex and pixel shader samplers. Compatible with `surface_get_texture` and `sprite_get_texture`!
-* Compile shaders from files (optimization level 3).
-* Save and load compiled shaders.
-* Hook into `ID3D11DeviceContext::Draw` calls to swap out used vertex and pixel shaders with custom ones.
-* Constant buffers.
-* Structured buffers (with SRV and UAV).
-* Geometry shaders.
-* Compute shaders.
-* Instanced rendering.
+* [ ] Shaders
+  * [x] Compile from file (optimization level 3)
+  * [x] Save and load compiled shaders
+  * [x] Vertex texture fetching of native GM textures (`sprite_get_texture()`, `surface_get_texture()`)
+  * [x] Hook into `ID3D11DeviceContext::Draw` calls to swap out used vertex and pixel shaders with custom ones
+  * [x] Geometry shaders
+  * [ ] Tessellation shaders (🛑 TODO)
+  * [ ] Compute shaders (🚧 WIP)
+* [ ] Buffers
+  * [ ] Vertex buffers
+  * [ ] Index buffers
+  * [x] Constant buffers
+  * [x] Structured buffers (with SRV and UAV)
+  * [ ] Raw buffers (🛑 TODO)
+  * [ ] Staging buffers
+* [ ] Textures
+  * [ ] Samplers (🛑 TODO)
+  * [ ] Texture2D (🛑 TODO)
+  * [ ] Texture3D (🛑 TODO)
+* [ ] Occlusion queries (🛑 TODO)
+* [ ] Timestamps (🛑 TODO)
+* [x] `vertex_submit_instanced()`
 
 ## Building the DLL
 
