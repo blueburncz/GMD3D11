@@ -16,8 +16,8 @@
   * [ ] Tessellation shaders (🛑 TODO)
   * [ ] Compute shaders (🚧 WIP)
 * [ ] Buffers
-  * [ ] Vertex buffers
-  * [ ] Index buffers
+  * [ ] Vertex buffers (🛑 TODO)
+  * [ ] Index buffers (🛑 TODO)
   * [x] Constant buffers
   * [x] Structured buffers (with SRV and UAV)
   * [ ] Raw buffers (🛑 TODO)
