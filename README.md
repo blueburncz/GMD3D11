@@ -21,7 +21,7 @@
   * [x] Constant buffers
   * [x] Structured buffers (with SRV and UAV)
   * [ ] Raw buffers (🛑 TODO)
-  * [ ] Staging buffers
+  * [ ] Staging buffers (🛑 TODO)
 * [ ] Textures
   * [ ] Samplers (🛑 TODO)
   * [ ] Texture2D (🛑 TODO)
