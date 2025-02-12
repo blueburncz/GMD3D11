@@ -10,7 +10,6 @@
 * [ ] Shaders
   * [x] Compile from file (optimization level 3)
   * [x] Save and load compiled shaders
-  * [x] Vertex texture fetching of native GM textures (`sprite_get_texture()`, `surface_get_texture()`)
   * [x] Hook into `ID3D11DeviceContext::Draw` calls to swap out used vertex and pixel shaders with custom ones
   * [x] Geometry shaders
   * [ ] Tessellation shaders (🛑 TODO)
@@ -23,12 +22,14 @@
   * [ ] Raw buffers (🛑 TODO)
   * [ ] Staging buffers (🛑 TODO)
 * [ ] Textures
+  * [x] `texture_set_stage_vs()` - vertex texture fetching of native GM textures (`sprite_get_texture()`, `surface_get_texture()`)
   * [ ] Samplers (🛑 TODO)
   * [ ] Texture2D (🛑 TODO)
   * [ ] Texture3D (🛑 TODO)
+  * [ ] Texture arrays (🛑 TODO)
 * [ ] Occlusion queries (🛑 TODO)
 * [ ] Timestamps (🛑 TODO)
-* [x] `vertex_submit_instanced()`
+* [x] `vertex_submit_instanced()` - instanced rendering of native GM vertex buffers
 
 ## Building the DLL
 
