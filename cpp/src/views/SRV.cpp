@@ -22,7 +22,7 @@ SRV::~SRV()
 ///
 /// @param {Real} _srv The ID of the SRV.
 ///
-/// @return {Bool} Returns true if the SRV exists.
+/// @return {Bool} Returns `true` if the SRV exists.
 GM_EXPORT ty_real d3d11_srv_exists(ty_real _srv)
 {
     return (_srv >= 0.0 && Trackable::Exists<SRV>(static_cast<size_t>(_srv))) ? GM_TRUE : GM_FALSE;

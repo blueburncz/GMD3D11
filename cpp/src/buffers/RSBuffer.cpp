@@ -107,7 +107,7 @@ GM_EXPORT ty_real d3d11_rsbuffer_write_data(ty_real _rsbuffer, ty_string _data)
 ///
 /// @param {Real} _rsbuffer The ID of the read-only structured buffer.
 ///
-/// @return {Bool} Returns true if the read-only structured buffer exists.
+/// @return {Bool} Returns `true` if the read-only structured buffer exists.
 GM_EXPORT ty_real d3d11_rsbuffer_exists(ty_real _rsbuffer)
 {
     return (_rsbuffer >= 0.0 && Trackable::Exists<RSBuffer>(static_cast<size_t>(_rsbuffer))) ? GM_TRUE : GM_FALSE;

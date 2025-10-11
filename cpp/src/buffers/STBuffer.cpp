@@ -92,7 +92,7 @@ GM_EXPORT ty_real d3d11_stbuffer_get_size(ty_real _stbuffer)
 ///
 /// @param {Real} _stbuffer The ID of the staging buffer.
 ///
-/// @return {Bool} Returns true if given staging buffer is currently mapped for reading or false otherwise.
+/// @return {Bool} Returns `true` if given staging buffer is currently mapped for reading or `false` otherwise.
 GM_EXPORT ty_real d3d11_stbuffer_is_mapped(ty_real _stbuffer)
 {
     return Trackable::Get<STBuffer>(static_cast<size_t>(_stbuffer))->IsMapped() ? GM_TRUE : GM_FALSE;
@@ -104,7 +104,7 @@ GM_EXPORT ty_real d3d11_stbuffer_is_mapped(ty_real _stbuffer)
 ///
 /// @param {Real} _stbuffer The ID of the staging buffer.
 ///
-/// @return {Bool} Returns true on success or false otherwise (e.g. the staging buffer was already mapped).
+/// @return {Bool} Returns `true` on success or `false` otherwise (e.g. the staging buffer was already mapped).
 GM_EXPORT ty_real d3d11_stbuffer_map(ty_real _stbuffer)
 {
     return Trackable::Get<STBuffer>(static_cast<size_t>(_stbuffer))->Map() ? GM_TRUE : GM_FALSE;
@@ -117,7 +117,7 @@ GM_EXPORT ty_real d3d11_stbuffer_map(ty_real _stbuffer)
 /// @param {Real} _stbuffer The ID of the staging buffer.
 /// @param {Pointer} _dest The address of the destination buffer.
 ///
-/// @return {Bool} Returns true on success or false otherwise (e.g. the staging buffer was not mapped).
+/// @return {Bool} Returns `true` on success or `false` otherwise (e.g. the staging buffer was not mapped).
 GM_EXPORT ty_real d3d11_stbuffer_read_data(ty_real _stbuffer, ty_string _dest)
 {
     STBuffer* stBuffer = Trackable::Get<STBuffer>(static_cast<size_t>(_stbuffer));
@@ -135,7 +135,7 @@ GM_EXPORT ty_real d3d11_stbuffer_read_data(ty_real _stbuffer, ty_string _dest)
 ///
 /// @param {Real} _stbuffer The ID of the staging buffer.
 ///
-/// @return {Bool} Returns true on success or false otherwise (e.g. the staging buffer was not mapped).
+/// @return {Bool} Returns `true` on success or `false` otherwise (e.g. the staging buffer was not mapped).
 GM_EXPORT ty_real d3d11_stbuffer_unmap(ty_real _stbuffer)
 {
     return Trackable::Get<STBuffer>(static_cast<size_t>(_stbuffer))->Unmap() ? GM_TRUE : GM_FALSE;
@@ -147,7 +147,7 @@ GM_EXPORT ty_real d3d11_stbuffer_unmap(ty_real _stbuffer)
 ///
 /// @param {Real} _stbuffer The ID of the staging buffer.
 ///
-/// @return {Bool} Returns true if the staging buffer exists.
+/// @return {Bool} Returns `true` if the staging buffer exists.
 GM_EXPORT ty_real d3d11_stbuffer_exists(ty_real _stbuffer)
 {
     return (_stbuffer >= 0.0 && Trackable::Exists<STBuffer>(static_cast<size_t>(_stbuffer))) ? GM_TRUE : GM_FALSE;

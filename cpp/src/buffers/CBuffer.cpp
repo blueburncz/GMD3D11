@@ -140,7 +140,7 @@ GM_EXPORT ty_real d3d11_shader_set_cbuffer_ps(ty_real _slot, ty_real _cbuffer)
 ///
 /// @param {Real} _cbuffer The ID of the constant buffer.
 ///
-/// @return {Bool} Returns true if the constant buffer exists.
+/// @return {Bool} Returns `true` if the constant buffer exists.
 GM_EXPORT ty_real d3d11_cbuffer_exists(ty_real _cbuffer)
 {
     return (_cbuffer >= 0.0 && Trackable::Exists<CBuffer>(static_cast<size_t>(_cbuffer))) ? GM_TRUE : GM_FALSE;

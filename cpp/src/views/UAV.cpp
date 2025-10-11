@@ -22,7 +22,7 @@ UAV::~UAV()
 ///
 /// @param {Real} _uav The ID of the UAV.
 ///
-/// @return {Bool} Returns true if the UAV exists.
+/// @return {Bool} Returns `true` if the UAV exists.
 GM_EXPORT ty_real d3d11_uav_exists(ty_real _uav)
 {
     return (_uav >= 0.0 && Trackable::Exists<UAV>(static_cast<size_t>(_uav))) ? GM_TRUE : GM_FALSE;

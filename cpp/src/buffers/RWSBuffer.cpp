@@ -126,7 +126,7 @@ GM_EXPORT ty_real d3d11_rwsbuffer_write_data(ty_real _rwsbuffer, ty_string _data
 ///
 /// @param {Real} _rwsbuffer The ID of the read-write structured buffer.
 ///
-/// @return {Bool} Returns true if the read-write structured buffer exists.
+/// @return {Bool} Returns `true` if the read-write structured buffer exists.
 GM_EXPORT ty_real d3d11_rwsbuffer_exists(ty_real _rwsbuffer)
 {
     return (_rwsbuffer >= 0.0 && Trackable::Exists<RWSBuffer>(static_cast<size_t>(_rwsbuffer))) ? GM_TRUE : GM_FALSE;

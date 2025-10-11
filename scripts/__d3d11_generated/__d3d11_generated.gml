@@ -25,7 +25,7 @@ function d3d11_get_error_string()
 /// @param {Real} _src The slot index in the pixel shader to copy from.
 /// @param {Real} _dest The slot index in the verex shader to copy to.
 ///
-/// @return {Bool} Returns true on success or false otherwise.
+/// @return {Bool} Returns `true` on success or `false` otherwise.
 function d3d11_srv_copy_ps_vs(_src, _dest)
 {
 	gml_pragma("forceinline");
@@ -42,7 +42,7 @@ function d3d11_srv_copy_ps_vs(_src, _dest)
 /// @param {Real} _src The slot index in the pixel shader to copy from.
 /// @param {Real} _dest The slot index in the geometry shader to copy to.
 ///
-/// @return {Bool} Returns true on success or false otherwise.
+/// @return {Bool} Returns `true` on success or `false` otherwise.
 function d3d11_srv_copy_ps_gs(_src, _dest)
 {
 	gml_pragma("forceinline");
@@ -59,7 +59,7 @@ function d3d11_srv_copy_ps_gs(_src, _dest)
 /// @param {Real} _src The slot index in the pixel shader to copy from.
 /// @param {Real} _dest The slot index in the pixel shader to copy to.
 ///
-/// @return {Bool} Returns true on success or false otherwise.
+/// @return {Bool} Returns `true` on success or `false` otherwise.
 function d3d11_srv_copy_ps_ps(_src, _dest)
 {
 	gml_pragma("forceinline");
@@ -76,7 +76,7 @@ function d3d11_srv_copy_ps_ps(_src, _dest)
 /// @param {Real} _src The slot index in the pixel shader to copy from.
 /// @param {Real} _dest The slot index in the compute shader to copy to.
 ///
-/// @return {Bool} Returns true on success or false otherwise.
+/// @return {Bool} Returns `true` on success or `false` otherwise.
 function d3d11_srv_copy_ps_cs(_src, _dest)
 {
 	gml_pragma("forceinline");
@@ -276,7 +276,7 @@ function d3d11_shader_set_cbuffer_ps(_slot, _cbuffer)
 ///
 /// @param {Real} _cbuffer The ID of the constant buffer.
 ///
-/// @return {Bool} Returns true if the constant buffer exists.
+/// @return {Bool} Returns `true` if the constant buffer exists.
 function d3d11_cbuffer_exists(_cbuffer)
 {
 	gml_pragma("forceinline");
@@ -354,7 +354,7 @@ function d3d11_rsbuffer_write_data(_rsbuffer, _data)
 ///
 /// @param {Real} _rsbuffer The ID of the read-only structured buffer.
 ///
-/// @return {Bool} Returns true if the read-only structured buffer exists.
+/// @return {Bool} Returns `true` if the read-only structured buffer exists.
 function d3d11_rsbuffer_exists(_rsbuffer)
 {
 	gml_pragma("forceinline");
@@ -448,7 +448,7 @@ function d3d11_rwsbuffer_write_data(_rwsbuffer, _data)
 ///
 /// @param {Real} _rwsbuffer The ID of the read-write structured buffer.
 ///
-/// @return {Bool} Returns true if the read-write structured buffer exists.
+/// @return {Bool} Returns `true` if the read-write structured buffer exists.
 function d3d11_rwsbuffer_exists(_rwsbuffer)
 {
 	gml_pragma("forceinline");
@@ -543,7 +543,7 @@ function d3d11_stbuffer_get_size(_stbuffer)
 ///
 /// @param {Real} _stbuffer The ID of the staging buffer.
 ///
-/// @return {Bool} Returns true if given staging buffer is currently mapped for reading or false otherwise.
+/// @return {Bool} Returns `true` if given staging buffer is currently mapped for reading or `false` otherwise.
 function d3d11_stbuffer_is_mapped(_stbuffer)
 {
 	gml_pragma("forceinline");
@@ -559,7 +559,7 @@ function d3d11_stbuffer_is_mapped(_stbuffer)
 ///
 /// @param {Real} _stbuffer The ID of the staging buffer.
 ///
-/// @return {Bool} Returns true on success or false otherwise (e.g. the staging buffer was already mapped).
+/// @return {Bool} Returns `true` on success or `false` otherwise (e.g. the staging buffer was already mapped).
 function d3d11_stbuffer_map(_stbuffer)
 {
 	gml_pragma("forceinline");
@@ -576,7 +576,7 @@ function d3d11_stbuffer_map(_stbuffer)
 /// @param {Real} _stbuffer The ID of the staging buffer.
 /// @param {Pointer} _dest The address of the destination buffer.
 ///
-/// @return {Bool} Returns true on success or false otherwise (e.g. the staging buffer was not mapped).
+/// @return {Bool} Returns `true` on success or `false` otherwise (e.g. the staging buffer was not mapped).
 function d3d11_stbuffer_read_data(_stbuffer, _dest)
 {
 	gml_pragma("forceinline");
@@ -592,7 +592,7 @@ function d3d11_stbuffer_read_data(_stbuffer, _dest)
 ///
 /// @param {Real} _stbuffer The ID of the staging buffer.
 ///
-/// @return {Bool} Returns true on success or false otherwise (e.g. the staging buffer was not mapped).
+/// @return {Bool} Returns `true` on success or `false` otherwise (e.g. the staging buffer was not mapped).
 function d3d11_stbuffer_unmap(_stbuffer)
 {
 	gml_pragma("forceinline");
@@ -608,7 +608,7 @@ function d3d11_stbuffer_unmap(_stbuffer)
 ///
 /// @param {Real} _stbuffer The ID of the staging buffer.
 ///
-/// @return {Bool} Returns true if the staging buffer exists.
+/// @return {Bool} Returns `true` if the staging buffer exists.
 function d3d11_stbuffer_exists(_stbuffer)
 {
 	gml_pragma("forceinline");
@@ -816,7 +816,7 @@ function d3d11_shader_override_ps(_ps)
 ///
 /// @param {Real} _shader The ID of the shader.
 ///
-/// @return {Bool} Returns true if the shader exists.
+/// @return {Bool} Returns `true` if the shader exists.
 function d3d11_shader_exists(_shader)
 {
 	gml_pragma("forceinline");
@@ -912,7 +912,7 @@ function d3d11_shader_override_vs(_vs)
 ///
 /// @param {Real} _srv The ID of the SRV.
 ///
-/// @return {Bool} Returns true if the SRV exists.
+/// @return {Bool} Returns `true` if the SRV exists.
 function d3d11_srv_exists(_srv)
 {
 	gml_pragma("forceinline");
@@ -1002,7 +1002,7 @@ function d3d11_shader_set_srv_cs(_slot, _srv)
 ///
 /// @param {Real} _uav The ID of the UAV.
 ///
-/// @return {Bool} Returns true if the UAV exists.
+/// @return {Bool} Returns `true` if the UAV exists.
 function d3d11_uav_exists(_uav)
 {
 	gml_pragma("forceinline");

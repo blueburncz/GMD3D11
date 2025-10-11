@@ -77,7 +77,7 @@ GM_EXPORT ty_string d3d11_get_error_string()
 /// @param {Real} _src The slot index in the pixel shader to copy from.
 /// @param {Real} _dest The slot index in the verex shader to copy to.
 ///
-/// @return {Bool} Returns true on success or false otherwise.
+/// @return {Bool} Returns `true` on success or `false` otherwise.
 GM_EXPORT ty_real d3d11_srv_copy_ps_vs(ty_real _src, ty_real _dest)
 {
     UINT src = static_cast<UINT>(_src);
@@ -100,7 +100,7 @@ GM_EXPORT ty_real d3d11_srv_copy_ps_vs(ty_real _src, ty_real _dest)
 /// @param {Real} _src The slot index in the pixel shader to copy from.
 /// @param {Real} _dest The slot index in the geometry shader to copy to.
 ///
-/// @return {Bool} Returns true on success or false otherwise.
+/// @return {Bool} Returns `true` on success or `false` otherwise.
 GM_EXPORT ty_real d3d11_srv_copy_ps_gs(ty_real _src, ty_real _dest)
 {
     UINT src = static_cast<UINT>(_src);
@@ -123,7 +123,7 @@ GM_EXPORT ty_real d3d11_srv_copy_ps_gs(ty_real _src, ty_real _dest)
 /// @param {Real} _src The slot index in the pixel shader to copy from.
 /// @param {Real} _dest The slot index in the pixel shader to copy to.
 ///
-/// @return {Bool} Returns true on success or false otherwise.
+/// @return {Bool} Returns `true` on success or `false` otherwise.
 GM_EXPORT ty_real d3d11_srv_copy_ps_ps(ty_real _src, ty_real _dest)
 {
     UINT src = static_cast<UINT>(_src);
@@ -146,7 +146,7 @@ GM_EXPORT ty_real d3d11_srv_copy_ps_ps(ty_real _src, ty_real _dest)
 /// @param {Real} _src The slot index in the pixel shader to copy from.
 /// @param {Real} _dest The slot index in the compute shader to copy to.
 ///
-/// @return {Bool} Returns true on success or false otherwise.
+/// @return {Bool} Returns `true` on success or `false` otherwise.
 GM_EXPORT ty_real d3d11_srv_copy_ps_cs(ty_real _src, ty_real _dest)
 {
     UINT src = static_cast<UINT>(_src);
