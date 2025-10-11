@@ -5,6 +5,9 @@
 [![License](https://img.shields.io/github/license/blueburncz/GMD3D11)](LICENSE)
 [![Discord](https://img.shields.io/discord/298884075585011713?label=Discord)](https://discord.gg/ep2BGPm)
 
+> [!WARNING]
+> GMD3D11 is in early development. Its API is unstable and subject to change. Use at your own risk!
+
 ## Features
 
 * [ ] Shaders
