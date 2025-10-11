@@ -1,9 +1,7 @@
-/// @macro {String} Path to the GMD3D11 dynamic library.
-/// Default value is "GMD3D11.dll".
+/// @macro {String} Path to the GMD3D11 dynamic library. Default value is "GMD3D11.dll".
 #macro GMD3D11_PATH "GMD3D11.dll"
 
-/// @macro {Bool} Expands to `true` if GMD3D11 is supported on the current
-/// platform.
+/// @macro {Bool} Expands to `true` if GMD3D11 is supported on the current platform.
 #macro GMD3D11_IS_SUPPORTED (os_type == os_windows && os_browser == browser_not_a_browser)
 
 /// @macro {Real} Maximum number of slots for shader resources.

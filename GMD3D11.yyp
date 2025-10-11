@@ -1,8 +1,8 @@
 {
-  "$GMProject":"",
+  "$GMProject":"v1",
   "%Name":"GMD3D11",
   "AudioGroups":[
-    {"$GMAudioGroup":"","%Name":"audiogroup_default","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+    {"$GMAudioGroup":"v1","%Name":"audiogroup_default","exportDir":"","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
   ],
   "configs":{
     "children":[],
@@ -16,6 +16,7 @@
     {"$GMFolder":"","%Name":"VTF","folderPath":"folders/Examples/VTF.yy","name":"VTF","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"GMD3D11","folderPath":"folders/GMD3D11.yy","name":"GMD3D11","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
+  "ForcedPrefabProjectReferences":[],
   "IncludedFiles":[
     {"$GMIncludedFile":"","%Name":"GMD3D11.dll","CopyToMask":-1,"filePath":"datafiles","name":"GMD3D11.dll","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"rubber_duck_toy_1k.bin","CopyToMask":-1,"filePath":"datafiles","name":"rubber_duck_toy_1k.bin","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
@@ -30,7 +31,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.11.0.179",
+    "IDEVersion":"2024.1400.0.901",
   },
   "name":"GMD3D11",
   "resources":[
@@ -41,6 +42,7 @@
     {"id":{"name":"RmInstancedRendering","path":"rooms/RmInstancedRendering/RmInstancedRendering.yy",},},
     {"id":{"name":"RmVTF","path":"rooms/RmVTF/RmVTF.yy",},},
     {"id":{"name":"__d3d11_cbuffer","path":"scripts/__d3d11_cbuffer/__d3d11_cbuffer.yy",},},
+    {"id":{"name":"__d3d11_format","path":"scripts/__d3d11_format/__d3d11_format.yy",},},
     {"id":{"name":"__d3d11_generated","path":"scripts/__d3d11_generated/__d3d11_generated.yy",},},
     {"id":{"name":"__d3d11_sbuffer","path":"scripts/__d3d11_sbuffer/__d3d11_sbuffer.yy",},},
     {"id":{"name":"__d3d11_texture","path":"scripts/__d3d11_texture/__d3d11_texture.yy",},},
