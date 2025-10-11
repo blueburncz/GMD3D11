@@ -70,45 +70,95 @@ GM_EXPORT ty_string d3d11_get_error_string()
     return g_ErrorString ? g_ErrorString : "";
 }
 
-GM_EXPORT ty_real d3d11_texture_copy_vs(ty_real _index)
+/// @func d3d11_srv_copy_ps_vs(_src, _dest)
+///
+/// @desc Copies a shader resource view bound to a given slot in a pixel shader to another slot in a vertex shader.
+///
+/// @param {Real} _src The slot index in the pixel shader to copy from.
+/// @param {Real} _dest The slot index in the verex shader to copy to.
+///
+/// @return {Bool} Returns true on success or false otherwise.
+GM_EXPORT ty_real d3d11_srv_copy_ps_vs(ty_real _src, ty_real _dest)
 {
-    UINT startSlot = static_cast<UINT>(_index);
-    if (startSlot < 0
-        || startSlot >= D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT)
+    UINT src = static_cast<UINT>(_src);
+    UINT dest = static_cast<UINT>(_dest);
+    if ((src < 0 || src >= D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT)
+        || (dest < 0 || dest >= D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT))
     {
         return GM_FALSE;
     }
     ID3D11ShaderResourceView* shaderResourceView;
-    g_Context->PSGetShaderResources(0, 1, &shaderResourceView);
-    g_Context->VSSetShaderResources(startSlot, 1, &shaderResourceView);
+    g_Context->PSGetShaderResources(src, 1, &shaderResourceView);
+    g_Context->VSSetShaderResources(dest, 1, &shaderResourceView);
     return GM_TRUE;
 }
 
-GM_EXPORT ty_real d3d11_texture_copy_gs(ty_real _index)
+/// @func d3d11_srv_copy_ps_gs(_src, _dest)
+///
+/// @desc Copies a shader resource view bound to a given slot in a pixel shader to another slot in a geometry shader.
+///
+/// @param {Real} _src The slot index in the pixel shader to copy from.
+/// @param {Real} _dest The slot index in the geometry shader to copy to.
+///
+/// @return {Bool} Returns true on success or false otherwise.
+GM_EXPORT ty_real d3d11_srv_copy_ps_gs(ty_real _src, ty_real _dest)
 {
-    UINT startSlot = static_cast<UINT>(_index);
-    if (startSlot < 0
-        || startSlot >= D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT)
+    UINT src = static_cast<UINT>(_src);
+    UINT dest = static_cast<UINT>(_dest);
+    if ((src < 0 || src >= D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT)
+        || (dest < 0 || dest >= D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT))
     {
         return GM_FALSE;
     }
     ID3D11ShaderResourceView* shaderResourceView;
-    g_Context->PSGetShaderResources(0, 1, &shaderResourceView);
-    g_Context->GSSetShaderResources(startSlot, 1, &shaderResourceView);
+    g_Context->PSGetShaderResources(src, 1, &shaderResourceView);
+    g_Context->GSSetShaderResources(dest, 1, &shaderResourceView);
     return GM_TRUE;
 }
 
-GM_EXPORT ty_real d3d11_texture_copy_ps(ty_real _index)
+/// @func d3d11_srv_copy_ps_ps(_src, _dest)
+///
+/// @desc Copies a shader resource view bound to a given slot in a pixel shader to another slot in a pixel shader.
+///
+/// @param {Real} _src The slot index in the pixel shader to copy from.
+/// @param {Real} _dest The slot index in the pixel shader to copy to.
+///
+/// @return {Bool} Returns true on success or false otherwise.
+GM_EXPORT ty_real d3d11_srv_copy_ps_ps(ty_real _src, ty_real _dest)
 {
-    UINT startSlot = static_cast<UINT>(_index);
-    if (startSlot < 0
-        || startSlot >= D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT)
+    UINT src = static_cast<UINT>(_src);
+    UINT dest = static_cast<UINT>(_dest);
+    if ((src < 0 || src >= D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT)
+        || (dest < 0 || dest >= D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT))
     {
         return GM_FALSE;
     }
     ID3D11ShaderResourceView* shaderResourceView;
-    g_Context->PSGetShaderResources(0, 1, &shaderResourceView);
-    g_Context->PSSetShaderResources(startSlot, 1, &shaderResourceView);
+    g_Context->PSGetShaderResources(src, 1, &shaderResourceView);
+    g_Context->PSSetShaderResources(dest, 1, &shaderResourceView);
+    return GM_TRUE;
+}
+
+/// @func d3d11_srv_copy_ps_cs(_src, _dest)
+///
+/// @desc Copies a shader resource view bound to a given slot in a pixel shader to another slot in a compute shader.
+///
+/// @param {Real} _src The slot index in the pixel shader to copy from.
+/// @param {Real} _dest The slot index in the compute shader to copy to.
+///
+/// @return {Bool} Returns true on success or false otherwise.
+GM_EXPORT ty_real d3d11_srv_copy_ps_cs(ty_real _src, ty_real _dest)
+{
+    UINT src = static_cast<UINT>(_src);
+    UINT dest = static_cast<UINT>(_dest);
+    if ((src < 0 || src >= D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT)
+        || (dest < 0 || dest >= D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT))
+    {
+        return GM_FALSE;
+    }
+    ID3D11ShaderResourceView* shaderResourceView;
+    g_Context->PSGetShaderResources(src, 1, &shaderResourceView);
+    g_Context->CSSetShaderResources(dest, 1, &shaderResourceView);
     return GM_TRUE;
 }
 

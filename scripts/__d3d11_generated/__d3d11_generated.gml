@@ -18,31 +18,72 @@ function d3d11_get_error_string()
 	return external_call(_fn);
 }
 
-function d3d11_texture_copy_vs(_index)
+/// @func d3d11_srv_copy_ps_vs(_src, _dest)
+///
+/// @desc Copies a shader resource view bound to a given slot in a pixel shader to another slot in a vertex shader.
+///
+/// @param {Real} _src The slot index in the pixel shader to copy from.
+/// @param {Real} _dest The slot index in the verex shader to copy to.
+///
+/// @return {Bool} Returns true on success or false otherwise.
+function d3d11_srv_copy_ps_vs(_src, _dest)
 {
 	gml_pragma("forceinline");
 	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_texture_copy_vs", dll_cdecl, ty_real,
-		1, ty_real);
-	return external_call(_fn, _index);
+		GMD3D11_PATH, "d3d11_srv_copy_ps_vs", dll_cdecl, ty_real,
+		2, ty_real, ty_real);
+	return external_call(_fn, _src, _dest);
 }
 
-function d3d11_texture_copy_gs(_index)
+/// @func d3d11_srv_copy_ps_gs(_src, _dest)
+///
+/// @desc Copies a shader resource view bound to a given slot in a pixel shader to another slot in a geometry shader.
+///
+/// @param {Real} _src The slot index in the pixel shader to copy from.
+/// @param {Real} _dest The slot index in the geometry shader to copy to.
+///
+/// @return {Bool} Returns true on success or false otherwise.
+function d3d11_srv_copy_ps_gs(_src, _dest)
 {
 	gml_pragma("forceinline");
 	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_texture_copy_gs", dll_cdecl, ty_real,
-		1, ty_real);
-	return external_call(_fn, _index);
+		GMD3D11_PATH, "d3d11_srv_copy_ps_gs", dll_cdecl, ty_real,
+		2, ty_real, ty_real);
+	return external_call(_fn, _src, _dest);
 }
 
-function d3d11_texture_copy_ps(_index)
+/// @func d3d11_srv_copy_ps_ps(_src, _dest)
+///
+/// @desc Copies a shader resource view bound to a given slot in a pixel shader to another slot in a pixel shader.
+///
+/// @param {Real} _src The slot index in the pixel shader to copy from.
+/// @param {Real} _dest The slot index in the pixel shader to copy to.
+///
+/// @return {Bool} Returns true on success or false otherwise.
+function d3d11_srv_copy_ps_ps(_src, _dest)
 {
 	gml_pragma("forceinline");
 	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_texture_copy_ps", dll_cdecl, ty_real,
-		1, ty_real);
-	return external_call(_fn, _index);
+		GMD3D11_PATH, "d3d11_srv_copy_ps_ps", dll_cdecl, ty_real,
+		2, ty_real, ty_real);
+	return external_call(_fn, _src, _dest);
+}
+
+/// @func d3d11_srv_copy_ps_cs(_src, _dest)
+///
+/// @desc Copies a shader resource view bound to a given slot in a pixel shader to another slot in a compute shader.
+///
+/// @param {Real} _src The slot index in the pixel shader to copy from.
+/// @param {Real} _dest The slot index in the compute shader to copy to.
+///
+/// @return {Bool} Returns true on success or false otherwise.
+function d3d11_srv_copy_ps_cs(_src, _dest)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_srv_copy_ps_cs", dll_cdecl, ty_real,
+		2, ty_real, ty_real);
+	return external_call(_fn, _src, _dest);
 }
 
 /// @func d3d11_draw_instanced(_count)

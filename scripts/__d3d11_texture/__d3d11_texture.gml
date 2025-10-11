@@ -11,7 +11,7 @@ function d3d11_texture_set_stage_vs(_slot, _texture)
 {
 	gml_pragma("forceinline");
 	texture_set_stage(0, _texture);
-	return d3d11_texture_copy_vs(_slot);
+	return d3d11_srv_copy_ps_vs(0, _slot);
 }
 
 /// @func d3d11_texture_set_stage_gs(_slot, _texture)
@@ -27,7 +27,7 @@ function d3d11_texture_set_stage_gs(_slot, _texture)
 {
 	gml_pragma("forceinline");
 	texture_set_stage(0, _texture);
-	return d3d11_texture_copy_gs(_slot);
+	return d3d11_srv_copy_ps_gs(0, _slot);
 }
 
 /// @func d3d11_texture_set_stage_ps(_slot, _texture)
@@ -43,5 +43,5 @@ function d3d11_texture_set_stage_ps(_slot, _texture)
 {
 	gml_pragma("forceinline");
 	texture_set_stage(0, _texture);
-	return d3d11_texture_copy_ps(_slot);
+	return d3d11_srv_copy_ps_ps(0, _slot);
 }
