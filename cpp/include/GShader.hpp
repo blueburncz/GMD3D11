@@ -4,6 +4,7 @@
 
 #include <Shader.hpp>
 
+/// @brief Geometry shader.
 class GShader final : public Shader
 {
 public:

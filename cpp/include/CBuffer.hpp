@@ -7,6 +7,7 @@
 #include <cstdint>
 #include <d3d11.h>
 
+/// @brief Constant buffer.
 class CBuffer final : public Trackable<CBuffer>
 {
 public:

@@ -11,73 +11,45 @@
 #macro D3D11_CS_DISPATCH_MAX_THREAD_GROUPS_PER_DIMENSION 65535
 
 /// @macro {Real} A boolean value.
-/// @see d3d11_struct_add_member
-/// @see d3d11_struct_get_member_type
 #macro D3D11_BOOL 0
 
 /// @macro {Real} An integer value.
-/// @see d3d11_struct_add_member
-/// @see d3d11_struct_get_member_type
 #macro D3D11_INT 1
 
 /// @macro {Real} A 2D vector of integers.
-/// @see d3d11_struct_add_member
-/// @see d3d11_struct_get_member_type
 #macro D3D11_INT2 2
 
 /// @macro {Real} A 3D vector of integers.
-/// @see d3d11_struct_add_member
-/// @see d3d11_struct_get_member_type
 #macro D3D11_INT3 3
 
 /// @macro {Real} A 4D vector of integers.
-/// @see d3d11_struct_add_member
-/// @see d3d11_struct_get_member_type
 #macro D3D11_INT4 4
 
 /// @macro {Real} An unsigned integer.
-/// @see d3d11_struct_add_member
-/// @see d3d11_struct_get_member_type
 #macro D3D11_UINT 5
 
 /// @macro {Real} A 2D vector of unsigned integers.
-/// @see d3d11_struct_add_member
-/// @see d3d11_struct_get_member_type
 #macro D3D11_UINT2 6
 
 /// @macro {Real} A 3D vector of unsigned integers.
-/// @see d3d11_struct_add_member
-/// @see d3d11_struct_get_member_type
 #macro D3D11_UINT3 7
 
 /// @macro {Real} A 4D vector of unsigned integers.
-/// @see d3d11_struct_add_member
-/// @see d3d11_struct_get_member_type
 #macro D3D11_UINT4 8
 
 /// @macro {Real} A floating-point value.
-/// @see d3d11_struct_add_member
-/// @see d3d11_struct_get_member_type
 #macro D3D11_FLOAT 9
 
 /// @macro {Real} A 2D vector of floats.
-/// @see d3d11_struct_add_member
-/// @see d3d11_struct_get_member_type
 #macro D3D11_FLOAT2 10
 
 /// @macro {Real} A 3D vector of floats.
-/// @see d3d11_struct_add_member
-/// @see d3d11_struct_get_member_type
 #macro D3D11_FLOAT3 11
 
 /// @macro {Real} A 4D vector of floats.
-/// @see d3d11_struct_add_member
-/// @see d3d11_struct_get_member_type
 #macro D3D11_FLOAT4 12
 
 /// @macro {Real} A 4x4 matrix of floats.
-/// @see d3d11_struct_add_member
-/// @see d3d11_struct_get_member_type
 #macro D3D11_FLOAT4X4 13
 
 /// @func texture_set_stage_vs(_slot, _texture)
@@ -87,8 +59,6 @@
 ///
 /// @param {Id.Sampler} _slot The vertex texture slot index. Must be in range 0..7.
 /// @param {Pointer.Texture} _texture The texture to pass.
-///
-/// @see GMD3D11_IS_SUPPORTED
 function texture_set_stage_vs(_slot, _texture)
 {
 	gml_pragma("forceinline");

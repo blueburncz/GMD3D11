@@ -60,8 +60,6 @@ static CShader* CompileCS(char* file, char* entryPoint, char* profile)
 /// @param {String} _profile The compute shader profile, e.g. "cs_5_0".
 ///
 /// @return {Real} The ID of the compute shader or -1 on fail.
-///
-/// @see d3d11_get_error_string
 GM_EXPORT ty_real d3d11_shader_compile_cs(ty_string _file, ty_string _entryPoint, ty_string _profile)
 {
     CShader* shader = CompileCS(_file, _entryPoint, _profile);
@@ -114,11 +112,11 @@ GM_EXPORT ty_real d3d11_shader_load_cs(ty_string _file)
     return static_cast<ty_real>((new CShader(blob, cs))->GetID());
 }
 
-/// @func d3d11_shader_set_cs(_gs)
+/// @func d3d11_shader_set_cs(_cs)
 ///
 /// @desc Changes the current compute shader.
 ///
-/// @param {Real} _gs The ID of the shader or -1 to disable the compute stage.
+/// @param {Real} _cs The ID of the shader or -1 to disable the compute stage.
 GM_EXPORT ty_real d3d11_shader_set_cs(ty_real _gs)
 {
     ID3D11ComputeShader* shader = (_gs >= 0.0) ? ((CShader*)Shader::Get(static_cast<size_t>(_gs)))->GetShader() : nullptr;
@@ -133,9 +131,6 @@ GM_EXPORT ty_real d3d11_shader_set_cs(ty_real _gs)
 /// @param {Real} _x Number of workgroups to dispatch in the x direction.
 /// @param {Real} _y Number of workgroups to dispatch in the y direction.
 /// @param {Real} _z Number of workgroups to dispatch in the z direction.
-///
-/// @see d3d11_shader_set_cs
-/// @see D3D11_CS_DISPATCH_MAX_THREAD_GROUPS_PER_DIMENSION
 GM_EXPORT ty_real d3d11_compute_dispatch(ty_real _x, ty_real _y, ty_real _z)
 {
     g_Context->Dispatch(static_cast<UINT>(_x), static_cast<UINT>(_y), static_cast<UINT>(_z));

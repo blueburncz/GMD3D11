@@ -62,8 +62,6 @@ static VShader* CompileVS(char* file, char* entryPoint, char* profile)
 /// @param {String} _profile The vertex shader profile, e.g. "vs_4_0".
 ///
 /// @return {Real} The ID of the vertex shader or -1 on fail.
-///
-/// @see d3d11_get_error_string
 GM_EXPORT ty_real d3d11_shader_compile_vs(ty_string _file, ty_string _entryPoint, ty_string _profile)
 {
     VShader* shader = CompileVS(_file, _entryPoint, _profile);

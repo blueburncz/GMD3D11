@@ -7,6 +7,7 @@
 #include <d3d11.h>
 #include <vector>
 
+/// @brief Shader base class.
 class Shader : public Trackable<Shader>
 {
 public:

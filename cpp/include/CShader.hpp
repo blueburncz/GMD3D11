@@ -4,6 +4,7 @@
 
 #include <Shader.hpp>
 
+/// @brief Compute shader.
 class CShader final : public Shader
 {
 public:

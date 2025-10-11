@@ -27,10 +27,6 @@ CBuffer::~CBuffer()
 /// @param {Real} _size The size of the buffer, in bytes. Must be a multiple of 16!
 ///
 /// @return {Real} The ID of the created constant buffer or -1 on fail.
-///
-/// @see d3d11_sizeof16
-/// @see d3d11_cbuffer_exists
-/// @see d3d11_cbuffer_update
 GM_EXPORT ty_real d3d11_cbuffer_create(ty_real _size)
 {
     size_t size = static_cast<size_t>(_size);

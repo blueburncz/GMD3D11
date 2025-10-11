@@ -18,7 +18,8 @@
   * [ ] Vertex buffers (🛑 TODO)
   * [ ] Index buffers (🛑 TODO)
   * [x] Constant buffers
-  * [x] Structured buffers (with SRV and UAV)
+  * [x] Read-only structured buffers (with SRV)
+  * [x] Read/write structured buffers (with SRV and UAV)
   * [ ] Raw buffers (🛑 TODO)
   * [ ] Staging buffers (🛑 TODO)
 * [ ] Textures

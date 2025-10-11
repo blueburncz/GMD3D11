@@ -1,16 +1,21 @@
 {
   "FolderOrderSettings":[
     {"name":"GeometryShader","order":2,"path":"folders/Examples/GeometryShader.yy",},
+    {"name":"ComputeShader","order":4,"path":"folders/Examples/ComputeShader.yy",},
     {"name":"InstancedRendering","order":1,"path":"folders/Examples/InstancedRendering.yy",},
   ],
   "ResourceOrderSettings":[
+    {"name":"OMain","order":5,"path":"objects/OMain/OMain.yy",},
+    {"name":"RmComputeShader","order":1,"path":"rooms/RmComputeShader/RmComputeShader.yy",},
     {"name":"RmGeometryShader","order":1,"path":"rooms/RmGeometryShader/RmGeometryShader.yy",},
+    {"name":"RmInit","order":6,"path":"rooms/RmInit/RmInit.yy",},
     {"name":"RmInstancedRendering","order":1,"path":"rooms/RmInstancedRendering/RmInstancedRendering.yy",},
     {"name":"RmVTF","order":1,"path":"rooms/RmVTF/RmVTF.yy",},
     {"name":"__d3d11_cbuffer","order":6,"path":"scripts/__d3d11_cbuffer/__d3d11_cbuffer.yy",},
     {"name":"__d3d11_format","order":8,"path":"scripts/__d3d11_format/__d3d11_format.yy",},
     {"name":"__d3d11_generated","order":4,"path":"scripts/__d3d11_generated/__d3d11_generated.yy",},
-    {"name":"__d3d11_sbuffer","order":7,"path":"scripts/__d3d11_sbuffer/__d3d11_sbuffer.yy",},
+    {"name":"__d3d11_rsbuffer","order":7,"path":"scripts/__d3d11_rsbuffer/__d3d11_rsbuffer.yy",},
+    {"name":"__d3d11_rwsbuffer","order":9,"path":"scripts/__d3d11_rwsbuffer/__d3d11_rwsbuffer.yy",},
     {"name":"__d3d11_texture","order":5,"path":"scripts/__d3d11_texture/__d3d11_texture.yy",},
     {"name":"assert","order":3,"path":"scripts/assert/assert.yy",},
     {"name":"yamc","order":1,"path":"scripts/yamc/yamc.yy",},

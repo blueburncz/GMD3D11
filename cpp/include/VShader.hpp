@@ -4,6 +4,7 @@
 
 #include <Shader.hpp>
 
+/// @brief Vertex shader.
 class VShader final : public Shader
 {
 public:

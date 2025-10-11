@@ -4,6 +4,7 @@
 
 #include <Shader.hpp>
 
+/// @brief Pixel shader.
 class PShader final : public Shader
 {
 public:

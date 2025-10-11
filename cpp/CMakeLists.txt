@@ -10,10 +10,11 @@ add_library(GMD3D11 SHARED
     src/GShader.cpp
     src/main.cpp
     src/PShader.cpp
+    src/RSBuffer.cpp
+    src/RWSBuffer.cpp
     src/Shader.cpp
-    src/Srv.cpp
-    src/Uav.cpp
-    src/SBuffer.cpp
+    src/SRV.cpp
+    src/UAV.cpp
     src/utils.cpp
     src/VShader.cpp
     )

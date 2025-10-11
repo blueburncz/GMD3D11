@@ -7,10 +7,6 @@
 /// @param {Real} _size The size of the buffer, in bytes. Must be a multiple of 16!
 ///
 /// @return {Real} The ID of the created constant buffer or -1 on fail.
-///
-/// @see d3d11_sizeof16
-/// @see d3d11_cbuffer_exists
-/// @see d3d11_cbuffer_update
 function d3d11_cbuffer_create(_size)
 {
 	gml_pragma("forceinline");
@@ -133,8 +129,6 @@ function d3d11_cbuffer_destroy(_cbuffer)
 /// @param {String} _profile The compute shader profile, e.g. "cs_5_0".
 ///
 /// @return {Real} The ID of the compute shader or -1 on fail.
-///
-/// @see d3d11_get_error_string
 function d3d11_shader_compile_cs(_file, _entryPoint, _profile)
 {
 	gml_pragma("forceinline");
@@ -160,11 +154,11 @@ function d3d11_shader_load_cs(_file)
 	return external_call(_fn, _file);
 }
 
-/// @func d3d11_shader_set_cs(_gs)
+/// @func d3d11_shader_set_cs(_cs)
 ///
 /// @desc Changes the current compute shader.
 ///
-/// @param {Real} _gs The ID of the shader or -1 to disable the compute stage.
+/// @param {Real} _cs The ID of the shader or -1 to disable the compute stage.
 function d3d11_shader_set_cs(_gs)
 {
 	gml_pragma("forceinline");
@@ -181,9 +175,6 @@ function d3d11_shader_set_cs(_gs)
 /// @param {Real} _x Number of workgroups to dispatch in the x direction.
 /// @param {Real} _y Number of workgroups to dispatch in the y direction.
 /// @param {Real} _z Number of workgroups to dispatch in the z direction.
-///
-/// @see d3d11_shader_set_cs
-/// @see D3D11_CS_DISPATCH_MAX_THREAD_GROUPS_PER_DIMENSION
 function d3d11_compute_dispatch(_x, _y, _z)
 {
 	gml_pragma("forceinline");
@@ -202,8 +193,6 @@ function d3d11_compute_dispatch(_x, _y, _z)
 /// @param {String} _profile The geometry shader profile, e.g. "gs_4_0".
 ///
 /// @return {Real} The ID of the geometry shader or -1 on fail.
-///
-/// @see d3d11_get_error_string
 function d3d11_shader_compile_gs(_file, _entryPoint, _profile)
 {
 	gml_pragma("forceinline");
@@ -374,8 +363,6 @@ function d3d11_sizeof16(_type)
 /// @param {String} _profile The pixel shader profile, e.g. "ps_4_0".
 ///
 /// @return {Real} The ID of the pixel shader or -1 on fail.
-///
-/// @see d3d11_get_error_string
 function d3d11_shader_compile_ps(_file, _entryPoint, _profile)
 {
 	gml_pragma("forceinline");
@@ -415,116 +402,204 @@ function d3d11_shader_override_ps(_ps)
 	return external_call(_fn, _ps);
 }
 
-/// @func d3d11_sbuffer_create(_stride, _numElements)
+/// @func d3d11_rsbuffer_create(_stride, _numElements)
 ///
-/// @desc Creates a new structured buffer.
+/// @desc Creates a new read-only structured buffer.
 ///
 /// @param {Real} _stride The stride of a single element, in bytes.
 /// @param {Real} _numElements The number of elements in the buffer.
 ///
-/// @return {Real} The ID of the created structured buffer or -1 on fail.
-///
-/// @see d3d11_struct_begin
-/// @see d3d11_sbuffer_exists
-/// @see d3d11_sbuffer_update
-function d3d11_sbuffer_create(_stride, _numElements)
+/// @return {Real} The ID of the created read-only structured buffer or -1 on fail.
+function d3d11_rsbuffer_create(_stride, _numElements)
 {
 	gml_pragma("forceinline");
 	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_sbuffer_create", dll_cdecl, ty_real,
+		GMD3D11_PATH, "d3d11_rsbuffer_create", dll_cdecl, ty_real,
 		2, ty_real, ty_real);
 	return external_call(_fn, _stride, _numElements);
 }
 
-/// @func d3d11_sbuffer_get_size(_sbuffer)
+/// @func d3d11_rsbuffer_get_size(_rsbuffer)
 ///
-/// @desc Retrieves size of a structured buffer in bytes.
+/// @desc Retrieves size of a read-only structured buffer in bytes.
 ///
-/// @param {Real} _sbuffer The size of the structured buffer in bytes.
-function d3d11_sbuffer_get_size(_sbuffer)
+/// @param {Real} _rsbuffer The size of the read-only structured buffer in bytes.
+function d3d11_rsbuffer_get_size(_rsbuffer)
 {
 	gml_pragma("forceinline");
 	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_sbuffer_get_size", dll_cdecl, ty_real,
+		GMD3D11_PATH, "d3d11_rsbuffer_get_size", dll_cdecl, ty_real,
 		1, ty_real);
-	return external_call(_fn, _sbuffer);
+	return external_call(_fn, _rsbuffer);
 }
 
-/// @func d3d11_sbuffer_write_data(_sbuffer, _data)
+/// @func d3d11_rsbuffer_write_data(_rsbuffer, _data)
 ///
-/// @desc Writes data from a GM buffer into a D3D11 structured buffer.
+/// @desc Writes data from a GM buffer into a D3D11 read-only structured buffer.
 ///
-/// @param {Real} _sbuffer The ID of the structured buffer.
-/// @param {Pointer} _data An address of a GM buffer to update the structured buffer from.
-function d3d11_sbuffer_write_data(_sbuffer, _data)
+/// @param {Real} _rsbuffer The ID of the read-only structured buffer.
+/// @param {Pointer} _data An address of a GM buffer to update the read-only structured buffer from.
+function d3d11_rsbuffer_write_data(_rsbuffer, _data)
 {
 	gml_pragma("forceinline");
 	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_sbuffer_write_data", dll_cdecl, ty_real,
+		GMD3D11_PATH, "d3d11_rsbuffer_write_data", dll_cdecl, ty_real,
 		2, ty_real, ty_string);
-	return external_call(_fn, _sbuffer, _data);
+	return external_call(_fn, _rsbuffer, _data);
 }
 
-/// @func d3d11_sbuffer_exists(_sbuffer)
+/// @func d3d11_rsbuffer_exists(_rsbuffer)
 ///
-/// @desc Checks whether a structured buffer exists.
+/// @desc Checks whether a read-only structured buffer exists.
 ///
-/// @param {Real} _sbuffer The ID of the structured buffer.
+/// @param {Real} _rsbuffer The ID of the read-only structured buffer.
 ///
-/// @return {Bool} Returns true if the structured buffer exists.
-function d3d11_sbuffer_exists(_sbuffer)
+/// @return {Bool} Returns true if the read-only structured buffer exists.
+function d3d11_rsbuffer_exists(_rsbuffer)
 {
 	gml_pragma("forceinline");
 	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_sbuffer_exists", dll_cdecl, ty_real,
+		GMD3D11_PATH, "d3d11_rsbuffer_exists", dll_cdecl, ty_real,
 		1, ty_real);
-	return external_call(_fn, _sbuffer);
+	return external_call(_fn, _rsbuffer);
 }
 
-/// @func d3d11_sbuffer_destroy(_sbuffer)
+/// @func d3d11_rsbuffer_destroy(_rsbuffer)
 ///
-/// @desc Destroys a structured buffer.
+/// @desc Destroys a read-only structured buffer.
 ///
-/// @param {Real} _sbuffer The ID of the structured buffer to destroy.
-function d3d11_sbuffer_destroy(_sbuffer)
+/// @param {Real} _rsbuffer The ID of the read-only structured buffer to destroy.
+function d3d11_rsbuffer_destroy(_rsbuffer)
 {
 	gml_pragma("forceinline");
 	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_sbuffer_destroy", dll_cdecl, ty_real,
+		GMD3D11_PATH, "d3d11_rsbuffer_destroy", dll_cdecl, ty_real,
 		1, ty_real);
-	return external_call(_fn, _sbuffer);
+	return external_call(_fn, _rsbuffer);
 }
 
-/// @func d3d11_sbuffer_create_srv(_sbuffer)
+/// @func d3d11_rsbuffer_create_srv(_rsbuffer)
 ///
-/// @desc Creates a shader resource view (SRV) for given structured buffer.
+/// @desc Creates a shader resource view (SRV) for given read-only structured buffer.
 ///
-/// @param {Real} _sbuffer The ID of the structured buffer.
+/// @param {Real} _rsbuffer The ID of the read-only structured buffer.
 ///
 /// @return {Real} The ID of the created SRV on success or -1 on fail.
-function d3d11_sbuffer_create_srv(_sbuffer)
+function d3d11_rsbuffer_create_srv(_rsbuffer)
 {
 	gml_pragma("forceinline");
 	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_sbuffer_create_srv", dll_cdecl, ty_real,
+		GMD3D11_PATH, "d3d11_rsbuffer_create_srv", dll_cdecl, ty_real,
 		1, ty_real);
-	return external_call(_fn, _sbuffer);
+	return external_call(_fn, _rsbuffer);
 }
 
-/// @func d3d11_sbuffer_create_uav(_sbuffer)
+/// @func d3d11_rwsbuffer_create(_stride, _numElements)
 ///
-/// @desc Creates an unordered access view (UAV) for given structured buffer.
+/// @desc Creates a new read-write structured buffer.
 ///
-/// @param {Real} _sbuffer The ID of the structured buffer.
+/// @param {Real} _stride The stride of a single element, in bytes.
+/// @param {Real} _numElements The number of elements in the buffer.
 ///
-/// @return {Real} The ID of the created UAV on success or -1 on fail.
-function d3d11_sbuffer_create_uav(_sbuffer)
+/// @return {Real} The ID of the created read-write structured buffer or -1 on fail.
+function d3d11_rwsbuffer_create(_stride, _numElements)
 {
 	gml_pragma("forceinline");
 	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_sbuffer_create_uav", dll_cdecl, ty_real,
+		GMD3D11_PATH, "d3d11_rwsbuffer_create", dll_cdecl, ty_real,
+		2, ty_real, ty_real);
+	return external_call(_fn, _stride, _numElements);
+}
+
+/// @func d3d11_rwsbuffer_get_size(_rwsbuffer)
+///
+/// @desc Retrieves size of a read-write structured buffer in bytes.
+///
+/// @param {Real} _rwsbuffer The size of the read-write structured buffer in bytes.
+function d3d11_rwsbuffer_get_size(_rwsbuffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_rwsbuffer_get_size", dll_cdecl, ty_real,
 		1, ty_real);
-	return external_call(_fn, _sbuffer);
+	return external_call(_fn, _rwsbuffer);
+}
+
+/// @func d3d11_rwsbuffer_write_data(_rwsbuffer, _data)
+///
+/// @desc Writes data from a GM buffer into a D3D11 read-write structured buffer.
+///
+/// @param {Real} _rwsbuffer The ID of the read-write structured buffer.
+/// @param {Pointer} _data An address of a GM buffer to update the read-write structured buffer from.
+function d3d11_rwsbuffer_write_data(_rwsbuffer, _data)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_rwsbuffer_write_data", dll_cdecl, ty_real,
+		2, ty_real, ty_string);
+	return external_call(_fn, _rwsbuffer, _data);
+}
+
+/// @func d3d11_rwsbuffer_exists(_rwsbuffer)
+///
+/// @desc Checks whether a read-write structured buffer exists.
+///
+/// @param {Real} _rwsbuffer The ID of the read-write structured buffer.
+///
+/// @return {Bool} Returns true if the read-write structured buffer exists.
+function d3d11_rwsbuffer_exists(_rwsbuffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_rwsbuffer_exists", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _rwsbuffer);
+}
+
+/// @func d3d11_rwsbuffer_destroy(_rwsbuffer)
+///
+/// @desc Destroys a read-write structured buffer.
+///
+/// @param {Real} _rwsbuffer The ID of the read-write structured buffer to destroy.
+function d3d11_rwsbuffer_destroy(_rwsbuffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_rwsbuffer_destroy", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _rwsbuffer);
+}
+
+/// @func d3d11_rwsbuffer_create_srv(_rwsbuffer)
+///
+/// @desc Creates a shader resource view (SRV) for given read-write structured buffer.
+///
+/// @param {Real} _rwsbuffer The ID of the read-write structured buffer.
+///
+/// @return {Real} The ID of the created SRV on success or -1 on fail.
+function d3d11_rwsbuffer_create_srv(_rwsbuffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_rwsbuffer_create_srv", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _rwsbuffer);
+}
+
+/// @func d3d11_rwsbuffer_create_uav(_rwsbuffer)
+///
+/// @desc Creates an unordered access view (UAV) for given read-write structured buffer.
+///
+/// @param {Real} _rwsbuffer The ID of the read-write structured buffer.
+///
+/// @return {Real} The ID of the created UAV on success or -1 on fail.
+function d3d11_rwsbuffer_create_uav(_rwsbuffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_rwsbuffer_create_uav", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _rwsbuffer);
 }
 
 /// @func d3d11_shader_exists(_shader)
@@ -610,8 +685,6 @@ function d3d11_srv_destroy(_srv)
 ///
 /// @param {Real} _slot The slot to bind the SRV to.
 /// @param {Real} _srv The ID of the SRV or -1 to unbind the slot.
-///
-/// @see d3d11_sbuffer_create_srv
 function d3d11_shader_set_srv_vs(_slot, _srv)
 {
 	gml_pragma("forceinline");
@@ -627,8 +700,6 @@ function d3d11_shader_set_srv_vs(_slot, _srv)
 ///
 /// @param {Real} _slot The slot to bind the SRV to.
 /// @param {Real} _srv The ID of the SRV or -1 to unbind the slot.
-///
-/// @see d3d11_sbuffer_create_srv
 function d3d11_shader_set_srv_gs(_slot, _srv)
 {
 	gml_pragma("forceinline");
@@ -644,8 +715,6 @@ function d3d11_shader_set_srv_gs(_slot, _srv)
 ///
 /// @param {Real} _slot The slot to bind the SRV to.
 /// @param {Real} _srv The ID of the SRV or -1 to unbind the slot.
-///
-/// @see d3d11_sbuffer_create_srv
 function d3d11_shader_set_srv_ps(_slot, _srv)
 {
 	gml_pragma("forceinline");
@@ -661,8 +730,6 @@ function d3d11_shader_set_srv_ps(_slot, _srv)
 ///
 /// @param {Real} _slot The slot to bind the SRV to.
 /// @param {Real} _srv The ID of the SRV or -1 to unbind the slot.
-///
-/// @see d3d11_sbuffer_create_srv
 function d3d11_shader_set_srv_cs(_slot, _srv)
 {
 	gml_pragma("forceinline");
@@ -708,8 +775,6 @@ function d3d11_uav_destroy(_uav)
 ///
 /// @param {Real} _slot The slot to bind the UAV to.
 /// @param {Real} _uav The ID of the UAV or -1 to unbind the slot.
-///
-/// @see d3d11_sbuffer_create_uav
 function d3d11_shader_set_uav_cs(_slot, _uav)
 {
 	gml_pragma("forceinline");
@@ -728,8 +793,6 @@ function d3d11_shader_set_uav_cs(_slot, _uav)
 /// @param {String} _profile The vertex shader profile, e.g. "vs_4_0".
 ///
 /// @return {Real} The ID of the vertex shader or -1 on fail.
-///
-/// @see d3d11_get_error_string
 function d3d11_shader_compile_vs(_file, _entryPoint, _profile)
 {
 	gml_pragma("forceinline");

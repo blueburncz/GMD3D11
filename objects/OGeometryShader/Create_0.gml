@@ -1,23 +1,11 @@
 vs = d3d11_shader_compile_vs("shaders/PassthroughVS.hlsl", "main", "vs_4_0");
-
-if (!d3d11_shader_exists(vs))
-{
-	assert(false, $"Vertex shader compilation failed! {d3d11_get_error_string()}");
-}
+assert(d3d11_shader_exists(vs), $"Vertex shader compilation failed! {d3d11_get_error_string()}");
 
 gs = d3d11_shader_compile_gs("shaders/PassthroughGS.hlsl", "main", "gs_4_0");
-
-if (!d3d11_shader_exists(gs))
-{
-	assert(false, $"Geometry shader compilation failed! {d3d11_get_error_string()}");
-}
+assert(d3d11_shader_exists(gs), $"Geometry shader compilation failed!  {d3d11_get_error_string()}");
 
 ps = d3d11_shader_compile_ps("shaders/PassthroughPS.hlsl", "main", "ps_4_0");
-
-if (!d3d11_shader_exists(ps))
-{
-	assert(false, $"Pixel shader compilation failed! {d3d11_get_error_string()}");
-}
+assert(d3d11_shader_exists(ps), $"Pixel shader compilation failed! {d3d11_get_error_string()}");
 
 vertex_format_begin();
 vertex_format_add_position_3d();

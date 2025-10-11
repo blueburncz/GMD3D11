@@ -60,8 +60,6 @@ static GShader* CompileGS(char* file, char* entryPoint, char* profile)
 /// @param {String} _profile The geometry shader profile, e.g. "gs_4_0".
 ///
 /// @return {Real} The ID of the geometry shader or -1 on fail.
-///
-/// @see d3d11_get_error_string
 GM_EXPORT ty_real d3d11_shader_compile_gs(ty_string _file, ty_string _entryPoint, ty_string _profile)
 {
     GShader* shader = CompileGS(_file, _entryPoint, _profile);
