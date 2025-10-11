@@ -26,7 +26,7 @@ repeat (instanceNumber)
 	buffer_write(_buffer, buffer_f32, random(128));
 	buffer_write(_buffer, buffer_f32, 0.0);
 }
-d3d11_cbuffer_update(instanceData, _buffer);
+d3d11_cbuffer_write_data(instanceData, buffer_get_address(_buffer));
 buffer_delete(_buffer);
 
 camera = camera_create();

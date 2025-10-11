@@ -569,7 +569,7 @@ function d3d11_stbuffer_map(_stbuffer)
 	return external_call(_fn, _stbuffer);
 }
 
-/// @func d3d11_stbuffer_get_mapped_data(_stbuffer, _dest)
+/// @func d3d11_stbuffer_read_data(_stbuffer, _dest)
 ///
 /// @desc Copies data of a mapped staging buffer into a GM buffer, specified by its address.
 ///
@@ -577,11 +577,11 @@ function d3d11_stbuffer_map(_stbuffer)
 /// @param {Pointer} _dest The address of the destination buffer.
 ///
 /// @return {Bool} Returns true on success or false otherwise (e.g. the staging buffer was not mapped).
-function d3d11_stbuffer_get_mapped_data(_stbuffer, _dest)
+function d3d11_stbuffer_read_data(_stbuffer, _dest)
 {
 	gml_pragma("forceinline");
 	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_stbuffer_get_mapped_data", dll_cdecl, ty_real,
+		GMD3D11_PATH, "d3d11_stbuffer_read_data", dll_cdecl, ty_real,
 		2, ty_real, ty_string);
 	return external_call(_fn, _stbuffer, _dest);
 }
