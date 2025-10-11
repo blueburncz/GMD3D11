@@ -696,6 +696,24 @@ function d3d11_compute_dispatch(_x, _y, _z)
 	return external_call(_fn, _x, _y, _z);
 }
 
+/// @func d3d11_compute_dispatch_indirect(_buffer, _offset)
+///
+/// @desc Dispatches the current compute shader, reading the number of workgroups to be dispatched from the specified
+/// buffer. The dispatch arguments in the buffer must contain three UINT values representing the X, Y, and Z workgroup
+/// dimensions.
+///
+/// @param {Real} _buffer The ID of the buffer that contains the dispatch arguments.
+/// @param {Real} _offset The byte offset from the start of the buffer to the location of the dispatch arguments. Must
+/// be aligned to 4 bytes.
+function d3d11_compute_dispatch_indirect(_buffer, _offset)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_compute_dispatch_indirect", dll_cdecl, ty_real,
+		2, ty_real, ty_real);
+	return external_call(_fn, _buffer, _offset);
+}
+
 /// @func d3d11_shader_compile_gs(_file, _entryPoint, _profile)
 ///
 /// @desc Compiles a geometry shader from file.

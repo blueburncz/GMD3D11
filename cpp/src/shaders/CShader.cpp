@@ -1,5 +1,6 @@
 #include <shaders/CShader.hpp>
 
+#include <buffers/Buffer.hpp>
 #include <utils.hpp>
 
 #include <d3dcompiler.h>
@@ -133,5 +134,20 @@ GM_EXPORT ty_real d3d11_shader_set_cs(ty_real _gs)
 GM_EXPORT ty_real d3d11_compute_dispatch(ty_real _x, ty_real _y, ty_real _z)
 {
     g_Context->Dispatch(static_cast<UINT>(_x), static_cast<UINT>(_y), static_cast<UINT>(_z));
+    return GM_TRUE;
+}
+
+/// @func d3d11_compute_dispatch_indirect(_buffer, _offset)
+///
+/// @desc Dispatches the current compute shader, reading the number of workgroups to be dispatched from the specified
+/// buffer. The dispatch arguments in the buffer must contain three UINT values representing the X, Y, and Z workgroup
+/// dimensions.
+///
+/// @param {Real} _buffer The ID of the buffer that contains the dispatch arguments.
+/// @param {Real} _offset The byte offset from the start of the buffer to the location of the dispatch arguments. Must
+/// be aligned to 4 bytes.
+GM_EXPORT ty_real d3d11_compute_dispatch_indirect(ty_real _buffer, ty_real _offset)
+{
+    g_Context->DispatchIndirect(Trackable::Get<Buffer>(static_cast<size_t>(_buffer))->GetBuffer(), static_cast<UINT>(_offset));
     return GM_TRUE;
 }
