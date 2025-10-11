@@ -17,6 +17,7 @@
   * [x] Geometry shaders
   * [ ] Tessellation shaders (🛑 TODO)
   * [x] Compute shaders
+* [ ] Vertex formats (🛑 TODO)
 * [ ] Buffers
   * [ ] Vertex buffers (🛑 TODO)
   * [ ] Index buffers (🛑 TODO)
