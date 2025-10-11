@@ -1,237 +1,5 @@
 /* THIS FILE IS GENERATED - DO NOT EDIT BY HAND! */
 
-/// @func d3d11_cbuffer_create(_size)
-///
-/// @desc Creates a new constant buffer.
-///
-/// @param {Real} _size The size of the buffer, in bytes. Must be a multiple of 16!
-///
-/// @return {Real} The ID of the created constant buffer or -1 on fail.
-function d3d11_cbuffer_create(_size)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_cbuffer_create", dll_cdecl, ty_real,
-		1, ty_real);
-	return external_call(_fn, _size);
-}
-
-/// @func d3d11_cbuffer_get_size(_cbuffer)
-///
-/// @desc Retrieves size of a constant buffer in bytes.
-///
-/// @param {Real} _cbuffer The size of the constant buffer in bytes.
-function d3d11_cbuffer_get_size(_cbuffer)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_cbuffer_get_size", dll_cdecl, ty_real,
-		1, ty_real);
-	return external_call(_fn, _cbuffer);
-}
-
-/// @func d3d11_cbuffer_write_data(_cbuffer, _data)
-///
-/// @desc Writes data from a GM buffer into a D3D11 constant buffer.
-///
-/// @param {Real} _cbuffer The ID of the constant buffer.
-/// @param {Pointer} _data An address of a GM buffer to update the constant buffer from.
-function d3d11_cbuffer_write_data(_cbuffer, _data)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_cbuffer_write_data", dll_cdecl, ty_real,
-		2, ty_real, ty_string);
-	return external_call(_fn, _cbuffer, _data);
-}
-
-/// @func d3d11_shader_set_cbuffer_vs(_slot, _cbuffer)
-///
-/// @desc Binds a constant buffer to a vertex shader.
-///
-/// @param {Real} _slot The slot to bind the constant buffer to.
-/// @param {Real} _cbuffer The ID of the constant buffer or -1 to unbind the slot.
-function d3d11_shader_set_cbuffer_vs(_slot, _cbuffer)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_shader_set_cbuffer_vs", dll_cdecl, ty_real,
-		2, ty_real, ty_real);
-	return external_call(_fn, _slot, _cbuffer);
-}
-
-/// @func d3d11_shader_set_cbuffer_gs(_slot, _cbuffer)
-///
-/// @desc Binds a constant buffer to a geometry shader.
-///
-/// @param {Real} _slot The slot to bind the constant buffer to.
-/// @param {Real} _cbuffer The ID of the constant buffer or -1 to unbind the slot.
-function d3d11_shader_set_cbuffer_gs(_slot, _cbuffer)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_shader_set_cbuffer_gs", dll_cdecl, ty_real,
-		2, ty_real, ty_real);
-	return external_call(_fn, _slot, _cbuffer);
-}
-
-/// @func d3d11_shader_set_cbuffer_ps(_slot, _cbuffer)
-///
-/// @desc Binds a constant buffer to a pixel shader.
-///
-/// @param {Real} _slot The slot to bind the constant buffer to.
-/// @param {Real} _cbuffer The ID of the constant buffer or -1 to unbind the slot.
-function d3d11_shader_set_cbuffer_ps(_slot, _cbuffer)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_shader_set_cbuffer_ps", dll_cdecl, ty_real,
-		2, ty_real, ty_real);
-	return external_call(_fn, _slot, _cbuffer);
-}
-
-/// @func d3d11_cbuffer_exists(_cbuffer)
-///
-/// @desc Checks whether a constant buffer exists.
-///
-/// @param {Real} _cbuffer The ID of the constant buffer.
-///
-/// @return {Bool} Returns true if the constant buffer exists.
-function d3d11_cbuffer_exists(_cbuffer)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_cbuffer_exists", dll_cdecl, ty_real,
-		1, ty_real);
-	return external_call(_fn, _cbuffer);
-}
-
-/// @func d3d11_cbuffer_destroy(_cbuffer)
-///
-/// @desc Destroys a constant buffer.
-///
-/// @param {Real} _cbuffer The ID of the constant buffer to destroy.
-function d3d11_cbuffer_destroy(_cbuffer)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_cbuffer_destroy", dll_cdecl, ty_real,
-		1, ty_real);
-	return external_call(_fn, _cbuffer);
-}
-
-/// @func d3d11_shader_compile_cs(_file, _entryPoint, _profile)
-///
-/// @desc Compiles a compute shader from file.
-///
-/// @param {String} _file The path to file to compile.
-/// @param {String} _entryPoint The name of the entry point function, e.g. "main".
-/// @param {String} _profile The compute shader profile, e.g. "cs_5_0".
-///
-/// @return {Real} The ID of the compute shader or -1 on fail.
-function d3d11_shader_compile_cs(_file, _entryPoint, _profile)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_shader_compile_cs", dll_cdecl, ty_real,
-		3, ty_string, ty_string, ty_string);
-	return external_call(_fn, _file, _entryPoint, _profile);
-}
-
-/// @func d3d11_shader_load_cs(_file)
-///
-/// @desc Loads a compiled compute shader from a file.
-///
-/// @param {String} _file The path to the compiled compute shader.
-///
-/// @return {Real} The ID of the compute shader or -1 on fail.
-function d3d11_shader_load_cs(_file)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_shader_load_cs", dll_cdecl, ty_real,
-		1, ty_string);
-	return external_call(_fn, _file);
-}
-
-/// @func d3d11_shader_set_cs(_cs)
-///
-/// @desc Changes the current compute shader.
-///
-/// @param {Real} _cs The ID of the shader or -1 to disable the compute stage.
-function d3d11_shader_set_cs(_gs)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_shader_set_cs", dll_cdecl, ty_real,
-		1, ty_real);
-	return external_call(_fn, _gs);
-}
-
-/// @func d3d11_compute_dispatch(_x, _y, _z)
-///
-/// @disc Dispatches the current compute shader with given number of workgroups.
-///
-/// @param {Real} _x Number of workgroups to dispatch in the x direction.
-/// @param {Real} _y Number of workgroups to dispatch in the y direction.
-/// @param {Real} _z Number of workgroups to dispatch in the z direction.
-function d3d11_compute_dispatch(_x, _y, _z)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_compute_dispatch", dll_cdecl, ty_real,
-		3, ty_real, ty_real, ty_real);
-	return external_call(_fn, _x, _y, _z);
-}
-
-/// @func d3d11_shader_compile_gs(_file, _entryPoint, _profile)
-///
-/// @desc Compiles a geometry shader from file.
-///
-/// @param {String} _file The path to file to compile.
-/// @param {String} _entryPoint The name of the entry point function, e.g. "main".
-/// @param {String} _profile The geometry shader profile, e.g. "gs_4_0".
-///
-/// @return {Real} The ID of the geometry shader or -1 on fail.
-function d3d11_shader_compile_gs(_file, _entryPoint, _profile)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_shader_compile_gs", dll_cdecl, ty_real,
-		3, ty_string, ty_string, ty_string);
-	return external_call(_fn, _file, _entryPoint, _profile);
-}
-
-/// @func d3d11_shader_load_gs(_file)
-///
-/// @desc Loads a compiled geometry shader from a file.
-///
-/// @param {String} _file The path to the compiled geometry shader.
-///
-/// @return {Real} The ID of the geometry shader or -1 on fail.
-function d3d11_shader_load_gs(_file)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_shader_load_gs", dll_cdecl, ty_real,
-		1, ty_string);
-	return external_call(_fn, _file);
-}
-
-/// @func d3d11_shader_set_gs(_gs)
-///
-/// @desc Changes the current geometry shader.
-///
-/// @param {Real} _gs The ID of the shader or -1 to disable the geometry stage.
-function d3d11_shader_set_gs(_gs)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_shader_set_gs", dll_cdecl, ty_real,
-		1, ty_real);
-	return external_call(_fn, _gs);
-}
-
 function d3d11_init(_device, _context)
 {
 	gml_pragma("forceinline");
@@ -354,52 +122,141 @@ function d3d11_sizeof16(_type)
 	return external_call(_fn, _type);
 }
 
-/// @func d3d11_shader_compile_ps(_file, _entryPoint, _profile)
+/// @func d3d11_buffer_copy(_src, _dest)
 ///
-/// @desc Compiles a pixel shader from file.
+/// @desc Copies data from source to destination buffer.
 ///
-/// @param {String} _file The path to file to compile.
-/// @param {String} _entryPoint The name of the entry point function, e.g. "main".
-/// @param {String} _profile The pixel shader profile, e.g. "ps_4_0".
-///
-/// @return {Real} The ID of the pixel shader or -1 on fail.
-function d3d11_shader_compile_ps(_file, _entryPoint, _profile)
+/// @param {Real} _src The ID of the source buffer.
+/// @param {Real} _dest The ID of the destination buffer.
+function d3d11_buffer_copy(_src, _dest)
 {
 	gml_pragma("forceinline");
 	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_shader_compile_ps", dll_cdecl, ty_real,
-		3, ty_string, ty_string, ty_string);
-	return external_call(_fn, _file, _entryPoint, _profile);
+		GMD3D11_PATH, "d3d11_buffer_copy", dll_cdecl, ty_real,
+		2, ty_real, ty_real);
+	return external_call(_fn, _src, _dest);
 }
 
-/// @func d3d11_shader_load_ps(_file)
+/// @func d3d11_cbuffer_create(_size)
 ///
-/// @desc Loads a compiled pixel shader from a file.
+/// @desc Creates a new constant buffer.
 ///
-/// @param {String} _file The path to the compiled pixel shader.
+/// @param {Real} _size The size of the buffer, in bytes. Must be a multiple of 16!
 ///
-/// @return {Real} The ID of the pixel shader or -1 on fail.
-function d3d11_shader_load_ps(_file)
+/// @return {Real} The ID of the created constant buffer or -1 on fail.
+function d3d11_cbuffer_create(_size)
 {
 	gml_pragma("forceinline");
 	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_shader_load_ps", dll_cdecl, ty_real,
-		1, ty_string);
-	return external_call(_fn, _file);
-}
-
-/// @func d3d11_shader_override_ps(_ps)
-///
-/// @desc Hooks into `ID3D11DeviceContext::Draw` and replaces the current pixel shader with a custom one.
-///
-/// @param {Real} _ps The ID of the shader or -1 to disable the override.
-function d3d11_shader_override_ps(_ps)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_shader_override_ps", dll_cdecl, ty_real,
+		GMD3D11_PATH, "d3d11_cbuffer_create", dll_cdecl, ty_real,
 		1, ty_real);
-	return external_call(_fn, _ps);
+	return external_call(_fn, _size);
+}
+
+/// @func d3d11_cbuffer_get_size(_cbuffer)
+///
+/// @desc Retrieves size of a constant buffer in bytes.
+///
+/// @param {Real} _cbuffer The ID of the constant buffer.
+///
+/// @return {Real} The size of the constant buffer in bytes.
+function d3d11_cbuffer_get_size(_cbuffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_cbuffer_get_size", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _cbuffer);
+}
+
+/// @func d3d11_cbuffer_write_data(_cbuffer, _data)
+///
+/// @desc Writes data from a GM buffer into a D3D11 constant buffer.
+///
+/// @param {Real} _cbuffer The ID of the constant buffer.
+/// @param {Pointer} _data An address of a GM buffer to update the constant buffer from.
+function d3d11_cbuffer_write_data(_cbuffer, _data)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_cbuffer_write_data", dll_cdecl, ty_real,
+		2, ty_real, ty_string);
+	return external_call(_fn, _cbuffer, _data);
+}
+
+/// @func d3d11_shader_set_cbuffer_vs(_slot, _cbuffer)
+///
+/// @desc Binds a constant buffer to a vertex shader.
+///
+/// @param {Real} _slot The slot to bind the constant buffer to.
+/// @param {Real} _cbuffer The ID of the constant buffer or -1 to unbind the slot.
+function d3d11_shader_set_cbuffer_vs(_slot, _cbuffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_set_cbuffer_vs", dll_cdecl, ty_real,
+		2, ty_real, ty_real);
+	return external_call(_fn, _slot, _cbuffer);
+}
+
+/// @func d3d11_shader_set_cbuffer_gs(_slot, _cbuffer)
+///
+/// @desc Binds a constant buffer to a geometry shader.
+///
+/// @param {Real} _slot The slot to bind the constant buffer to.
+/// @param {Real} _cbuffer The ID of the constant buffer or -1 to unbind the slot.
+function d3d11_shader_set_cbuffer_gs(_slot, _cbuffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_set_cbuffer_gs", dll_cdecl, ty_real,
+		2, ty_real, ty_real);
+	return external_call(_fn, _slot, _cbuffer);
+}
+
+/// @func d3d11_shader_set_cbuffer_ps(_slot, _cbuffer)
+///
+/// @desc Binds a constant buffer to a pixel shader.
+///
+/// @param {Real} _slot The slot to bind the constant buffer to.
+/// @param {Real} _cbuffer The ID of the constant buffer or -1 to unbind the slot.
+function d3d11_shader_set_cbuffer_ps(_slot, _cbuffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_set_cbuffer_ps", dll_cdecl, ty_real,
+		2, ty_real, ty_real);
+	return external_call(_fn, _slot, _cbuffer);
+}
+
+/// @func d3d11_cbuffer_exists(_cbuffer)
+///
+/// @desc Checks whether a constant buffer exists.
+///
+/// @param {Real} _cbuffer The ID of the constant buffer.
+///
+/// @return {Bool} Returns true if the constant buffer exists.
+function d3d11_cbuffer_exists(_cbuffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_cbuffer_exists", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _cbuffer);
+}
+
+/// @func d3d11_cbuffer_destroy(_cbuffer)
+///
+/// @desc Destroys a constant buffer.
+///
+/// @param {Real} _cbuffer The ID of the constant buffer to destroy.
+function d3d11_cbuffer_destroy(_cbuffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_cbuffer_destroy", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _cbuffer);
 }
 
 /// @func d3d11_rsbuffer_create(_stride, _numElements)
@@ -423,7 +280,9 @@ function d3d11_rsbuffer_create(_stride, _numElements)
 ///
 /// @desc Retrieves size of a read-only structured buffer in bytes.
 ///
-/// @param {Real} _rsbuffer The size of the read-only structured buffer in bytes.
+/// @param {Real} _rsbuffer The ID of the read-only structured buffer.
+///
+/// @return {Real} The size of the read-only structured buffer in bytes.
 function d3d11_rsbuffer_get_size(_rsbuffer)
 {
 	gml_pragma("forceinline");
@@ -515,7 +374,9 @@ function d3d11_rwsbuffer_create(_stride, _numElements)
 ///
 /// @desc Retrieves size of a read-write structured buffer in bytes.
 ///
-/// @param {Real} _rwsbuffer The size of the read-write structured buffer in bytes.
+/// @param {Real} _rwsbuffer The ID of the read-write structured buffer.
+///
+/// @return {Real} The size of the read-write structured buffer in bytes.
 function d3d11_rwsbuffer_get_size(_rwsbuffer)
 {
 	gml_pragma("forceinline");
@@ -602,6 +463,294 @@ function d3d11_rwsbuffer_create_uav(_rwsbuffer)
 	return external_call(_fn, _rwsbuffer);
 }
 
+/// @func d3d11_stbuffer_create(_stride, _numElements)
+///
+/// @desc Creates a new staging buffer.
+///
+/// @param {Real} _stride The stride of a single element, in bytes.
+/// @param {Real} _numElements The number of elements in the buffer.
+///
+/// @return {Real} The ID of the created staging buffer or -1 on fail.
+function d3d11_stbuffer_create(_stride, _numElements)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_stbuffer_create", dll_cdecl, ty_real,
+		2, ty_real, ty_real);
+	return external_call(_fn, _stride, _numElements);
+}
+
+/// @func d3d11_stbuffer_get_size(_stbuffer)
+///
+/// @desc Retrieves size of a staging buffer in bytes.
+///
+/// @param {Real} _stbuffer The ID of the staging buffer.
+///
+/// @return {Real} The size of the staging buffer in bytes.
+function d3d11_stbuffer_get_size(_stbuffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_stbuffer_get_size", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _stbuffer);
+}
+
+/// @func d3d11_stbuffer_is_mapped(_stbuffer)
+///
+/// @desc Checks whether a staging buffer is currently mapped to CPU-accessible memory.
+///
+/// @param {Real} _stbuffer The ID of the staging buffer.
+///
+/// @return {Bool} Returns true if given staging buffer is currently mapped for reading or false otherwise.
+function d3d11_stbuffer_is_mapped(_stbuffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_stbuffer_is_mapped", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _stbuffer);
+}
+
+/// @func d3d11_stbuffer_map(_stbuffer)
+///
+/// @desc Maps a staging buffer to CPU-accessible memory for reading.
+///
+/// @param {Real} _stbuffer The ID of the staging buffer.
+///
+/// @return {Bool} Returns true on success or false otherwise (e.g. the staging buffer was already mapped).
+function d3d11_stbuffer_map(_stbuffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_stbuffer_map", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _stbuffer);
+}
+
+/// @func d3d11_stbuffer_get_mapped_data(_stbuffer, _dest)
+///
+/// @desc Copies data of a mapped staging buffer into a GM buffer, specified by its address.
+///
+/// @param {Real} _stbuffer The ID of the staging buffer.
+/// @param {Pointer} _dest The address of the destination buffer.
+///
+/// @return {Bool} Returns true on success or false otherwise (e.g. the staging buffer was not mapped).
+function d3d11_stbuffer_get_mapped_data(_stbuffer, _dest)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_stbuffer_get_mapped_data", dll_cdecl, ty_real,
+		2, ty_real, ty_string);
+	return external_call(_fn, _stbuffer, _dest);
+}
+
+/// @func d3d11_stbuffer_unmap(_stbuffer)
+///
+/// @desc Unmaps a staging buffer from CPU-accessible memory.
+///
+/// @param {Real} _stbuffer The ID of the staging buffer.
+///
+/// @return {Bool} Returns true on success or false otherwise (e.g. the staging buffer was not mapped).
+function d3d11_stbuffer_unmap(_stbuffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_stbuffer_unmap", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _stbuffer);
+}
+
+/// @func d3d11_stbuffer_exists(_stbuffer)
+///
+/// @desc Checks whether a staging buffer exists.
+///
+/// @param {Real} _stbuffer The ID of the staging buffer.
+///
+/// @return {Bool} Returns true if the staging buffer exists.
+function d3d11_stbuffer_exists(_stbuffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_stbuffer_exists", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _stbuffer);
+}
+
+/// @func d3d11_stbuffer_destroy(_stbuffer)
+///
+/// @desc Destroys a staging buffer.
+///
+/// @param {Real} _stbuffer The ID of the staging buffer to destroy.
+function d3d11_stbuffer_destroy(_stbuffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_stbuffer_destroy", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _stbuffer);
+}
+
+/// @func d3d11_shader_compile_cs(_file, _entryPoint, _profile)
+///
+/// @desc Compiles a compute shader from file.
+///
+/// @param {String} _file The path to file to compile.
+/// @param {String} _entryPoint The name of the entry point function, e.g. "main".
+/// @param {String} _profile The compute shader profile, e.g. "cs_5_0".
+///
+/// @return {Real} The ID of the compute shader or -1 on fail.
+function d3d11_shader_compile_cs(_file, _entryPoint, _profile)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_compile_cs", dll_cdecl, ty_real,
+		3, ty_string, ty_string, ty_string);
+	return external_call(_fn, _file, _entryPoint, _profile);
+}
+
+/// @func d3d11_shader_load_cs(_file)
+///
+/// @desc Loads a compiled compute shader from a file.
+///
+/// @param {String} _file The path to the compiled compute shader.
+///
+/// @return {Real} The ID of the compute shader or -1 on fail.
+function d3d11_shader_load_cs(_file)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_load_cs", dll_cdecl, ty_real,
+		1, ty_string);
+	return external_call(_fn, _file);
+}
+
+/// @func d3d11_shader_set_cs(_cs)
+///
+/// @desc Changes the current compute shader.
+///
+/// @param {Real} _cs The ID of the shader or -1 to disable the compute stage.
+function d3d11_shader_set_cs(_gs)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_set_cs", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _gs);
+}
+
+/// @func d3d11_compute_dispatch(_x, _y, _z)
+///
+/// @disc Dispatches the current compute shader with given number of workgroups.
+///
+/// @param {Real} _x Number of workgroups to dispatch in the x direction.
+/// @param {Real} _y Number of workgroups to dispatch in the y direction.
+/// @param {Real} _z Number of workgroups to dispatch in the z direction.
+function d3d11_compute_dispatch(_x, _y, _z)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_compute_dispatch", dll_cdecl, ty_real,
+		3, ty_real, ty_real, ty_real);
+	return external_call(_fn, _x, _y, _z);
+}
+
+/// @func d3d11_shader_compile_gs(_file, _entryPoint, _profile)
+///
+/// @desc Compiles a geometry shader from file.
+///
+/// @param {String} _file The path to file to compile.
+/// @param {String} _entryPoint The name of the entry point function, e.g. "main".
+/// @param {String} _profile The geometry shader profile, e.g. "gs_4_0".
+///
+/// @return {Real} The ID of the geometry shader or -1 on fail.
+function d3d11_shader_compile_gs(_file, _entryPoint, _profile)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_compile_gs", dll_cdecl, ty_real,
+		3, ty_string, ty_string, ty_string);
+	return external_call(_fn, _file, _entryPoint, _profile);
+}
+
+/// @func d3d11_shader_load_gs(_file)
+///
+/// @desc Loads a compiled geometry shader from a file.
+///
+/// @param {String} _file The path to the compiled geometry shader.
+///
+/// @return {Real} The ID of the geometry shader or -1 on fail.
+function d3d11_shader_load_gs(_file)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_load_gs", dll_cdecl, ty_real,
+		1, ty_string);
+	return external_call(_fn, _file);
+}
+
+/// @func d3d11_shader_set_gs(_gs)
+///
+/// @desc Changes the current geometry shader.
+///
+/// @param {Real} _gs The ID of the shader or -1 to disable the geometry stage.
+function d3d11_shader_set_gs(_gs)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_set_gs", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _gs);
+}
+
+/// @func d3d11_shader_compile_ps(_file, _entryPoint, _profile)
+///
+/// @desc Compiles a pixel shader from file.
+///
+/// @param {String} _file The path to file to compile.
+/// @param {String} _entryPoint The name of the entry point function, e.g. "main".
+/// @param {String} _profile The pixel shader profile, e.g. "ps_4_0".
+///
+/// @return {Real} The ID of the pixel shader or -1 on fail.
+function d3d11_shader_compile_ps(_file, _entryPoint, _profile)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_compile_ps", dll_cdecl, ty_real,
+		3, ty_string, ty_string, ty_string);
+	return external_call(_fn, _file, _entryPoint, _profile);
+}
+
+/// @func d3d11_shader_load_ps(_file)
+///
+/// @desc Loads a compiled pixel shader from a file.
+///
+/// @param {String} _file The path to the compiled pixel shader.
+///
+/// @return {Real} The ID of the pixel shader or -1 on fail.
+function d3d11_shader_load_ps(_file)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_load_ps", dll_cdecl, ty_real,
+		1, ty_string);
+	return external_call(_fn, _file);
+}
+
+/// @func d3d11_shader_override_ps(_ps)
+///
+/// @desc Hooks into `ID3D11DeviceContext::Draw` and replaces the current pixel shader with a custom one.
+///
+/// @param {Real} _ps The ID of the shader or -1 to disable the override.
+function d3d11_shader_override_ps(_ps)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_override_ps", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _ps);
+}
+
 /// @func d3d11_shader_exists(_shader)
 ///
 /// @desc Checks whether a shader exists.
@@ -647,6 +796,55 @@ function d3d11_shader_save(_shader, _filePath)
 		GMD3D11_PATH, "d3d11_shader_save", dll_cdecl, ty_real,
 		2, ty_real, ty_string);
 	return external_call(_fn, _shader, _filePath);
+}
+
+/// @func d3d11_shader_compile_vs(_file, _entryPoint, _profile)
+///
+/// @desc Compiles a vertex shader from file.
+///
+/// @param {String} _file The path to file to compile.
+/// @param {String} _entryPoint The name of the entry point function, e.g. "main".
+/// @param {String} _profile The vertex shader profile, e.g. "vs_4_0".
+///
+/// @return {Real} The ID of the vertex shader or -1 on fail.
+function d3d11_shader_compile_vs(_file, _entryPoint, _profile)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_compile_vs", dll_cdecl, ty_real,
+		3, ty_string, ty_string, ty_string);
+	return external_call(_fn, _file, _entryPoint, _profile);
+}
+
+/// @func d3d11_shader_load_vs(_file)
+///
+/// @desc Loads a compiled vertex shader from a file.
+///
+/// @param {String} _file The path to the compiled vertex shader.
+///
+/// @return {Real} The ID of the vertex shader or -1 on fail.
+function d3d11_shader_load_vs(_file)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_load_vs", dll_cdecl, ty_real,
+		1, ty_string);
+	return external_call(_fn, _file);
+}
+
+/// @func d3d11_shader_override_vs(_vs)
+///
+/// @desc Hooks into `ID3D11DeviceContext::Draw` and replaces the current vertex shader with a custom one.
+///
+/// @param {Real} _vs The ID of the shader or -1 to disable the override. The vertex format expected by the shader must
+/// be compatible with the overriden shader!
+function d3d11_shader_override_vs(_vs)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_override_vs", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _vs);
 }
 
 /// @func d3d11_srv_exists(_srv)
@@ -782,53 +980,4 @@ function d3d11_shader_set_uav_cs(_slot, _uav)
 		GMD3D11_PATH, "d3d11_shader_set_uav_cs", dll_cdecl, ty_real,
 		2, ty_real, ty_real);
 	return external_call(_fn, _slot, _uav);
-}
-
-/// @func d3d11_shader_compile_vs(_file, _entryPoint, _profile)
-///
-/// @desc Compiles a vertex shader from file.
-///
-/// @param {String} _file The path to file to compile.
-/// @param {String} _entryPoint The name of the entry point function, e.g. "main".
-/// @param {String} _profile The vertex shader profile, e.g. "vs_4_0".
-///
-/// @return {Real} The ID of the vertex shader or -1 on fail.
-function d3d11_shader_compile_vs(_file, _entryPoint, _profile)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_shader_compile_vs", dll_cdecl, ty_real,
-		3, ty_string, ty_string, ty_string);
-	return external_call(_fn, _file, _entryPoint, _profile);
-}
-
-/// @func d3d11_shader_load_vs(_file)
-///
-/// @desc Loads a compiled vertex shader from a file.
-///
-/// @param {String} _file The path to the compiled vertex shader.
-///
-/// @return {Real} The ID of the vertex shader or -1 on fail.
-function d3d11_shader_load_vs(_file)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_shader_load_vs", dll_cdecl, ty_real,
-		1, ty_string);
-	return external_call(_fn, _file);
-}
-
-/// @func d3d11_shader_override_vs(_vs)
-///
-/// @desc Hooks into `ID3D11DeviceContext::Draw` and replaces the current vertex shader with a custom one.
-///
-/// @param {Real} _vs The ID of the shader or -1 to disable the override. The vertex format expected by the shader must
-/// be compatible with the overriden shader!
-function d3d11_shader_override_vs(_vs)
-{
-	gml_pragma("forceinline");
-	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_shader_override_vs", dll_cdecl, ty_real,
-		1, ty_real);
-	return external_call(_fn, _vs);
 }

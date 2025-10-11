@@ -1,4 +1,4 @@
-#include <Shader.hpp>
+#include <shaders/Shader.hpp>
 
 #include <d3dcompiler.h>
 #include <fstream>
@@ -7,8 +7,10 @@
 
 extern char* g_ErrorString;
 
+
 Shader::Shader(ID3DBlob* blob)
-    : Blob(blob)
+    : Trackable()
+    , Blob(blob)
 {
 }
 
@@ -118,7 +120,7 @@ HRESULT CompileShader(_In_ LPCWSTR srcFile, _In_ LPCSTR entryPoint, _In_ LPCSTR 
 /// @return {Bool} Returns true if the shader exists.
 GM_EXPORT ty_real d3d11_shader_exists(ty_real _shader)
 {
-    return (_shader >= 0.0 && Shader::Exists(static_cast<size_t>(_shader))) ? GM_TRUE : GM_FALSE;
+    return (_shader >= 0.0 && Trackable::Exists<Shader>(static_cast<size_t>(_shader))) ? GM_TRUE : GM_FALSE;
 }
 
 /// @func d3d11_shader_destroy(_shader)
@@ -128,7 +130,7 @@ GM_EXPORT ty_real d3d11_shader_exists(ty_real _shader)
 /// @param {Real} _shader The ID of the shader to destroy.
 GM_EXPORT ty_real d3d11_shader_destroy(ty_real _shader)
 {
-    delete Shader::Get(static_cast<size_t>(_shader));
+    delete Trackable::Get<Shader>(static_cast<size_t>(_shader));
     return GM_TRUE;
 }
 
@@ -142,5 +144,5 @@ GM_EXPORT ty_real d3d11_shader_destroy(ty_real _shader)
 /// @return {Bool} Returns `true` on success.
 GM_EXPORT ty_real d3d11_shader_save(ty_real _shader, ty_string _filePath)
 {
-    return Shader::Get(static_cast<size_t>(_shader))->SaveBlob(_filePath) ? GM_TRUE : GM_FALSE;
+    return Trackable::Get<Shader>(static_cast<size_t>(_shader))->SaveBlob(_filePath) ? GM_TRUE : GM_FALSE;
 }

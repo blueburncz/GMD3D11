@@ -2,7 +2,7 @@
 
 #include <common.hpp>
 
-#include <Shader.hpp>
+#include <shaders/Shader.hpp>
 
 /// @brief Compute shader.
 class CShader final : public Shader

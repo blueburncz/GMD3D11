@@ -1,6 +1,5 @@
-#include <CBuffer.hpp>
+#include <buffers/CBuffer.hpp>
 
-#include <cstdint>
 #include <iostream>
 
 extern ID3D11Device* g_Device;
@@ -14,10 +13,6 @@ CBuffer::CBuffer(ID3D11Buffer* buffer, size_t size)
 
 CBuffer::~CBuffer()
 {
-    if (Buffer)
-    {
-        Buffer->Release();
-    }
 }
 
 /// @func d3d11_cbuffer_create(_size)
@@ -53,10 +48,12 @@ GM_EXPORT ty_real d3d11_cbuffer_create(ty_real _size)
 ///
 /// @desc Retrieves size of a constant buffer in bytes.
 ///
-/// @param {Real} _cbuffer The size of the constant buffer in bytes.
+/// @param {Real} _cbuffer The ID of the constant buffer.
+///
+/// @return {Real} The size of the constant buffer in bytes.
 GM_EXPORT ty_real d3d11_cbuffer_get_size(ty_real _cbuffer)
 {
-    return CBuffer::Get(static_cast<size_t>(_cbuffer))->GetSize();
+    return Trackable::Get<CBuffer>(static_cast<size_t>(_cbuffer))->GetSize();
 }
 
 /// @func d3d11_cbuffer_write_data(_cbuffer, _data)
@@ -68,7 +65,7 @@ GM_EXPORT ty_real d3d11_cbuffer_get_size(ty_real _cbuffer)
 GM_EXPORT ty_real d3d11_cbuffer_write_data(ty_real _cbuffer, ty_string _data)
 {
     g_Context->UpdateSubresource(
-        CBuffer::Get(static_cast<size_t>(_cbuffer))->GetBuffer(),
+        Trackable::Get<CBuffer>(static_cast<size_t>(_cbuffer))->GetBuffer(),
         0,
         nullptr,
         (void*)_data,
@@ -87,7 +84,7 @@ GM_EXPORT ty_real d3d11_shader_set_cbuffer_vs(ty_real _slot, ty_real _cbuffer)
 {
     if (_cbuffer >= 0.0)
     {
-        ID3D11Buffer* buffer = CBuffer::Get(static_cast<size_t>(_cbuffer))->GetBuffer();
+        ID3D11Buffer* buffer = Trackable::Get<CBuffer>(static_cast<size_t>(_cbuffer))->GetBuffer();
         g_Context->VSSetConstantBuffers(static_cast<UINT>(_slot), 1, &buffer);
     }
     else
@@ -107,7 +104,7 @@ GM_EXPORT ty_real d3d11_shader_set_cbuffer_gs(ty_real _slot, ty_real _cbuffer)
 {
     if (_cbuffer >= 0.0)
     {
-        ID3D11Buffer* buffer = CBuffer::Get(static_cast<size_t>(_cbuffer))->GetBuffer();
+        ID3D11Buffer* buffer = Trackable::Get<CBuffer>(static_cast<size_t>(_cbuffer))->GetBuffer();
         g_Context->GSSetConstantBuffers(static_cast<UINT>(_slot), 1, &buffer);
     }
     else
@@ -127,7 +124,7 @@ GM_EXPORT ty_real d3d11_shader_set_cbuffer_ps(ty_real _slot, ty_real _cbuffer)
 {
     if (_cbuffer >= 0.0)
     {
-        ID3D11Buffer* buffer = CBuffer::Get(static_cast<size_t>(_cbuffer))->GetBuffer();
+        ID3D11Buffer* buffer = Trackable::Get<CBuffer>(static_cast<size_t>(_cbuffer))->GetBuffer();
         g_Context->PSSetConstantBuffers(static_cast<UINT>(_slot), 1, &buffer);
     }
     else
@@ -146,7 +143,7 @@ GM_EXPORT ty_real d3d11_shader_set_cbuffer_ps(ty_real _slot, ty_real _cbuffer)
 /// @return {Bool} Returns true if the constant buffer exists.
 GM_EXPORT ty_real d3d11_cbuffer_exists(ty_real _cbuffer)
 {
-    return (_cbuffer >= 0.0 && CBuffer::Exists(static_cast<size_t>(_cbuffer))) ? GM_TRUE : GM_FALSE;
+    return (_cbuffer >= 0.0 && Trackable::Exists<CBuffer>(static_cast<size_t>(_cbuffer))) ? GM_TRUE : GM_FALSE;
 }
 
 /// @func d3d11_cbuffer_destroy(_cbuffer)
@@ -156,6 +153,6 @@ GM_EXPORT ty_real d3d11_cbuffer_exists(ty_real _cbuffer)
 /// @param {Real} _cbuffer The ID of the constant buffer to destroy.
 GM_EXPORT ty_real d3d11_cbuffer_destroy(ty_real _cbuffer)
 {
-    delete CBuffer::Get(static_cast<size_t>(_cbuffer));
+    delete Trackable::Get<CBuffer>(static_cast<size_t>(_cbuffer));
     return GM_TRUE;
 }

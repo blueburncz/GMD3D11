@@ -1,0 +1,30 @@
+#pragma once
+
+#include <common.hpp>
+
+#include <Trackable.hpp>
+
+#include <d3d11.h>
+#include <vector>
+
+/// @brief Shader base class.
+class Shader : public Trackable
+{
+public:
+    virtual ~Shader();
+
+    ID3DBlob* GetBlob() const { return Blob; }
+
+    bool SaveBlob(const char* filePath) const;
+
+    static std::vector<char> LoadBlob(const char* filePath);
+
+protected:
+    Shader::Shader(ID3DBlob* blob);
+
+private:
+    ID3DBlob* Blob = nullptr;
+};
+
+// Source: https://learn.microsoft.com/en-us/windows/win32/direct3d11/how-to--compile-a-shader
+HRESULT CompileShader(_In_ LPCWSTR srcFile, _In_ LPCSTR entryPoint, _In_ LPCSTR profile, _Outptr_ ID3DBlob** blob);

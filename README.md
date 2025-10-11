@@ -13,7 +13,7 @@
   * [x] Hook into `ID3D11DeviceContext::Draw` calls to swap out used vertex and pixel shaders with custom ones
   * [x] Geometry shaders
   * [ ] Tessellation shaders (🛑 TODO)
-  * [ ] Compute shaders (🚧 WIP)
+  * [x] Compute shaders
 * [ ] Buffers
   * [ ] Vertex buffers (🛑 TODO)
   * [ ] Index buffers (🛑 TODO)
@@ -21,7 +21,8 @@
   * [x] Read-only structured buffers (with SRV)
   * [x] Read/write structured buffers (with SRV and UAV)
   * [ ] Raw buffers (🛑 TODO)
-  * [ ] Staging buffers (🛑 TODO)
+  * [x] Staging buffers
+  * [ ] Indirect buffers (🛑 TODO)
 * [ ] Textures
   * [x] `texture_set_stage_vs()` - vertex texture fetching of native GM textures (`sprite_get_texture()`, `surface_get_texture()`)
   * [ ] Samplers (🛑 TODO)

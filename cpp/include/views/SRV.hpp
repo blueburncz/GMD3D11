@@ -6,7 +6,7 @@
 
 #include <d3d11.h>
 
-class SRV final : public Trackable<SRV>
+class SRV final : public Trackable
 {
 public:
     SRV(ID3D11ShaderResourceView* srv);

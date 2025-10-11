@@ -1,6 +1,5 @@
-#include <CShader.hpp>
+#include <shaders/CShader.hpp>
 
-#include <Shader.hpp>
 #include <utils.hpp>
 
 #include <d3dcompiler.h>
@@ -119,7 +118,7 @@ GM_EXPORT ty_real d3d11_shader_load_cs(ty_string _file)
 /// @param {Real} _cs The ID of the shader or -1 to disable the compute stage.
 GM_EXPORT ty_real d3d11_shader_set_cs(ty_real _gs)
 {
-    ID3D11ComputeShader* shader = (_gs >= 0.0) ? ((CShader*)Shader::Get(static_cast<size_t>(_gs)))->GetShader() : nullptr;
+    ID3D11ComputeShader* shader = (_gs >= 0.0) ? ((CShader*)Trackable::Get<Shader>(static_cast<size_t>(_gs)))->GetShader() : nullptr;
     g_Context->CSSetShader(shader, nullptr, 0);
     return GM_TRUE;
 }

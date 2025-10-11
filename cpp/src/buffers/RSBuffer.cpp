@@ -1,6 +1,5 @@
-#include <RSBuffer.hpp>
+#include <buffers/RSBuffer.hpp>
 
-#include <cstdint>
 #include <iostream>
 
 extern ID3D11Device* g_Device;
@@ -15,10 +14,6 @@ RSBuffer::RSBuffer(ID3D11Buffer* buffer, size_t stride, size_t numElements)
 
 RSBuffer::~RSBuffer()
 {
-    if (Buffer)
-    {
-        Buffer->Release();
-    }
 }
 
 SRV* RSBuffer::CreateSRV() const
@@ -29,7 +24,7 @@ SRV* RSBuffer::CreateSRV() const
     srvDesc.Buffer.NumElements = NumElements;
 
     ID3D11ShaderResourceView* srv = nullptr;
-    HRESULT hr = g_Device->CreateShaderResourceView(Buffer, &srvDesc, &srv);
+    HRESULT hr = g_Device->CreateShaderResourceView(Raw, &srvDesc, &srv);
 
     if (FAILED(hr))
     {
@@ -80,10 +75,12 @@ GM_EXPORT ty_real d3d11_rsbuffer_create(ty_real _stride, ty_real _numElements)
 ///
 /// @desc Retrieves size of a read-only structured buffer in bytes.
 ///
-/// @param {Real} _rsbuffer The size of the read-only structured buffer in bytes.
+/// @param {Real} _rsbuffer The ID of the read-only structured buffer.
+///
+/// @return {Real} The size of the read-only structured buffer in bytes.
 GM_EXPORT ty_real d3d11_rsbuffer_get_size(ty_real _rsbuffer)
 {
-    return RSBuffer::Get(static_cast<size_t>(_rsbuffer))->GetSize();
+    return Trackable::Get<RSBuffer>(static_cast<size_t>(_rsbuffer))->GetSize();
 }
 
 /// @func d3d11_rsbuffer_write_data(_rsbuffer, _data)
@@ -95,7 +92,7 @@ GM_EXPORT ty_real d3d11_rsbuffer_get_size(ty_real _rsbuffer)
 GM_EXPORT ty_real d3d11_rsbuffer_write_data(ty_real _rsbuffer, ty_string _data)
 {
     g_Context->UpdateSubresource(
-        RSBuffer::Get(static_cast<size_t>(_rsbuffer))->GetBuffer(),
+        Trackable::Get<RSBuffer>(static_cast<size_t>(_rsbuffer))->GetBuffer(),
         0,
         nullptr,
         (void*)_data,
@@ -113,7 +110,7 @@ GM_EXPORT ty_real d3d11_rsbuffer_write_data(ty_real _rsbuffer, ty_string _data)
 /// @return {Bool} Returns true if the read-only structured buffer exists.
 GM_EXPORT ty_real d3d11_rsbuffer_exists(ty_real _rsbuffer)
 {
-    return (_rsbuffer >= 0.0 && RSBuffer::Exists(static_cast<size_t>(_rsbuffer))) ? GM_TRUE : GM_FALSE;
+    return (_rsbuffer >= 0.0 && Trackable::Exists<RSBuffer>(static_cast<size_t>(_rsbuffer))) ? GM_TRUE : GM_FALSE;
 }
 
 /// @func d3d11_rsbuffer_destroy(_rsbuffer)
@@ -123,7 +120,7 @@ GM_EXPORT ty_real d3d11_rsbuffer_exists(ty_real _rsbuffer)
 /// @param {Real} _rsbuffer The ID of the read-only structured buffer to destroy.
 GM_EXPORT ty_real d3d11_rsbuffer_destroy(ty_real _rsbuffer)
 {
-    delete RSBuffer::Get(static_cast<size_t>(_rsbuffer));
+    delete Trackable::Get<RSBuffer>(static_cast<size_t>(_rsbuffer));
     return GM_TRUE;
 }
 
@@ -136,7 +133,7 @@ GM_EXPORT ty_real d3d11_rsbuffer_destroy(ty_real _rsbuffer)
 /// @return {Real} The ID of the created SRV on success or -1 on fail.
 GM_EXPORT ty_real d3d11_rsbuffer_create_srv(ty_real _rsbuffer)
 {
-    if (SRV* srv = RSBuffer::Get(static_cast<size_t>(_rsbuffer))->CreateSRV())
+    if (SRV* srv = Trackable::Get<RSBuffer>(static_cast<size_t>(_rsbuffer))->CreateSRV())
     {
         return static_cast<ty_real>(srv->GetID());
     }

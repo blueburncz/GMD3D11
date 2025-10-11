@@ -1,6 +1,5 @@
-#include <GShader.hpp>
+#include <shaders/GShader.hpp>
 
-#include <Shader.hpp>
 #include <utils.hpp>
 
 #include <d3dcompiler.h>
@@ -119,7 +118,7 @@ GM_EXPORT ty_real d3d11_shader_load_gs(ty_string _file)
 /// @param {Real} _gs The ID of the shader or -1 to disable the geometry stage.
 GM_EXPORT ty_real d3d11_shader_set_gs(ty_real _gs)
 {
-    ID3D11GeometryShader* shader = (_gs >= 0.0) ? ((GShader*)Shader::Get(static_cast<size_t>(_gs)))->GetShader() : nullptr;
+    ID3D11GeometryShader* shader = (_gs >= 0.0) ? ((GShader*)Trackable::Get<Shader>(static_cast<size_t>(_gs)))->GetShader() : nullptr;
     g_Context->GSSetShader(shader, nullptr, 0);
     return GM_TRUE;
 }

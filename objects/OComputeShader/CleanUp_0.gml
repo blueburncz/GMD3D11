@@ -22,3 +22,8 @@ if (d3d11_uav_exists(uav))
 {
 	d3d11_uav_destroy(uav);
 }
+
+if (d3d11_stbuffer_exists(stagingBuffer))
+{
+	d3d11_stbuffer_destroy(stagingBuffer);
+}

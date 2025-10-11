@@ -1,7 +1,7 @@
 {
   "FolderOrderSettings":[
-    {"name":"GeometryShader","order":2,"path":"folders/Examples/GeometryShader.yy",},
     {"name":"ComputeShader","order":4,"path":"folders/Examples/ComputeShader.yy",},
+    {"name":"GeometryShader","order":2,"path":"folders/Examples/GeometryShader.yy",},
     {"name":"InstancedRendering","order":1,"path":"folders/Examples/InstancedRendering.yy",},
   ],
   "ResourceOrderSettings":[

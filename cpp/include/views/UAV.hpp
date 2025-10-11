@@ -6,7 +6,7 @@
 
 #include <d3d11.h>
 
-class UAV final : public Trackable<UAV>
+class UAV final : public Trackable
 {
 public:
     UAV(ID3D11UnorderedAccessView* uav);

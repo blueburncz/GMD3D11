@@ -1,9 +1,10 @@
-#include "SRV.hpp"
+#include <views/SRV.hpp>
 
 extern ID3D11DeviceContext* g_Context;
 
 SRV::SRV(ID3D11ShaderResourceView* srv)
-    : Raw(srv)
+    : Trackable()
+    , Raw(srv)
 {
 }
 
@@ -24,7 +25,7 @@ SRV::~SRV()
 /// @return {Bool} Returns true if the SRV exists.
 GM_EXPORT ty_real d3d11_srv_exists(ty_real _srv)
 {
-    return (_srv >= 0.0 && SRV::Exists(static_cast<size_t>(_srv))) ? GM_TRUE : GM_FALSE;
+    return (_srv >= 0.0 && Trackable::Exists<SRV>(static_cast<size_t>(_srv))) ? GM_TRUE : GM_FALSE;
 }
 
 /// @func d3d11_srv_destroy(_srv)
@@ -34,7 +35,7 @@ GM_EXPORT ty_real d3d11_srv_exists(ty_real _srv)
 /// @param {Real} _srv The ID of the SRV to destroy.
 GM_EXPORT ty_real d3d11_srv_destroy(ty_real _srv)
 {
-    delete SRV::Get(static_cast<size_t>(_srv));
+    delete Trackable::Get<SRV>(static_cast<size_t>(_srv));
     return GM_TRUE;
 }
 
@@ -48,7 +49,7 @@ GM_EXPORT ty_real d3d11_shader_set_srv_vs(ty_real _slot, ty_real _srv)
 {
     if (_srv >= 0.0)
     {
-        ID3D11ShaderResourceView* srv = SRV::Get(static_cast<size_t>(_srv))->GetSRV();
+        ID3D11ShaderResourceView* srv = Trackable::Get<SRV>(static_cast<size_t>(_srv))->GetSRV();
         g_Context->VSSetShaderResources(static_cast<UINT>(_slot), 1, &srv);
     }
     else
@@ -68,7 +69,7 @@ GM_EXPORT ty_real d3d11_shader_set_srv_gs(ty_real _slot, ty_real _srv)
 {
     if (_srv >= 0.0)
     {
-        ID3D11ShaderResourceView* srv = SRV::Get(static_cast<size_t>(_srv))->GetSRV();
+        ID3D11ShaderResourceView* srv = Trackable::Get<SRV>(static_cast<size_t>(_srv))->GetSRV();
         g_Context->GSSetShaderResources(static_cast<UINT>(_slot), 1, &srv);
     }
     else
@@ -88,7 +89,7 @@ GM_EXPORT ty_real d3d11_shader_set_srv_ps(ty_real _slot, ty_real _srv)
 {
     if (_srv >= 0.0)
     {
-        ID3D11ShaderResourceView* srv = SRV::Get(static_cast<size_t>(_srv))->GetSRV();
+        ID3D11ShaderResourceView* srv = Trackable::Get<SRV>(static_cast<size_t>(_srv))->GetSRV();
         g_Context->PSSetShaderResources(static_cast<UINT>(_slot), 1, &srv);
     }
     else
@@ -108,7 +109,7 @@ GM_EXPORT ty_real d3d11_shader_set_srv_cs(ty_real _slot, ty_real _srv)
 {
     if (_srv >= 0.0)
     {
-        ID3D11ShaderResourceView* srv = SRV::Get(static_cast<size_t>(_srv))->GetSRV();
+        ID3D11ShaderResourceView* srv = Trackable::Get<SRV>(static_cast<size_t>(_srv))->GetSRV();
         g_Context->CSSetShaderResources(static_cast<UINT>(_slot), 1, &srv);
     }
     else

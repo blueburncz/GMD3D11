@@ -2,7 +2,7 @@
 
 #include <common.hpp>
 
-#include <Shader.hpp>
+#include <shaders/Shader.hpp>
 
 /// @brief Geometry shader.
 class GShader final : public Shader

@@ -1,9 +1,10 @@
-#include "Uav.hpp"
+#include <views/UAV.hpp>
 
 extern ID3D11DeviceContext* g_Context;
 
 UAV::UAV(ID3D11UnorderedAccessView* uav)
-    : Raw(uav)
+    : Trackable()
+    , Raw(uav)
 {
 }
 
@@ -24,7 +25,7 @@ UAV::~UAV()
 /// @return {Bool} Returns true if the UAV exists.
 GM_EXPORT ty_real d3d11_uav_exists(ty_real _uav)
 {
-    return (_uav >= 0.0 && UAV::Exists(static_cast<size_t>(_uav))) ? GM_TRUE : GM_FALSE;
+    return (_uav >= 0.0 && Trackable::Exists<UAV>(static_cast<size_t>(_uav))) ? GM_TRUE : GM_FALSE;
 }
 
 /// @func d3d11_uav_destroy(_uav)
@@ -34,7 +35,7 @@ GM_EXPORT ty_real d3d11_uav_exists(ty_real _uav)
 /// @param {Real} _uav The ID of the UAV to destroy.
 GM_EXPORT ty_real d3d11_uav_destroy(ty_real _uav)
 {
-    delete UAV::Get(static_cast<size_t>(_uav));
+    delete Trackable::Get<UAV>(static_cast<size_t>(_uav));
     return GM_TRUE;
 }
 
@@ -48,7 +49,7 @@ GM_EXPORT ty_real d3d11_shader_set_uav_cs(ty_real _slot, ty_real _uav)
 {
     if (_uav >= 0.0)
     {
-        ID3D11UnorderedAccessView* uav = UAV::Get(static_cast<size_t>(_uav))->GetUAV();
+        ID3D11UnorderedAccessView* uav = Trackable::Get<UAV>(static_cast<size_t>(_uav))->GetUAV();
         g_Context->CSSetUnorderedAccessViews(static_cast<UINT>(_slot), 1, &uav, nullptr);
     }
     else

@@ -1,6 +1,5 @@
-#include <RWSBuffer.hpp>
+#include <buffers/RWSBuffer.hpp>
 
-#include <cstdint>
 #include <iostream>
 
 extern ID3D11Device* g_Device;
@@ -15,10 +14,6 @@ RWSBuffer::RWSBuffer(ID3D11Buffer* buffer, size_t stride, size_t numElements)
 
 RWSBuffer::~RWSBuffer()
 {
-    if (Buffer)
-    {
-        Buffer->Release();
-    }
 }
 
 SRV* RWSBuffer::CreateSRV() const
@@ -29,7 +24,7 @@ SRV* RWSBuffer::CreateSRV() const
     srvDesc.Buffer.NumElements = NumElements;
 
     ID3D11ShaderResourceView* srv = nullptr;
-    HRESULT hr = g_Device->CreateShaderResourceView(Buffer, &srvDesc, &srv);
+    HRESULT hr = g_Device->CreateShaderResourceView(Raw, &srvDesc, &srv);
 
     if (FAILED(hr))
     {
@@ -48,7 +43,7 @@ UAV* RWSBuffer::CreateUAV() const
     uavDesc.Buffer.NumElements = NumElements;
     
     ID3D11UnorderedAccessView* uav = nullptr;
-    HRESULT hr = g_Device->CreateUnorderedAccessView(Buffer, &uavDesc, &uav);
+    HRESULT hr = g_Device->CreateUnorderedAccessView(Raw, &uavDesc, &uav);
 
     if (FAILED(hr))
     {
@@ -99,10 +94,12 @@ GM_EXPORT ty_real d3d11_rwsbuffer_create(ty_real _stride, ty_real _numElements)
 ///
 /// @desc Retrieves size of a read-write structured buffer in bytes.
 ///
-/// @param {Real} _rwsbuffer The size of the read-write structured buffer in bytes.
+/// @param {Real} _rwsbuffer The ID of the read-write structured buffer.
+///
+/// @return {Real} The size of the read-write structured buffer in bytes.
 GM_EXPORT ty_real d3d11_rwsbuffer_get_size(ty_real _rwsbuffer)
 {
-    return RWSBuffer::Get(static_cast<size_t>(_rwsbuffer))->GetSize();
+    return Trackable::Get<RWSBuffer>(static_cast<size_t>(_rwsbuffer))->GetSize();
 }
 
 /// @func d3d11_rwsbuffer_write_data(_rwsbuffer, _data)
@@ -114,7 +111,7 @@ GM_EXPORT ty_real d3d11_rwsbuffer_get_size(ty_real _rwsbuffer)
 GM_EXPORT ty_real d3d11_rwsbuffer_write_data(ty_real _rwsbuffer, ty_string _data)
 {
     g_Context->UpdateSubresource(
-        RWSBuffer::Get(static_cast<size_t>(_rwsbuffer))->GetBuffer(),
+        Trackable::Get<RWSBuffer>(static_cast<size_t>(_rwsbuffer))->GetBuffer(),
         0,
         nullptr,
         (void*)_data,
@@ -132,7 +129,7 @@ GM_EXPORT ty_real d3d11_rwsbuffer_write_data(ty_real _rwsbuffer, ty_string _data
 /// @return {Bool} Returns true if the read-write structured buffer exists.
 GM_EXPORT ty_real d3d11_rwsbuffer_exists(ty_real _rwsbuffer)
 {
-    return (_rwsbuffer >= 0.0 && RWSBuffer::Exists(static_cast<size_t>(_rwsbuffer))) ? GM_TRUE : GM_FALSE;
+    return (_rwsbuffer >= 0.0 && Trackable::Exists<RWSBuffer>(static_cast<size_t>(_rwsbuffer))) ? GM_TRUE : GM_FALSE;
 }
 
 /// @func d3d11_rwsbuffer_destroy(_rwsbuffer)
@@ -142,7 +139,7 @@ GM_EXPORT ty_real d3d11_rwsbuffer_exists(ty_real _rwsbuffer)
 /// @param {Real} _rwsbuffer The ID of the read-write structured buffer to destroy.
 GM_EXPORT ty_real d3d11_rwsbuffer_destroy(ty_real _rwsbuffer)
 {
-    delete RWSBuffer::Get(static_cast<size_t>(_rwsbuffer));
+    delete Trackable::Get<RWSBuffer>(static_cast<size_t>(_rwsbuffer));
     return GM_TRUE;
 }
 
@@ -155,7 +152,7 @@ GM_EXPORT ty_real d3d11_rwsbuffer_destroy(ty_real _rwsbuffer)
 /// @return {Real} The ID of the created SRV on success or -1 on fail.
 GM_EXPORT ty_real d3d11_rwsbuffer_create_srv(ty_real _rwsbuffer)
 {
-    if (SRV* srv = RWSBuffer::Get(static_cast<size_t>(_rwsbuffer))->CreateSRV())
+    if (SRV* srv = Trackable::Get<RWSBuffer>(static_cast<size_t>(_rwsbuffer))->CreateSRV())
     {
         return static_cast<ty_real>(srv->GetID());
     }
@@ -171,7 +168,7 @@ GM_EXPORT ty_real d3d11_rwsbuffer_create_srv(ty_real _rwsbuffer)
 /// @return {Real} The ID of the created UAV on success or -1 on fail.
 GM_EXPORT ty_real d3d11_rwsbuffer_create_uav(ty_real _rwsbuffer)
 {
-    if (UAV* uav = RWSBuffer::Get(static_cast<size_t>(_rwsbuffer))->CreateUAV())
+    if (UAV* uav = Trackable::Get<RWSBuffer>(static_cast<size_t>(_rwsbuffer))->CreateUAV())
     {
         return static_cast<ty_real>(uav->GetID());
     }
