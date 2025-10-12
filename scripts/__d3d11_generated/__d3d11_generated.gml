@@ -107,7 +107,7 @@ function d3d11_draw_instanced(_count)
 ///
 /// @param {Real} _type The type to get the byte-size of.
 ///
-/// @return {Real} The size of given type or -1 if the type is not valid.
+/// @return {Real} The size of given type or 0 if the type is not valid.
 ///
 /// @see D3D11_BOOL
 /// @see D3D11_INT
@@ -139,7 +139,7 @@ function d3d11_sizeof(_type)
 /// @param {Real} _type The type to get the byte size of.
 /// @param {Real} _alignment The required aligned byte size.
 ///
-/// @return {Real} The aligned byte size of given type or -1 if the type is not valid.
+/// @return {Real} The aligned byte size of given type or 0 if the type is not valid.
 ///
 /// @see D3D11_BOOL
 /// @see D3D11_INT
@@ -186,7 +186,7 @@ function d3d11_buffer_copy(_src, _dest)
 /// @param {Real} _stride The stride of a single element, in bytes.
 /// @param {Real} _numElements The number of elements in the buffer.
 ///
-/// @return {Real} The ID of the created compute buffer or -1 on fail.
+/// @return {Real} The ID of the created compute buffer or {@link GMD3D11_ID_INVALID} on fail.
 function d3d11_compute_buffer_create(_stride, _numElements)
 {
 	gml_pragma("forceinline");
@@ -263,7 +263,7 @@ function d3d11_compute_buffer_destroy(_id)
 ///
 /// @param {Real} _id The ID of the compute buffer.
 ///
-/// @return {Real} The ID of the created SRV on success or -1 on fail.
+/// @return {Real} The ID of the created SRV on success or {@link GMD3D11_ID_INVALID} on fail.
 function d3d11_compute_buffer_create_srv(_id)
 {
 	gml_pragma("forceinline");
@@ -279,7 +279,7 @@ function d3d11_compute_buffer_create_srv(_id)
 ///
 /// @param {Real} _id The ID of the compute buffer.
 ///
-/// @return {Real} The ID of the created UAV on success or -1 on fail.
+/// @return {Real} The ID of the created UAV on success or {@link GMD3D11_ID_INVALID} on fail.
 function d3d11_compute_buffer_create_uav(_id)
 {
 	gml_pragma("forceinline");
@@ -295,7 +295,7 @@ function d3d11_compute_buffer_create_uav(_id)
 ///
 /// @param {Real} _size The size of the buffer, in bytes. Must be a multiple of 16!
 ///
-/// @return {Real} The ID of the created constant buffer or -1 on fail.
+/// @return {Real} The ID of the created constant buffer or {@link GMD3D11_ID_INVALID} on fail.
 function d3d11_constant_buffer_create(_size)
 {
 	gml_pragma("forceinline");
@@ -341,7 +341,7 @@ function d3d11_constant_buffer_write_data(_id, _data)
 /// @desc Binds a constant buffer to a vertex shader.
 ///
 /// @param {Real} _slot The slot to bind the constant buffer to.
-/// @param {Real} _id The ID of the constant buffer or -1 to unbind the slot.
+/// @param {Real} _id The ID of the constant buffer or {@link GMD3D11_ID_INVALID} to unbind the slot.
 function d3d11_shader_set_constant_buffer_vs(_slot, _id)
 {
 	gml_pragma("forceinline");
@@ -356,7 +356,7 @@ function d3d11_shader_set_constant_buffer_vs(_slot, _id)
 /// @desc Binds a constant buffer to a geometry shader.
 ///
 /// @param {Real} _slot The slot to bind the constant buffer to.
-/// @param {Real} _id The ID of the constant buffer or -1 to unbind the slot.
+/// @param {Real} _id The ID of the constant buffer or {@link GMD3D11_ID_INVALID} to unbind the slot.
 function d3d11_shader_set_constant_buffer_gs(_slot, _id)
 {
 	gml_pragma("forceinline");
@@ -371,7 +371,7 @@ function d3d11_shader_set_constant_buffer_gs(_slot, _id)
 /// @desc Binds a constant buffer to a pixel shader.
 ///
 /// @param {Real} _slot The slot to bind the constant buffer to.
-/// @param {Real} _id The ID of the constant buffer or -1 to unbind the slot.
+/// @param {Real} _id The ID of the constant buffer or {@link GMD3D11_ID_INVALID} to unbind the slot.
 function d3d11_shader_set_constant_buffer_ps(_slot, _id)
 {
 	gml_pragma("forceinline");
@@ -418,7 +418,7 @@ function d3d11_constant_buffer_destroy(_id)
 /// @param {Real} _stride The stride of a single element, in bytes.
 /// @param {Real} _numElements The number of elements in the buffer.
 ///
-/// @return {Real} The ID of the created staging buffer or -1 on fail.
+/// @return {Real} The ID of the created staging buffer or {@link GMD3D11_ID_INVALID} on fail.
 function d3d11_readback_buffer_create(_stride, _numElements)
 {
 	gml_pragma("forceinline");
@@ -546,7 +546,7 @@ function d3d11_readback_buffer_destroy(_id)
 /// @param {Real} _stride The stride of a single element, in bytes.
 /// @param {Real} _numElements The number of elements in the buffer.
 ///
-/// @return {Real} The ID of the created structured buffer or -1 on fail.
+/// @return {Real} The ID of the created structured buffer or {@link GMD3D11_ID_INVALID} on fail.
 function d3d11_structured_buffer_create(_stride, _numElements)
 {
 	gml_pragma("forceinline");
@@ -623,7 +623,7 @@ function d3d11_structured_buffer_destroy(_id)
 ///
 /// @param {Real} _id The ID of the structured buffer.
 ///
-/// @return {Real} The ID of the created SRV on success or -1 on fail.
+/// @return {Real} The ID of the created SRV on success or {@link GMD3D11_ID_INVALID} on fail.
 function d3d11_structured_buffer_create_srv(_id)
 {
 	gml_pragma("forceinline");
@@ -641,7 +641,7 @@ function d3d11_structured_buffer_create_srv(_id)
 /// @param {String} _entryPoint The name of the entry point function, e.g. "main".
 /// @param {String} _profile The compute shader profile, e.g. "cs_5_0".
 ///
-/// @return {Real} The ID of the compute shader or -1 on fail.
+/// @return {Real} The ID of the compute shader or {@link GMD3D11_ID_INVALID} on fail.
 function d3d11_shader_compile_cs(_file, _entryPoint, _profile)
 {
 	gml_pragma("forceinline");
@@ -657,7 +657,7 @@ function d3d11_shader_compile_cs(_file, _entryPoint, _profile)
 ///
 /// @param {String} _file The path to the compiled compute shader.
 ///
-/// @return {Real} The ID of the compute shader or -1 on fail.
+/// @return {Real} The ID of the compute shader pr {@link GMD3D11_ID_INVALID} on fail.
 function d3d11_shader_load_cs(_file)
 {
 	gml_pragma("forceinline");
@@ -671,7 +671,7 @@ function d3d11_shader_load_cs(_file)
 ///
 /// @desc Changes the current compute shader.
 ///
-/// @param {Real} _cs The ID of the shader or -1 to disable the compute stage.
+/// @param {Real} _cs The ID of the shader or {@link GMD3D11_ID_INVALID} to disable the compute stage.
 function d3d11_shader_set_cs(_gs)
 {
 	gml_pragma("forceinline");
@@ -723,7 +723,7 @@ function d3d11_compute_dispatch_indirect(_buffer, _offset)
 /// @param {String} _entryPoint The name of the entry point function, e.g. "main".
 /// @param {String} _profile The geometry shader profile, e.g. "gs_4_0".
 ///
-/// @return {Real} The ID of the geometry shader or -1 on fail.
+/// @return {Real} The ID of the geometry shader pr {@link GMD3D11_ID_INVALID} on fail.
 function d3d11_shader_compile_gs(_file, _entryPoint, _profile)
 {
 	gml_pragma("forceinline");
@@ -739,7 +739,7 @@ function d3d11_shader_compile_gs(_file, _entryPoint, _profile)
 ///
 /// @param {String} _file The path to the compiled geometry shader.
 ///
-/// @return {Real} The ID of the geometry shader or -1 on fail.
+/// @return {Real} The ID of the geometry shader pr {@link GMD3D11_ID_INVALID} on fail.
 function d3d11_shader_load_gs(_file)
 {
 	gml_pragma("forceinline");
@@ -753,7 +753,7 @@ function d3d11_shader_load_gs(_file)
 ///
 /// @desc Changes the current geometry shader.
 ///
-/// @param {Real} _gs The ID of the shader or -1 to disable the geometry stage.
+/// @param {Real} _gs The ID of the shader or {@link GMD3D11_ID_INVALID} to disable the geometry stage.
 function d3d11_shader_set_gs(_gs)
 {
 	gml_pragma("forceinline");
@@ -771,7 +771,7 @@ function d3d11_shader_set_gs(_gs)
 /// @param {String} _entryPoint The name of the entry point function, e.g. "main".
 /// @param {String} _profile The pixel shader profile, e.g. "ps_4_0".
 ///
-/// @return {Real} The ID of the pixel shader or -1 on fail.
+/// @return {Real} The ID of the pixel shader pr {@link GMD3D11_ID_INVALID} on fail.
 function d3d11_shader_compile_ps(_file, _entryPoint, _profile)
 {
 	gml_pragma("forceinline");
@@ -787,7 +787,7 @@ function d3d11_shader_compile_ps(_file, _entryPoint, _profile)
 ///
 /// @param {String} _file The path to the compiled pixel shader.
 ///
-/// @return {Real} The ID of the pixel shader or -1 on fail.
+/// @return {Real} The ID of the pixel shader pr {@link GMD3D11_ID_INVALID} on fail.
 function d3d11_shader_load_ps(_file)
 {
 	gml_pragma("forceinline");
@@ -801,7 +801,7 @@ function d3d11_shader_load_ps(_file)
 ///
 /// @desc Hooks into `ID3D11DeviceContext::Draw` and replaces the current pixel shader with a custom one.
 ///
-/// @param {Real} _ps The ID of the shader or -1 to disable the override.
+/// @param {Real} _ps The ID of the shader or {@link GMD3D11_ID_INVALID} to disable the override.
 function d3d11_shader_override_ps(_ps)
 {
 	gml_pragma("forceinline");
@@ -866,7 +866,7 @@ function d3d11_shader_save(_shader, _filePath)
 /// @param {String} _entryPoint The name of the entry point function, e.g. "main".
 /// @param {String} _profile The vertex shader profile, e.g. "vs_4_0".
 ///
-/// @return {Real} The ID of the vertex shader or -1 on fail.
+/// @return {Real} The ID of the vertex shader pr {@link GMD3D11_ID_INVALID} on fail.
 function d3d11_shader_compile_vs(_file, _entryPoint, _profile)
 {
 	gml_pragma("forceinline");
@@ -882,7 +882,7 @@ function d3d11_shader_compile_vs(_file, _entryPoint, _profile)
 ///
 /// @param {String} _file The path to the compiled vertex shader.
 ///
-/// @return {Real} The ID of the vertex shader or -1 on fail.
+/// @return {Real} The ID of the vertex shader pr {@link GMD3D11_ID_INVALID} on fail.
 function d3d11_shader_load_vs(_file)
 {
 	gml_pragma("forceinline");
@@ -896,8 +896,8 @@ function d3d11_shader_load_vs(_file)
 ///
 /// @desc Hooks into `ID3D11DeviceContext::Draw` and replaces the current vertex shader with a custom one.
 ///
-/// @param {Real} _vs The ID of the shader or -1 to disable the override. The vertex format expected by the shader must
-/// be compatible with the overriden shader!
+/// @param {Real} _vs The ID of the shader or {@link GMD3D11_ID_INVALID} to disable the override. The vertex format
+/// expected by the shader must be compatible with the overriden shader!
 function d3d11_shader_override_vs(_vs)
 {
 	gml_pragma("forceinline");
@@ -942,7 +942,7 @@ function d3d11_srv_destroy(_srv)
 /// @desc Binds a shader resource view (SRV) to a vertex shader.
 ///
 /// @param {Real} _slot The slot to bind the SRV to.
-/// @param {Real} _srv The ID of the SRV or -1 to unbind the slot.
+/// @param {Real} _srv The ID of the SRV or {@link GMD3D11_ID_INVALID} to unbind the slot.
 function d3d11_shader_set_srv_vs(_slot, _srv)
 {
 	gml_pragma("forceinline");
@@ -957,7 +957,7 @@ function d3d11_shader_set_srv_vs(_slot, _srv)
 /// @desc Binds a shader resource view (SRV) to a geometry shader.
 ///
 /// @param {Real} _slot The slot to bind the SRV to.
-/// @param {Real} _srv The ID of the SRV or -1 to unbind the slot.
+/// @param {Real} _srv The ID of the SRV or {@link GMD3D11_ID_INVALID} to unbind the slot.
 function d3d11_shader_set_srv_gs(_slot, _srv)
 {
 	gml_pragma("forceinline");
@@ -972,7 +972,7 @@ function d3d11_shader_set_srv_gs(_slot, _srv)
 /// @desc Binds a shader resource view (SRV) to a pixel shader.
 ///
 /// @param {Real} _slot The slot to bind the SRV to.
-/// @param {Real} _srv The ID of the SRV or -1 to unbind the slot.
+/// @param {Real} _srv The ID of the SRV or {@link GMD3D11_ID_INVALID} to unbind the slot.
 function d3d11_shader_set_srv_ps(_slot, _srv)
 {
 	gml_pragma("forceinline");
@@ -987,7 +987,7 @@ function d3d11_shader_set_srv_ps(_slot, _srv)
 /// @desc Binds a shader resource view (SRV) to a compute shader.
 ///
 /// @param {Real} _slot The slot to bind the SRV to.
-/// @param {Real} _srv The ID of the SRV or -1 to unbind the slot.
+/// @param {Real} _srv The ID of the SRV or {@link GMD3D11_ID_INVALID} to unbind the slot.
 function d3d11_shader_set_srv_cs(_slot, _srv)
 {
 	gml_pragma("forceinline");
@@ -1032,7 +1032,7 @@ function d3d11_uav_destroy(_uav)
 /// @desc Binds an unordered access view (UAV) to a compute shader.
 ///
 /// @param {Real} _slot The slot to bind the UAV to.
-/// @param {Real} _uav The ID of the UAV or -1 to unbind the slot.
+/// @param {Real} _uav The ID of the UAV or {@link GMD3D11_ID_INVALID} to unbind the slot.
 function d3d11_shader_set_uav_cs(_slot, _uav)
 {
 	gml_pragma("forceinline");

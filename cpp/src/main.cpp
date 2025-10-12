@@ -199,7 +199,7 @@ enum class EType : uint32_t
 ///
 /// @param {Real} _type The type to get the byte-size of.
 ///
-/// @return {Real} The size of given type or -1 if the type is not valid.
+/// @return {Real} The size of given type or 0 if the type is not valid.
 ///
 /// @see D3D11_BOOL
 /// @see D3D11_INT
@@ -219,7 +219,7 @@ GM_EXPORT ty_real d3d11_sizeof(ty_real _type)
 {
     if (_type < 0.0 || _type >= static_cast<ty_real>(EType::SIZE))
     {
-        return -1.0;
+        return 0.0;
     }
 
     switch (static_cast<EType>(_type))
@@ -267,7 +267,7 @@ GM_EXPORT ty_real d3d11_sizeof(ty_real _type)
         return sizeof(DirectX::XMFLOAT4X4);
 
     default:
-        return -1.0;
+        return 0.0;
     }
 }
 
@@ -278,7 +278,7 @@ GM_EXPORT ty_real d3d11_sizeof(ty_real _type)
 /// @param {Real} _type The type to get the byte size of.
 /// @param {Real} _alignment The required aligned byte size.
 ///
-/// @return {Real} The aligned byte size of given type or -1 if the type is not valid.
+/// @return {Real} The aligned byte size of given type or 0 if the type is not valid.
 ///
 /// @see D3D11_BOOL
 /// @see D3D11_INT
@@ -298,7 +298,7 @@ GM_EXPORT ty_real d3d11_sizeof_aligned(ty_real _type, ty_real _alignment)
 {
     if (_type < 0.0 || _type >= static_cast<ty_real>(EType::SIZE))
     {
-        return -1.0;
+        return 0.0;
     }
     return static_cast<ty_real>(RoundUp(static_cast<size_t>(d3d11_sizeof(_type)), static_cast<size_t>(_alignment)));
 }

@@ -45,12 +45,12 @@ bool ReadbackBuffer::Unmap()
 /// @param {Real} _stride The stride of a single element, in bytes.
 /// @param {Real} _numElements The number of elements in the buffer.
 ///
-/// @return {Real} The ID of the created staging buffer or -1 on fail.
+/// @return {Real} The ID of the created staging buffer or {@link GMD3D11_ID_INVALID} on fail.
 GM_EXPORT ty_real d3d11_readback_buffer_create(ty_real _stride, ty_real _numElements)
 {
     if (_stride <= 0.0 || _numElements <= 0.0)
     {
-        return -1.0;
+        return GMD3D11_ID_INVALID;
     }
 
     UINT size = static_cast<UINT>(_stride) * static_cast<UINT>(_numElements);
@@ -68,7 +68,7 @@ GM_EXPORT ty_real d3d11_readback_buffer_create(ty_real _stride, ty_real _numElem
     if (FAILED(hr))
     {
         std::cout << "Failed to create a staging buffer!" << std::endl;
-        return -1.0;
+        return GMD3D11_ID_INVALID;
     }
 
     return static_cast<ty_real>((new ReadbackBuffer(buffer, static_cast<size_t>(_stride), static_cast<size_t>(_numElements)))->GetID());
@@ -150,7 +150,7 @@ GM_EXPORT ty_real d3d11_readback_buffer_unmap(ty_real _id)
 /// @return {Bool} Returns `true` if the staging buffer exists.
 GM_EXPORT ty_real d3d11_readback_buffer_exists(ty_real _id)
 {
-    return (_id >= 0.0 && Trackable::Exists<ReadbackBuffer>(static_cast<size_t>(_id))) ? GM_TRUE : GM_FALSE;
+    return (_id != GMD3D11_ID_INVALID && Trackable::Exists<ReadbackBuffer>(static_cast<size_t>(_id))) ? GM_TRUE : GM_FALSE;
 }
 
 /// @func d3d11_readback_buffer_destroy(_id)

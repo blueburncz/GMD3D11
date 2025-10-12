@@ -25,7 +25,7 @@ SRV::~SRV()
 /// @return {Bool} Returns `true` if the SRV exists.
 GM_EXPORT ty_real d3d11_srv_exists(ty_real _srv)
 {
-    return (_srv >= 0.0 && Trackable::Exists<SRV>(static_cast<size_t>(_srv))) ? GM_TRUE : GM_FALSE;
+    return (_srv != GMD3D11_ID_INVALID && Trackable::Exists<SRV>(static_cast<size_t>(_srv))) ? GM_TRUE : GM_FALSE;
 }
 
 /// @func d3d11_srv_destroy(_srv)
@@ -44,10 +44,10 @@ GM_EXPORT ty_real d3d11_srv_destroy(ty_real _srv)
 /// @desc Binds a shader resource view (SRV) to a vertex shader.
 ///
 /// @param {Real} _slot The slot to bind the SRV to.
-/// @param {Real} _srv The ID of the SRV or -1 to unbind the slot.
+/// @param {Real} _srv The ID of the SRV or {@link GMD3D11_ID_INVALID} to unbind the slot.
 GM_EXPORT ty_real d3d11_shader_set_srv_vs(ty_real _slot, ty_real _srv)
 {
-    if (_srv >= 0.0)
+    if (_srv != GMD3D11_ID_INVALID)
     {
         ID3D11ShaderResourceView* srv = Trackable::Get<SRV>(static_cast<size_t>(_srv))->GetSRV();
         g_Context->VSSetShaderResources(static_cast<UINT>(_slot), 1, &srv);
@@ -64,10 +64,10 @@ GM_EXPORT ty_real d3d11_shader_set_srv_vs(ty_real _slot, ty_real _srv)
 /// @desc Binds a shader resource view (SRV) to a geometry shader.
 ///
 /// @param {Real} _slot The slot to bind the SRV to.
-/// @param {Real} _srv The ID of the SRV or -1 to unbind the slot.
+/// @param {Real} _srv The ID of the SRV or {@link GMD3D11_ID_INVALID} to unbind the slot.
 GM_EXPORT ty_real d3d11_shader_set_srv_gs(ty_real _slot, ty_real _srv)
 {
-    if (_srv >= 0.0)
+    if (_srv != GMD3D11_ID_INVALID)
     {
         ID3D11ShaderResourceView* srv = Trackable::Get<SRV>(static_cast<size_t>(_srv))->GetSRV();
         g_Context->GSSetShaderResources(static_cast<UINT>(_slot), 1, &srv);
@@ -84,10 +84,10 @@ GM_EXPORT ty_real d3d11_shader_set_srv_gs(ty_real _slot, ty_real _srv)
 /// @desc Binds a shader resource view (SRV) to a pixel shader.
 ///
 /// @param {Real} _slot The slot to bind the SRV to.
-/// @param {Real} _srv The ID of the SRV or -1 to unbind the slot.
+/// @param {Real} _srv The ID of the SRV or {@link GMD3D11_ID_INVALID} to unbind the slot.
 GM_EXPORT ty_real d3d11_shader_set_srv_ps(ty_real _slot, ty_real _srv)
 {
-    if (_srv >= 0.0)
+    if (_srv != GMD3D11_ID_INVALID)
     {
         ID3D11ShaderResourceView* srv = Trackable::Get<SRV>(static_cast<size_t>(_srv))->GetSRV();
         g_Context->PSSetShaderResources(static_cast<UINT>(_slot), 1, &srv);
@@ -104,10 +104,10 @@ GM_EXPORT ty_real d3d11_shader_set_srv_ps(ty_real _slot, ty_real _srv)
 /// @desc Binds a shader resource view (SRV) to a compute shader.
 ///
 /// @param {Real} _slot The slot to bind the SRV to.
-/// @param {Real} _srv The ID of the SRV or -1 to unbind the slot.
+/// @param {Real} _srv The ID of the SRV or {@link GMD3D11_ID_INVALID} to unbind the slot.
 GM_EXPORT ty_real d3d11_shader_set_srv_cs(ty_real _slot, ty_real _srv)
 {
-    if (_srv >= 0.0)
+    if (_srv != GMD3D11_ID_INVALID)
     {
         ID3D11ShaderResourceView* srv = Trackable::Get<SRV>(static_cast<size_t>(_srv))->GetSRV();
         g_Context->CSSetShaderResources(static_cast<UINT>(_slot), 1, &srv);

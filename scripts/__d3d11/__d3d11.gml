@@ -4,6 +4,9 @@
 /// @macro {Bool} Expands to `true` if GMD3D11 is supported on the current platform.
 #macro GMD3D11_IS_SUPPORTED (os_type == os_windows && os_browser == browser_not_a_browser)
 
+/// @macro {Real} An invalid/null resource ID.
+#macro GMD3D11_ID_INVALID -1
+
 /// @macro {Real} Maximum number of slots for shader resources.
 #macro D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT 128
 

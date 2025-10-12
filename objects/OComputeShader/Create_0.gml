@@ -31,9 +31,9 @@ d3d11_shader_set_cs(cs);
 d3d11_shader_set_srv_cs(0, srv);
 d3d11_shader_set_uav_cs(0, uav);
 d3d11_compute_dispatch(_numGroups, 1, 1);
-d3d11_shader_set_srv_cs(0, -1);
-d3d11_shader_set_uav_cs(0, -1);
-d3d11_shader_set_cs(-1);
+d3d11_shader_set_srv_cs(0, GMD3D11_ID_INVALID);
+d3d11_shader_set_uav_cs(0, GMD3D11_ID_INVALID);
+d3d11_shader_set_cs(GMD3D11_ID_INVALID);
 
 d3d11_buffer_copy(bufferOut, stagingBuffer);
 assert(d3d11_readback_buffer_map(stagingBuffer), $"Failed to map stagingBuffer! {d3d11_get_error_string()}");

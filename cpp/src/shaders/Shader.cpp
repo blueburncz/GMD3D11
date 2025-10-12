@@ -120,7 +120,7 @@ HRESULT CompileShader(_In_ LPCWSTR srcFile, _In_ LPCSTR entryPoint, _In_ LPCSTR 
 /// @return {Bool} Returns `true` if the shader exists.
 GM_EXPORT ty_real d3d11_shader_exists(ty_real _shader)
 {
-    return (_shader >= 0.0 && Trackable::Exists<Shader>(static_cast<size_t>(_shader))) ? GM_TRUE : GM_FALSE;
+    return (_shader != GMD3D11_ID_INVALID && Trackable::Exists<Shader>(static_cast<size_t>(_shader))) ? GM_TRUE : GM_FALSE;
 }
 
 /// @func d3d11_shader_destroy(_shader)

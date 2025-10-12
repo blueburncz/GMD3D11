@@ -59,13 +59,13 @@ static ComputeShader* CompileCS(char* file, char* entryPoint, char* profile)
 /// @param {String} _entryPoint The name of the entry point function, e.g. "main".
 /// @param {String} _profile The compute shader profile, e.g. "cs_5_0".
 ///
-/// @return {Real} The ID of the compute shader or -1 on fail.
+/// @return {Real} The ID of the compute shader or {@link GMD3D11_ID_INVALID} on fail.
 GM_EXPORT ty_real d3d11_shader_compile_cs(ty_string _file, ty_string _entryPoint, ty_string _profile)
 {
     ComputeShader* shader = CompileCS(_file, _entryPoint, _profile);
     if (!shader)
     {
-        return -1.0;
+        return GMD3D11_ID_INVALID;
     }
     return static_cast<ty_real>(shader->GetID());
 }
@@ -76,14 +76,14 @@ GM_EXPORT ty_real d3d11_shader_compile_cs(ty_string _file, ty_string _entryPoint
 ///
 /// @param {String} _file The path to the compiled compute shader.
 ///
-/// @return {Real} The ID of the compute shader or -1 on fail.
+/// @return {Real} The ID of the compute shader pr {@link GMD3D11_ID_INVALID} on fail.
 GM_EXPORT ty_real d3d11_shader_load_cs(ty_string _file)
 {
     std::vector<char> bytecode = Shader::LoadBlob(_file);
     if (bytecode.empty())
     {
         std::cout << "Failed loading CS " << _file << "!" << std::endl;
-        return -1.0;
+        return GMD3D11_ID_INVALID;
     }
 
     ID3D11ComputeShader* cs = nullptr;
@@ -92,7 +92,7 @@ GM_EXPORT ty_real d3d11_shader_load_cs(ty_string _file)
     if (FAILED(hr))
     {
         std::cout << "Failed creating loaded CS " << _file << "!" << std::endl;
-        return -1.0;
+        return GMD3D11_ID_INVALID;
     }
 
     ID3DBlob* blob = nullptr;
@@ -102,7 +102,7 @@ GM_EXPORT ty_real d3d11_shader_load_cs(ty_string _file)
     {
         std::cout << "Failed creating blob for loaded CS " << _file << "!" << std::endl;
         cs->Release();
-        return -1.0;
+        return GMD3D11_ID_INVALID;
     }
 
     memcpy(blob->GetBufferPointer(), bytecode.data(), bytecode.size());
@@ -116,10 +116,10 @@ GM_EXPORT ty_real d3d11_shader_load_cs(ty_string _file)
 ///
 /// @desc Changes the current compute shader.
 ///
-/// @param {Real} _cs The ID of the shader or -1 to disable the compute stage.
+/// @param {Real} _cs The ID of the shader or {@link GMD3D11_ID_INVALID} to disable the compute stage.
 GM_EXPORT ty_real d3d11_shader_set_cs(ty_real _gs)
 {
-    ID3D11ComputeShader* shader = (_gs >= 0.0) ? ((ComputeShader*)Trackable::Get<Shader>(static_cast<size_t>(_gs)))->GetShader() : nullptr;
+    ID3D11ComputeShader* shader = (_gs != GMD3D11_ID_INVALID) ? ((ComputeShader*)Trackable::Get<Shader>(static_cast<size_t>(_gs)))->GetShader() : nullptr;
     g_Context->CSSetShader(shader, nullptr, 0);
     return GM_TRUE;
 }

@@ -58,15 +58,14 @@ static GeometryShader* CompileGS(char* file, char* entryPoint, char* profile)
 /// @param {String} _entryPoint The name of the entry point function, e.g. "main".
 /// @param {String} _profile The geometry shader profile, e.g. "gs_4_0".
 ///
-/// @return {Real} The ID of the geometry shader or -1 on fail.
+/// @return {Real} The ID of the geometry shader pr {@link GMD3D11_ID_INVALID} on fail.
 GM_EXPORT ty_real d3d11_shader_compile_gs(ty_string _file, ty_string _entryPoint, ty_string _profile)
 {
-    GeometryShader* shader = CompileGS(_file, _entryPoint, _profile);
-    if (!shader)
+    if (GeometryShader* shader = CompileGS(_file, _entryPoint, _profile))
     {
-        return -1.0;
+        return static_cast<ty_real>(shader->GetID());
     }
-    return static_cast<ty_real>(shader->GetID());
+    return GMD3D11_ID_INVALID;
 }
 
 /// @func d3d11_shader_load_gs(_file)
@@ -75,14 +74,14 @@ GM_EXPORT ty_real d3d11_shader_compile_gs(ty_string _file, ty_string _entryPoint
 ///
 /// @param {String} _file The path to the compiled geometry shader.
 ///
-/// @return {Real} The ID of the geometry shader or -1 on fail.
+/// @return {Real} The ID of the geometry shader pr {@link GMD3D11_ID_INVALID} on fail.
 GM_EXPORT ty_real d3d11_shader_load_gs(ty_string _file)
 {
     std::vector<char> bytecode = Shader::LoadBlob(_file);
     if (bytecode.empty())
     {
         std::cout << "Failed loading GS " << _file << "!" << std::endl;
-        return -1.0;
+        return GMD3D11_ID_INVALID;
     }
 
     ID3D11GeometryShader* gs = nullptr;
@@ -91,7 +90,7 @@ GM_EXPORT ty_real d3d11_shader_load_gs(ty_string _file)
     if (FAILED(hr))
     {
         std::cout << "Failed creating loaded GS " << _file << "!" << std::endl;
-        return -1.0;
+        return GMD3D11_ID_INVALID;
     }
 
     ID3DBlob* blob = nullptr;
@@ -101,7 +100,7 @@ GM_EXPORT ty_real d3d11_shader_load_gs(ty_string _file)
     {
         std::cout << "Failed creating blob for loaded GS " << _file << "!" << std::endl;
         gs->Release();
-        return -1.0;
+        return GMD3D11_ID_INVALID;
     }
 
     memcpy(blob->GetBufferPointer(), bytecode.data(), bytecode.size());
@@ -115,10 +114,10 @@ GM_EXPORT ty_real d3d11_shader_load_gs(ty_string _file)
 ///
 /// @desc Changes the current geometry shader.
 ///
-/// @param {Real} _gs The ID of the shader or -1 to disable the geometry stage.
+/// @param {Real} _gs The ID of the shader or {@link GMD3D11_ID_INVALID} to disable the geometry stage.
 GM_EXPORT ty_real d3d11_shader_set_gs(ty_real _gs)
 {
-    ID3D11GeometryShader* shader = (_gs >= 0.0) ? ((GeometryShader*)Trackable::Get<Shader>(static_cast<size_t>(_gs)))->GetShader() : nullptr;
+    ID3D11GeometryShader* shader = (_gs != GMD3D11_ID_INVALID) ? ((GeometryShader*)Trackable::Get<Shader>(static_cast<size_t>(_gs)))->GetShader() : nullptr;
     g_Context->GSSetShader(shader, nullptr, 0);
     return GM_TRUE;
 }

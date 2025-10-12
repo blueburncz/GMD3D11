@@ -25,7 +25,7 @@ UAV::~UAV()
 /// @return {Bool} Returns `true` if the UAV exists.
 GM_EXPORT ty_real d3d11_uav_exists(ty_real _uav)
 {
-    return (_uav >= 0.0 && Trackable::Exists<UAV>(static_cast<size_t>(_uav))) ? GM_TRUE : GM_FALSE;
+    return (_uav != GMD3D11_ID_INVALID && Trackable::Exists<UAV>(static_cast<size_t>(_uav))) ? GM_TRUE : GM_FALSE;
 }
 
 /// @func d3d11_uav_destroy(_uav)
@@ -44,10 +44,10 @@ GM_EXPORT ty_real d3d11_uav_destroy(ty_real _uav)
 /// @desc Binds an unordered access view (UAV) to a compute shader.
 ///
 /// @param {Real} _slot The slot to bind the UAV to.
-/// @param {Real} _uav The ID of the UAV or -1 to unbind the slot.
+/// @param {Real} _uav The ID of the UAV or {@link GMD3D11_ID_INVALID} to unbind the slot.
 GM_EXPORT ty_real d3d11_shader_set_uav_cs(ty_real _slot, ty_real _uav)
 {
-    if (_uav >= 0.0)
+    if (_uav != GMD3D11_ID_INVALID)
     {
         ID3D11UnorderedAccessView* uav = Trackable::Get<UAV>(static_cast<size_t>(_uav))->GetUAV();
         g_Context->CSSetUnorderedAccessViews(static_cast<UINT>(_slot), 1, &uav, nullptr);

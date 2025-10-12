@@ -6,6 +6,8 @@
 #define GM_TRUE 1.0
 #define GM_FALSE 0.0
 
+#define GMD3D11_ID_INVALID -1.0
+
 typedef char* ty_string;
 typedef double ty_real;
 

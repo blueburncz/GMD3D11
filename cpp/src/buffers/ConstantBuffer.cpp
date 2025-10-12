@@ -21,7 +21,7 @@ ConstantBuffer::~ConstantBuffer()
 ///
 /// @param {Real} _size The size of the buffer, in bytes. Must be a multiple of 16!
 ///
-/// @return {Real} The ID of the created constant buffer or -1 on fail.
+/// @return {Real} The ID of the created constant buffer or {@link GMD3D11_ID_INVALID} on fail.
 GM_EXPORT ty_real d3d11_constant_buffer_create(ty_real _size)
 {
     size_t size = static_cast<size_t>(_size);
@@ -29,7 +29,7 @@ GM_EXPORT ty_real d3d11_constant_buffer_create(ty_real _size)
     if (size <= 0 || size != RoundUp(size, 16))
     {
         std::cout << "Failed to create a constant buffer - struct size must be aligned to 16 bytes!" << std::endl;
-        return -1;
+        return GMD3D11_ID_INVALID;
     }
 
     CD3D11_BUFFER_DESC cbDesc(size, D3D11_BIND_CONSTANT_BUFFER);
@@ -38,7 +38,7 @@ GM_EXPORT ty_real d3d11_constant_buffer_create(ty_real _size)
 
     if (FAILED(hr))
     {
-        return -1.0;
+        return GMD3D11_ID_INVALID;
     }
 
     return static_cast<ty_real>((new ConstantBuffer(buffer, size))->GetID());
@@ -79,10 +79,10 @@ GM_EXPORT ty_real d3d11_constant_buffer_write_data(ty_real _id, ty_string _data)
 /// @desc Binds a constant buffer to a vertex shader.
 ///
 /// @param {Real} _slot The slot to bind the constant buffer to.
-/// @param {Real} _id The ID of the constant buffer or -1 to unbind the slot.
+/// @param {Real} _id The ID of the constant buffer or {@link GMD3D11_ID_INVALID} to unbind the slot.
 GM_EXPORT ty_real d3d11_shader_set_constant_buffer_vs(ty_real _slot, ty_real _id)
 {
-    if (_id >= 0.0)
+    if (_id != GMD3D11_ID_INVALID)
     {
         ID3D11Buffer* buffer = Trackable::Get<ConstantBuffer>(static_cast<size_t>(_id))->GetBuffer();
         g_Context->VSSetConstantBuffers(static_cast<UINT>(_slot), 1, &buffer);
@@ -99,10 +99,10 @@ GM_EXPORT ty_real d3d11_shader_set_constant_buffer_vs(ty_real _slot, ty_real _id
 /// @desc Binds a constant buffer to a geometry shader.
 ///
 /// @param {Real} _slot The slot to bind the constant buffer to.
-/// @param {Real} _id The ID of the constant buffer or -1 to unbind the slot.
+/// @param {Real} _id The ID of the constant buffer or {@link GMD3D11_ID_INVALID} to unbind the slot.
 GM_EXPORT ty_real d3d11_shader_set_constant_buffer_gs(ty_real _slot, ty_real _id)
 {
-    if (_id >= 0.0)
+    if (_id != GMD3D11_ID_INVALID)
     {
         ID3D11Buffer* buffer = Trackable::Get<ConstantBuffer>(static_cast<size_t>(_id))->GetBuffer();
         g_Context->GSSetConstantBuffers(static_cast<UINT>(_slot), 1, &buffer);
@@ -119,10 +119,10 @@ GM_EXPORT ty_real d3d11_shader_set_constant_buffer_gs(ty_real _slot, ty_real _id
 /// @desc Binds a constant buffer to a pixel shader.
 ///
 /// @param {Real} _slot The slot to bind the constant buffer to.
-/// @param {Real} _id The ID of the constant buffer or -1 to unbind the slot.
+/// @param {Real} _id The ID of the constant buffer or {@link GMD3D11_ID_INVALID} to unbind the slot.
 GM_EXPORT ty_real d3d11_shader_set_constant_buffer_ps(ty_real _slot, ty_real _id)
 {
-    if (_id >= 0.0)
+    if (_id != GMD3D11_ID_INVALID)
     {
         ID3D11Buffer* buffer = Trackable::Get<ConstantBuffer>(static_cast<size_t>(_id))->GetBuffer();
         g_Context->PSSetConstantBuffers(static_cast<UINT>(_slot), 1, &buffer);
@@ -143,7 +143,7 @@ GM_EXPORT ty_real d3d11_shader_set_constant_buffer_ps(ty_real _slot, ty_real _id
 /// @return {Bool} Returns `true` if the constant buffer exists.
 GM_EXPORT ty_real d3d11_constant_buffer_exists(ty_real _id)
 {
-    return (_id >= 0.0 && Trackable::Exists<ConstantBuffer>(static_cast<size_t>(_id))) ? GM_TRUE : GM_FALSE;
+    return (_id != GMD3D11_ID_INVALID && Trackable::Exists<ConstantBuffer>(static_cast<size_t>(_id))) ? GM_TRUE : GM_FALSE;
 }
 
 /// @func d3d11_constant_buffer_destroy(_id)

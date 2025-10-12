@@ -61,12 +61,12 @@ UAV* ComputeBuffer::CreateUAV() const
 /// @param {Real} _stride The stride of a single element, in bytes.
 /// @param {Real} _numElements The number of elements in the buffer.
 ///
-/// @return {Real} The ID of the created compute buffer or -1 on fail.
+/// @return {Real} The ID of the created compute buffer or {@link GMD3D11_ID_INVALID} on fail.
 GM_EXPORT ty_real d3d11_compute_buffer_create(ty_real _stride, ty_real _numElements)
 {
     if (_stride <= 0.0 || _numElements <= 0.0)
     {
-        return -1.0;
+        return GMD3D11_ID_INVALID;
     }
 
     UINT size = static_cast<UINT>(_stride) * static_cast<UINT>(_numElements);
@@ -84,7 +84,7 @@ GM_EXPORT ty_real d3d11_compute_buffer_create(ty_real _stride, ty_real _numEleme
     if (FAILED(hr))
     {
         std::cout << "Failed to create a compute buffer!" << std::endl;
-        return -1.0;
+        return GMD3D11_ID_INVALID;
     }
 
     return static_cast<ty_real>((new ComputeBuffer(buffer, static_cast<size_t>(_stride), static_cast<size_t>(_numElements)))->GetID());
@@ -129,7 +129,7 @@ GM_EXPORT ty_real d3d11_compute_buffer_write_data(ty_real _id, ty_string _data)
 /// @return {Bool} Returns `true` if the compute buffer exists.
 GM_EXPORT ty_real d3d11_compute_buffer_exists(ty_real _id)
 {
-    return (_id >= 0.0 && Trackable::Exists<ComputeBuffer>(static_cast<size_t>(_id))) ? GM_TRUE : GM_FALSE;
+    return (_id != GMD3D11_ID_INVALID && Trackable::Exists<ComputeBuffer>(static_cast<size_t>(_id))) ? GM_TRUE : GM_FALSE;
 }
 
 /// @func d3d11_compute_buffer_destroy(_id)
@@ -149,14 +149,14 @@ GM_EXPORT ty_real d3d11_compute_buffer_destroy(ty_real _id)
 ///
 /// @param {Real} _id The ID of the compute buffer.
 ///
-/// @return {Real} The ID of the created SRV on success or -1 on fail.
+/// @return {Real} The ID of the created SRV on success or {@link GMD3D11_ID_INVALID} on fail.
 GM_EXPORT ty_real d3d11_compute_buffer_create_srv(ty_real _id)
 {
     if (SRV* srv = Trackable::Get<ComputeBuffer>(static_cast<size_t>(_id))->CreateSRV())
     {
         return static_cast<ty_real>(srv->GetID());
     }
-    return -1.0;
+    return GMD3D11_ID_INVALID;
 }
 
 /// @func d3d11_compute_buffer_create_uav(_id)
@@ -165,12 +165,12 @@ GM_EXPORT ty_real d3d11_compute_buffer_create_srv(ty_real _id)
 ///
 /// @param {Real} _id The ID of the compute buffer.
 ///
-/// @return {Real} The ID of the created UAV on success or -1 on fail.
+/// @return {Real} The ID of the created UAV on success or {@link GMD3D11_ID_INVALID} on fail.
 GM_EXPORT ty_real d3d11_compute_buffer_create_uav(ty_real _id)
 {
     if (UAV* uav = Trackable::Get<ComputeBuffer>(static_cast<size_t>(_id))->CreateUAV())
     {
         return static_cast<ty_real>(uav->GetID());
     }
-    return -1.0;
+    return GMD3D11_ID_INVALID;
 }
