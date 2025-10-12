@@ -1,4 +1,4 @@
-#include <buffers/STBuffer.hpp>
+#include <buffers/ReadbackBuffer.hpp>
 
 #include <cstring>
 #include <iostream>
@@ -6,18 +6,18 @@
 extern ID3D11Device* g_Device;
 extern ID3D11DeviceContext* g_Context;
 
-STBuffer::STBuffer(ID3D11Buffer* buffer, size_t stride, size_t numElements)
+ReadbackBuffer::ReadbackBuffer(ID3D11Buffer* buffer, size_t stride, size_t numElements)
     : Buffer(buffer)
     , Stride(stride)
     , NumElements(numElements)
 {
 }
 
-STBuffer::~STBuffer()
+ReadbackBuffer::~ReadbackBuffer()
 {
 }
 
-bool STBuffer::Map()
+bool ReadbackBuffer::Map()
 {
     if (!Mapped)
     {
@@ -27,7 +27,7 @@ bool STBuffer::Map()
     return false;
 }
 
-bool STBuffer::Unmap()
+bool ReadbackBuffer::Unmap()
 {
     if (Mapped)
     {
@@ -38,7 +38,7 @@ bool STBuffer::Unmap()
     return false;
 }
 
-/// @func d3d11_stbuffer_create(_stride, _numElements)
+/// @func d3d11_readback_buffer_create(_stride, _numElements)
 ///
 /// @desc Creates a new staging buffer.
 ///
@@ -46,7 +46,7 @@ bool STBuffer::Unmap()
 /// @param {Real} _numElements The number of elements in the buffer.
 ///
 /// @return {Real} The ID of the created staging buffer or -1 on fail.
-GM_EXPORT ty_real d3d11_stbuffer_create(ty_real _stride, ty_real _numElements)
+GM_EXPORT ty_real d3d11_readback_buffer_create(ty_real _stride, ty_real _numElements)
 {
     if (_stride <= 0.0 || _numElements <= 0.0)
     {
@@ -71,56 +71,56 @@ GM_EXPORT ty_real d3d11_stbuffer_create(ty_real _stride, ty_real _numElements)
         return -1.0;
     }
 
-    return static_cast<ty_real>((new STBuffer(buffer, static_cast<size_t>(_stride), static_cast<size_t>(_numElements)))->GetID());
+    return static_cast<ty_real>((new ReadbackBuffer(buffer, static_cast<size_t>(_stride), static_cast<size_t>(_numElements)))->GetID());
 }
 
-/// @func d3d11_stbuffer_get_size(_stbuffer)
+/// @func d3d11_readback_buffer_get_size(_id)
 ///
 /// @desc Retrieves size of a staging buffer in bytes.
 ///
-/// @param {Real} _stbuffer The ID of the staging buffer.
+/// @param {Real} _id The ID of the staging buffer.
 ///
 /// @return {Real} The size of the staging buffer in bytes.
-GM_EXPORT ty_real d3d11_stbuffer_get_size(ty_real _stbuffer)
+GM_EXPORT ty_real d3d11_readback_buffer_get_size(ty_real _id)
 {
-    return Trackable::Get<STBuffer>(static_cast<size_t>(_stbuffer))->GetSize();
+    return Trackable::Get<ReadbackBuffer>(static_cast<size_t>(_id))->GetSize();
 }
 
-/// @func d3d11_stbuffer_is_mapped(_stbuffer)
+/// @func d3d11_readback_buffer_is_mapped(_id)
 ///
 /// @desc Checks whether a staging buffer is currently mapped to CPU-accessible memory.
 ///
-/// @param {Real} _stbuffer The ID of the staging buffer.
+/// @param {Real} _id The ID of the staging buffer.
 ///
 /// @return {Bool} Returns `true` if given staging buffer is currently mapped for reading or `false` otherwise.
-GM_EXPORT ty_real d3d11_stbuffer_is_mapped(ty_real _stbuffer)
+GM_EXPORT ty_real d3d11_readback_buffer_is_mapped(ty_real _id)
 {
-    return Trackable::Get<STBuffer>(static_cast<size_t>(_stbuffer))->IsMapped() ? GM_TRUE : GM_FALSE;
+    return Trackable::Get<ReadbackBuffer>(static_cast<size_t>(_id))->IsMapped() ? GM_TRUE : GM_FALSE;
 }
 
-/// @func d3d11_stbuffer_map(_stbuffer)
+/// @func d3d11_readback_buffer_map(_id)
 ///
 /// @desc Maps a staging buffer to CPU-accessible memory for reading.
 ///
-/// @param {Real} _stbuffer The ID of the staging buffer.
+/// @param {Real} _id The ID of the staging buffer.
 ///
 /// @return {Bool} Returns `true` on success or `false` otherwise (e.g. the staging buffer was already mapped).
-GM_EXPORT ty_real d3d11_stbuffer_map(ty_real _stbuffer)
+GM_EXPORT ty_real d3d11_readback_buffer_map(ty_real _id)
 {
-    return Trackable::Get<STBuffer>(static_cast<size_t>(_stbuffer))->Map() ? GM_TRUE : GM_FALSE;
+    return Trackable::Get<ReadbackBuffer>(static_cast<size_t>(_id))->Map() ? GM_TRUE : GM_FALSE;
 }
 
-/// @func d3d11_stbuffer_read_data(_stbuffer, _dest)
+/// @func d3d11_readback_buffer_read_data(_id, _dest)
 ///
 /// @desc Copies data of a mapped staging buffer into a GM buffer, specified by its address.
 ///
-/// @param {Real} _stbuffer The ID of the staging buffer.
+/// @param {Real} _id The ID of the staging buffer.
 /// @param {Pointer} _dest The address of the destination buffer.
 ///
 /// @return {Bool} Returns `true` on success or `false` otherwise (e.g. the staging buffer was not mapped).
-GM_EXPORT ty_real d3d11_stbuffer_read_data(ty_real _stbuffer, ty_string _dest)
+GM_EXPORT ty_real d3d11_readback_buffer_read_data(ty_real _id, ty_string _dest)
 {
-    STBuffer* stBuffer = Trackable::Get<STBuffer>(static_cast<size_t>(_stbuffer));
+    ReadbackBuffer* stBuffer = Trackable::Get<ReadbackBuffer>(static_cast<size_t>(_id));
     if (stBuffer->IsMapped())
     {
         memcpy(_dest, stBuffer->GetMappedData(), stBuffer->GetSize());
@@ -129,37 +129,37 @@ GM_EXPORT ty_real d3d11_stbuffer_read_data(ty_real _stbuffer, ty_string _dest)
     return GM_FALSE;
 }
 
-/// @func d3d11_stbuffer_unmap(_stbuffer)
+/// @func d3d11_readback_buffer_unmap(_id)
 ///
 /// @desc Unmaps a staging buffer from CPU-accessible memory.
 ///
-/// @param {Real} _stbuffer The ID of the staging buffer.
+/// @param {Real} _id The ID of the staging buffer.
 ///
 /// @return {Bool} Returns `true` on success or `false` otherwise (e.g. the staging buffer was not mapped).
-GM_EXPORT ty_real d3d11_stbuffer_unmap(ty_real _stbuffer)
+GM_EXPORT ty_real d3d11_readback_buffer_unmap(ty_real _id)
 {
-    return Trackable::Get<STBuffer>(static_cast<size_t>(_stbuffer))->Unmap() ? GM_TRUE : GM_FALSE;
+    return Trackable::Get<ReadbackBuffer>(static_cast<size_t>(_id))->Unmap() ? GM_TRUE : GM_FALSE;
 }
 
-/// @func d3d11_stbuffer_exists(_stbuffer)
+/// @func d3d11_readback_buffer_exists(_id)
 ///
 /// @desc Checks whether a staging buffer exists.
 ///
-/// @param {Real} _stbuffer The ID of the staging buffer.
+/// @param {Real} _id The ID of the staging buffer.
 ///
 /// @return {Bool} Returns `true` if the staging buffer exists.
-GM_EXPORT ty_real d3d11_stbuffer_exists(ty_real _stbuffer)
+GM_EXPORT ty_real d3d11_readback_buffer_exists(ty_real _id)
 {
-    return (_stbuffer >= 0.0 && Trackable::Exists<STBuffer>(static_cast<size_t>(_stbuffer))) ? GM_TRUE : GM_FALSE;
+    return (_id >= 0.0 && Trackable::Exists<ReadbackBuffer>(static_cast<size_t>(_id))) ? GM_TRUE : GM_FALSE;
 }
 
-/// @func d3d11_stbuffer_destroy(_stbuffer)
+/// @func d3d11_readback_buffer_destroy(_id)
 ///
 /// @desc Destroys a staging buffer.
 ///
-/// @param {Real} _stbuffer The ID of the staging buffer to destroy.
-GM_EXPORT ty_real d3d11_stbuffer_destroy(ty_real _stbuffer)
+/// @param {Real} _id The ID of the staging buffer to destroy.
+GM_EXPORT ty_real d3d11_readback_buffer_destroy(ty_real _id)
 {
-    delete Trackable::Get<STBuffer>(static_cast<size_t>(_stbuffer));
+    delete Trackable::Get<ReadbackBuffer>(static_cast<size_t>(_id));
     return GM_TRUE;
 }

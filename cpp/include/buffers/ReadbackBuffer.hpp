@@ -7,12 +7,12 @@
 #include <d3d11.h>
 
 /// @brief Staging buffer, for reading GPU data on the CPU.
-class STBuffer final : public Buffer
+class ReadbackBuffer final : public Buffer
 {
 public:
-    STBuffer(ID3D11Buffer* buffer, size_t stride, size_t numElements);
+    ReadbackBuffer(ID3D11Buffer* buffer, size_t stride, size_t numElements);
 
-    virtual ~STBuffer();
+    virtual ~ReadbackBuffer();
 
     size_t GetSize() const { return Stride * NumElements; }
 

@@ -8,9 +8,9 @@ if (d3d11_shader_exists(vs))
 	d3d11_shader_destroy(vs);
 }
 
-if (d3d11_cbuffer_exists(instanceData))
+if (d3d11_constant_buffer_exists(instanceData))
 {
-	d3d11_cbuffer_destroy(instanceData);
+	d3d11_constant_buffer_destroy(instanceData);
 }
 
 camera_destroy(camera);

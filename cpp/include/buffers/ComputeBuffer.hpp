@@ -8,15 +8,17 @@
 
 #include <d3d11.h>
 
-/// @brief Read-only structured buffer.
-class RSBuffer final : public Buffer
+/// @brief Read-write structured buffer.
+class ComputeBuffer final : public Buffer
 {
 public:
-    RSBuffer(ID3D11Buffer* buffer, size_t stride, size_t numElements);
+    ComputeBuffer(ID3D11Buffer* buffer, size_t stride, size_t numElements);
 
-    virtual ~RSBuffer();
+    virtual ~ComputeBuffer();
 
     size_t GetSize() const { return Stride * NumElements; }
+
+    UAV* CreateUAV() const;
 
     SRV* CreateSRV() const;
 

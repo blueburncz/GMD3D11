@@ -7,12 +7,12 @@
 #include <d3d11.h>
 
 /// @brief Constant buffer.
-class CBuffer final : public Buffer
+class ConstantBuffer final : public Buffer
 {
 public:
-    CBuffer(ID3D11Buffer* buffer, size_t size);
+    ConstantBuffer(ID3D11Buffer* buffer, size_t size);
 
-    virtual ~CBuffer();
+    virtual ~ConstantBuffer();
 
     size_t GetSize() const { return Size; }
 

@@ -14,27 +14,31 @@
   * [x] Compile from file (optimization level 3)
   * [x] Save and load compiled shaders
   * [x] Hook into `ID3D11DeviceContext::Draw` calls to swap out used vertex and pixel shaders with custom ones
-  * [x] Geometry shaders
-  * [ ] Tessellation shaders (🛑 TODO)
-  * [x] Compute shaders
-* [ ] Vertex formats (🛑 TODO)
+  * [x] Vertex
+  * [x] Pixel
+  * [x] Geometry
+  * [ ] Tessellation
+  * [x] Compute
+* [ ] Vertex formats
 * [ ] Buffers
-  * [ ] Vertex buffers (🛑 TODO)
-  * [ ] Index buffers (🛑 TODO)
-  * [x] Constant buffers
-  * [x] Read-only structured buffers (with SRV)
-  * [x] Read/write structured buffers (with SRV and UAV)
-  * [ ] Raw buffers (🛑 TODO)
-  * [x] Staging buffers
-  * [ ] Indirect buffers (🛑 TODO)
+  * [ ] Vertex
+  * [ ] Index
+  * [x] Constant
+  * [x] Structured (read-only)
+  * [x] Compute (read/write structured)
+  * [ ] Append/consume
+  * [ ] Indirect args
+  * [ ] Raw
+  * [ ] Upload (CPU -> GPU)
+  * [x] Readback (GPU -> CPU)
 * [ ] Textures
   * [x] `texture_set_stage_vs()` - vertex texture fetching of native GM textures (`sprite_get_texture()`, `surface_get_texture()`)
-  * [ ] Samplers (🛑 TODO)
-  * [ ] Texture2D (🛑 TODO)
-  * [ ] Texture3D (🛑 TODO)
-  * [ ] Texture arrays (🛑 TODO)
-* [ ] Occlusion queries (🛑 TODO)
-* [ ] Timestamps (🛑 TODO)
+  * [ ] Samplers
+  * [ ] 2D
+  * [ ] 3D
+  * [ ] Arrays
+* [ ] Occlusion queries
+* [ ] Timestamps
 * [x] `vertex_submit_instanced()` - instanced rendering of native GM vertex buffers
 
 ## Building the DLL

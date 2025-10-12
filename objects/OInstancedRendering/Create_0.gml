@@ -15,10 +15,10 @@ assert(d3d11_shader_exists(ps), $"Pixel shader compilation failed! {d3d11_get_er
 instanceNumber = 2000;
 
 // Instance position could be just float3, but cbuffer size must be divisible by 16!
-instanceData = d3d11_cbuffer_create(d3d11_sizeof16(D3D11_FLOAT4) * instanceNumber);
-assert(d3d11_cbuffer_exists(instanceData), $"Could not create instanceData! {d3d11_get_error_string()}");
+instanceData = d3d11_constant_buffer_create(d3d11_sizeof16(D3D11_FLOAT4) * instanceNumber);
+assert(d3d11_constant_buffer_exists(instanceData), $"Could not create instanceData! {d3d11_get_error_string()}");
 
-var _buffer = buffer_create(d3d11_cbuffer_get_size(instanceData), buffer_fixed, 1);
+var _buffer = buffer_create(d3d11_constant_buffer_get_size(instanceData), buffer_fixed, 1);
 repeat (instanceNumber)
 {
 	buffer_write(_buffer, buffer_f32, random(128));
@@ -26,7 +26,7 @@ repeat (instanceNumber)
 	buffer_write(_buffer, buffer_f32, random(128));
 	buffer_write(_buffer, buffer_f32, 0.0);
 }
-d3d11_cbuffer_write_data(instanceData, buffer_get_address(_buffer));
+d3d11_constant_buffer_write_data(instanceData, buffer_get_address(_buffer));
 buffer_delete(_buffer);
 
 camera = camera_create();
