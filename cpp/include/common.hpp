@@ -9,7 +9,7 @@
 typedef char* ty_string;
 typedef double ty_real;
 
-static inline size_t RoundUp16(size_t value)
+static inline size_t RoundUp(size_t value, size_t alignment)
 {
-    return ((value + 15) & ~static_cast<size_t>(15));
+    return ((value + (alignment - 1)) & ~(alignment - 1));
 }

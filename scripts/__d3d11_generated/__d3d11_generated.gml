@@ -105,7 +105,7 @@ function d3d11_draw_instanced(_count)
 ///
 /// @desc Retrieves size of given type, in bytes.
 ///
-/// @param {Real} _type The type to get the byte-size of. 
+/// @param {Real} _type The type to get the byte-size of.
 ///
 /// @return {Real} The size of given type or -1 if the type is not valid.
 ///
@@ -132,13 +132,14 @@ function d3d11_sizeof(_type)
 	return external_call(_fn, _type);
 }
 
-/// @func d3d11_sizeof16(_type)
+/// @func d3d11_sizeof_aligned(_type, _alignment)
 ///
-/// @desc Retrieves 16 byte-aligned size of given type, in bytes.
+/// @desc Retrieves aligned byte size of given type.
 ///
-/// @param {Real} _type The type to get the byte-size of. 
+/// @param {Real} _type The type to get the byte size of.
+/// @param {Real} _alignment The required aligned byte size.
 ///
-/// @return {Real} The 16 byte-aligned size of given type or -1 if the type is not valid.
+/// @return {Real} The aligned byte size of given type or -1 if the type is not valid.
 ///
 /// @see D3D11_BOOL
 /// @see D3D11_INT
@@ -154,13 +155,13 @@ function d3d11_sizeof(_type)
 /// @see D3D11_FLOAT3
 /// @see D3D11_FLOAT4
 /// @see D3D11_FLOAT4X4
-function d3d11_sizeof16(_type)
+function d3d11_sizeof_aligned(_type, _alignment)
 {
 	gml_pragma("forceinline");
 	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_sizeof16", dll_cdecl, ty_real,
-		1, ty_real);
-	return external_call(_fn, _type);
+		GMD3D11_PATH, "d3d11_sizeof_aligned", dll_cdecl, ty_real,
+		2, ty_real, ty_real);
+	return external_call(_fn, _type, _alignment);
 }
 
 /// @func d3d11_buffer_copy(_src, _dest)

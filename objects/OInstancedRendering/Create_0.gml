@@ -15,7 +15,7 @@ assert(d3d11_shader_exists(ps), $"Pixel shader compilation failed! {d3d11_get_er
 instanceNumber = 2000;
 
 // Instance position could be just float3, but cbuffer size must be divisible by 16!
-instanceData = d3d11_constant_buffer_create(d3d11_sizeof16(D3D11_FLOAT4) * instanceNumber);
+instanceData = d3d11_constant_buffer_create(d3d11_sizeof_aligned(D3D11_FLOAT4, 16) * instanceNumber);
 assert(d3d11_constant_buffer_exists(instanceData), $"Could not create instanceData! {d3d11_get_error_string()}");
 
 var _buffer = buffer_create(d3d11_constant_buffer_get_size(instanceData), buffer_fixed, 1);

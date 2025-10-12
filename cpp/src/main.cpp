@@ -197,7 +197,7 @@ enum class EType : uint32_t
 ///
 /// @desc Retrieves size of given type, in bytes.
 ///
-/// @param {Real} _type The type to get the byte-size of. 
+/// @param {Real} _type The type to get the byte-size of.
 ///
 /// @return {Real} The size of given type or -1 if the type is not valid.
 ///
@@ -235,7 +235,7 @@ GM_EXPORT ty_real d3d11_sizeof(ty_real _type)
 
     case EType::Int3:
         return sizeof(DirectX::XMINT3);
-    
+
     case EType::Int4:
         return sizeof(DirectX::XMINT4);
 
@@ -247,13 +247,13 @@ GM_EXPORT ty_real d3d11_sizeof(ty_real _type)
 
     case EType::Uint3:
         return sizeof(DirectX::XMUINT3);
-    
+
     case EType::Uint4:
         return sizeof(DirectX::XMUINT4);
 
     case EType::Float:
         return sizeof(float);
-    
+
     case EType::Float2:
         return sizeof(DirectX::XMFLOAT2);
 
@@ -271,13 +271,14 @@ GM_EXPORT ty_real d3d11_sizeof(ty_real _type)
     }
 }
 
-/// @func d3d11_sizeof16(_type)
+/// @func d3d11_sizeof_aligned(_type, _alignment)
 ///
-/// @desc Retrieves 16 byte-aligned size of given type, in bytes.
+/// @desc Retrieves aligned byte size of given type.
 ///
-/// @param {Real} _type The type to get the byte-size of. 
+/// @param {Real} _type The type to get the byte size of.
+/// @param {Real} _alignment The required aligned byte size.
 ///
-/// @return {Real} The 16 byte-aligned size of given type or -1 if the type is not valid.
+/// @return {Real} The aligned byte size of given type or -1 if the type is not valid.
 ///
 /// @see D3D11_BOOL
 /// @see D3D11_INT
@@ -293,11 +294,11 @@ GM_EXPORT ty_real d3d11_sizeof(ty_real _type)
 /// @see D3D11_FLOAT3
 /// @see D3D11_FLOAT4
 /// @see D3D11_FLOAT4X4
-GM_EXPORT ty_real d3d11_sizeof16(ty_real _type)
+GM_EXPORT ty_real d3d11_sizeof_aligned(ty_real _type, ty_real _alignment)
 {
     if (_type < 0.0 || _type >= static_cast<ty_real>(EType::SIZE))
     {
         return -1.0;
     }
-    return static_cast<ty_real>(RoundUp16(static_cast<size_t>(d3d11_sizeof(_type))));
+    return static_cast<ty_real>(RoundUp(static_cast<size_t>(d3d11_sizeof(_type)), static_cast<size_t>(_alignment)));
 }

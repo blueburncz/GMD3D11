@@ -26,7 +26,7 @@ GM_EXPORT ty_real d3d11_constant_buffer_create(ty_real _size)
 {
     size_t size = static_cast<size_t>(_size);
 
-    if (size <= 0 || size != RoundUp16(size))
+    if (size <= 0 || size != RoundUp(size, 16))
     {
         std::cout << "Failed to create a constant buffer - struct size must be aligned to 16 bytes!" << std::endl;
         return -1;
