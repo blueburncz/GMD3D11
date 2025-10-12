@@ -110,7 +110,7 @@ GM_EXPORT ty_real d3d11_readback_buffer_map(ty_real _id)
     return Trackable::Get<ReadbackBuffer>(static_cast<size_t>(_id))->Map() ? GM_TRUE : GM_FALSE;
 }
 
-/// @func d3d11_readback_buffer_read_data(_id, _dest)
+/// @func d3d11_readback_buffer_read(_id, _dest)
 ///
 /// @desc Copies data of a mapped staging buffer into a GM buffer, specified by its address.
 ///
@@ -118,7 +118,7 @@ GM_EXPORT ty_real d3d11_readback_buffer_map(ty_real _id)
 /// @param {Pointer} _dest The address of the destination buffer.
 ///
 /// @return {Bool} Returns `true` on success or `false` otherwise (e.g. the staging buffer was not mapped).
-GM_EXPORT ty_real d3d11_readback_buffer_read_data(ty_real _id, ty_string _dest)
+GM_EXPORT ty_real d3d11_readback_buffer_read(ty_real _id, ty_string _dest)
 {
     ReadbackBuffer* stBuffer = Trackable::Get<ReadbackBuffer>(static_cast<size_t>(_id));
     if (stBuffer->IsMapped())

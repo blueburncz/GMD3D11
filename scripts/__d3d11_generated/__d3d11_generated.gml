@@ -223,17 +223,17 @@ function d3d11_compute_buffer_get_size(_id)
 	return external_call(_fn, _id);
 }
 
-/// @func d3d11_compute_buffer_write_data(_id, _data)
+/// @func d3d11_compute_buffer_write(_id, _data)
 ///
 /// @desc Writes data from a GM buffer into a D3D11 compute buffer.
 ///
 /// @param {Real} _id The ID of the compute buffer.
 /// @param {Pointer} _data An address of a GM buffer to update the compute buffer from.
-function d3d11_compute_buffer_write_data(_id, _data)
+function d3d11_compute_buffer_write(_id, _data)
 {
 	gml_pragma("forceinline");
 	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_compute_buffer_write_data", dll_cdecl, ty_real,
+		GMD3D11_PATH, "d3d11_compute_buffer_write", dll_cdecl, ty_real,
 		2, ty_real, ty_string);
 	return external_call(_fn, _id, _data);
 }
@@ -332,17 +332,17 @@ function d3d11_constant_buffer_get_size(_id)
 	return external_call(_fn, _id);
 }
 
-/// @func d3d11_constant_buffer_write_data(_id, _data)
+/// @func d3d11_constant_buffer_write(_id, _data)
 ///
 /// @desc Writes data from a GM buffer into a D3D11 constant buffer.
 ///
 /// @param {Real} _id The ID of the constant buffer.
 /// @param {Pointer} _data An address of a GM buffer to update the constant buffer from.
-function d3d11_constant_buffer_write_data(_id, _data)
+function d3d11_constant_buffer_write(_id, _data)
 {
 	gml_pragma("forceinline");
 	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_constant_buffer_write_data", dll_cdecl, ty_real,
+		GMD3D11_PATH, "d3d11_constant_buffer_write", dll_cdecl, ty_real,
 		2, ty_real, ty_string);
 	return external_call(_fn, _id, _data);
 }
@@ -487,7 +487,7 @@ function d3d11_readback_buffer_map(_id)
 	return external_call(_fn, _id);
 }
 
-/// @func d3d11_readback_buffer_read_data(_id, _dest)
+/// @func d3d11_readback_buffer_read(_id, _dest)
 ///
 /// @desc Copies data of a mapped staging buffer into a GM buffer, specified by its address.
 ///
@@ -495,11 +495,11 @@ function d3d11_readback_buffer_map(_id)
 /// @param {Pointer} _dest The address of the destination buffer.
 ///
 /// @return {Bool} Returns `true` on success or `false` otherwise (e.g. the staging buffer was not mapped).
-function d3d11_readback_buffer_read_data(_id, _dest)
+function d3d11_readback_buffer_read(_id, _dest)
 {
 	gml_pragma("forceinline");
 	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_readback_buffer_read_data", dll_cdecl, ty_real,
+		GMD3D11_PATH, "d3d11_readback_buffer_read", dll_cdecl, ty_real,
 		2, ty_real, ty_string);
 	return external_call(_fn, _id, _dest);
 }
@@ -583,17 +583,17 @@ function d3d11_structured_buffer_get_size(_id)
 	return external_call(_fn, _id);
 }
 
-/// @func d3d11_structured_buffer_write_data(_id, _data)
+/// @func d3d11_structured_buffer_write(_id, _data)
 ///
 /// @desc Writes data from a GM buffer into a D3D11 structured buffer.
 ///
 /// @param {Real} _id The ID of the structured buffer.
 /// @param {Pointer} _data An address of a GM buffer to update the structured buffer from.
-function d3d11_structured_buffer_write_data(_id, _data)
+function d3d11_structured_buffer_write(_id, _data)
 {
 	gml_pragma("forceinline");
 	static _fn = external_define(
-		GMD3D11_PATH, "d3d11_structured_buffer_write_data", dll_cdecl, ty_real,
+		GMD3D11_PATH, "d3d11_structured_buffer_write", dll_cdecl, ty_real,
 		2, ty_real, ty_string);
 	return external_call(_fn, _id, _data);
 }

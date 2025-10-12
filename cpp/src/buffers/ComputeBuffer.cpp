@@ -102,13 +102,13 @@ GM_EXPORT ty_real d3d11_compute_buffer_get_size(ty_real _id)
     return Trackable::Get<ComputeBuffer>(static_cast<size_t>(_id))->GetSize();
 }
 
-/// @func d3d11_compute_buffer_write_data(_id, _data)
+/// @func d3d11_compute_buffer_write(_id, _data)
 ///
 /// @desc Writes data from a GM buffer into a D3D11 compute buffer.
 ///
 /// @param {Real} _id The ID of the compute buffer.
 /// @param {Pointer} _data An address of a GM buffer to update the compute buffer from.
-GM_EXPORT ty_real d3d11_compute_buffer_write_data(ty_real _id, ty_string _data)
+GM_EXPORT ty_real d3d11_compute_buffer_write(ty_real _id, ty_string _data)
 {
     g_Context->UpdateSubresource(
         Trackable::Get<ComputeBuffer>(static_cast<size_t>(_id))->GetBuffer(),

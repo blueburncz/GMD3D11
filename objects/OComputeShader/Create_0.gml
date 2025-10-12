@@ -13,7 +13,7 @@ for (var i = 1; i <= _numElements; ++i)
 {
 	buffer_write(_tempBuffer, buffer_f32, i);
 }
-d3d11_structured_buffer_write_data(bufferIn, buffer_get_address(_tempBuffer));
+d3d11_structured_buffer_write(bufferIn, buffer_get_address(_tempBuffer));
 
 srv = d3d11_structured_buffer_create_srv(bufferIn);
 assert(d3d11_srv_exists(srv), "Could not create SRV!");
@@ -38,7 +38,7 @@ d3d11_shader_set_cs(GMD3D11_ID_INVALID);
 d3d11_buffer_copy(bufferOut, stagingBuffer);
 assert(d3d11_readback_buffer_map(stagingBuffer), "Failed to map stagingBuffer!");
 assert(d3d11_readback_buffer_is_mapped(stagingBuffer));
-d3d11_readback_buffer_read_data(stagingBuffer, buffer_get_address(_tempBuffer));
+d3d11_readback_buffer_read(stagingBuffer, buffer_get_address(_tempBuffer));
 assert(d3d11_readback_buffer_unmap(stagingBuffer), "Failed to unmap stagingBuffer!");
 
 buffer_seek(_tempBuffer, buffer_seek_start, 0);
