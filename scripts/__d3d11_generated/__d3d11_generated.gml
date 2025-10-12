@@ -1,5 +1,11 @@
 /* THIS FILE IS GENERATED - DO NOT EDIT BY HAND! */
 
+/// @func d3d11_init(_device, _context)
+///
+/// @desc Initializes the GMD3D11 extension. Must be called first before using any other functions!
+///
+/// @param {Pointer} _device A pointer to the D3D11 device, retrieved from `os_get_info()`.
+/// @param {Pointer} _context A pointer to the D3D11 context, retrieved from `os_get_info()`.
 function d3d11_init(_device, _context)
 {
 	gml_pragma("forceinline");
@@ -9,6 +15,11 @@ function d3d11_init(_device, _context)
 	return external_call(_fn, _device, _context);
 }
 
+/// @func d3d11_get_error_string()
+///
+/// @desc Retrieves the last error string.
+///
+/// @return {String} The last error string.
 function d3d11_get_error_string()
 {
 	gml_pragma("forceinline");

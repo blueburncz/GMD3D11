@@ -54,6 +54,12 @@ void __stdcall Draw(ID3D11DeviceContext* Context, UINT VertexCount, UINT StartVe
     fn(Context, VertexCount, StartVertexLocation);
 }
 
+/// @func d3d11_init(_device, _context)
+///
+/// @desc Initializes the GMD3D11 extension. Must be called first before using any other functions!
+///
+/// @param {Pointer} _device A pointer to the D3D11 device, retrieved from `os_get_info()`.
+/// @param {Pointer} _context A pointer to the D3D11 context, retrieved from `os_get_info()`.
 GM_EXPORT ty_real d3d11_init(ty_string _device, ty_string _context)
 {
     g_Device = (ID3D11Device*)_device;
@@ -65,6 +71,11 @@ GM_EXPORT ty_real d3d11_init(ty_string _device, ty_string _context)
     return GM_TRUE;
 }
 
+/// @func d3d11_get_error_string()
+///
+/// @desc Retrieves the last error string.
+///
+/// @return {String} The last error string.
 GM_EXPORT ty_string d3d11_get_error_string()
 {
     return g_ErrorString ? g_ErrorString : "";
