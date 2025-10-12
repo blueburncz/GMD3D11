@@ -134,6 +134,26 @@ GM_EXPORT ty_real d3d11_shader_set_constant_buffer_ps(ty_real _slot, ty_real _id
     return GM_TRUE;
 }
 
+/// @func d3d11_shader_set_constant_buffer_cs(_slot, _id)
+///
+/// @desc Binds a constant buffer to a compute shader.
+///
+/// @param {Real} _slot The slot to bind the constant buffer to.
+/// @param {Real} _id The ID of the constant buffer or {@link GMD3D11_ID_INVALID} to unbind the slot.
+GM_EXPORT ty_real d3d11_shader_set_constant_buffer_cs(ty_real _slot, ty_real _id)
+{
+    if (_id != GMD3D11_ID_INVALID)
+    {
+        ID3D11Buffer* buffer = Trackable::Get<ConstantBuffer>(static_cast<size_t>(_id))->GetBuffer();
+        g_Context->CSSetConstantBuffers(static_cast<UINT>(_slot), 1, &buffer);
+    }
+    else
+    {
+        g_Context->CSSetConstantBuffers(static_cast<UINT>(_slot), 0, nullptr);
+    }
+    return GM_TRUE;
+}
+
 /// @func d3d11_constant_buffer_exists(_id)
 ///
 /// @desc Checks whether a constant buffer exists.

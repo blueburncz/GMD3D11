@@ -392,6 +392,21 @@ function d3d11_shader_set_constant_buffer_ps(_slot, _id)
 	return external_call(_fn, _slot, _id);
 }
 
+/// @func d3d11_shader_set_constant_buffer_cs(_slot, _id)
+///
+/// @desc Binds a constant buffer to a compute shader.
+///
+/// @param {Real} _slot The slot to bind the constant buffer to.
+/// @param {Real} _id The ID of the constant buffer or {@link GMD3D11_ID_INVALID} to unbind the slot.
+function d3d11_shader_set_constant_buffer_cs(_slot, _id)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_shader_set_constant_buffer_cs", dll_cdecl, ty_real,
+		2, ty_real, ty_real);
+	return external_call(_fn, _slot, _id);
+}
+
 /// @func d3d11_constant_buffer_exists(_id)
 ///
 /// @desc Checks whether a constant buffer exists.
