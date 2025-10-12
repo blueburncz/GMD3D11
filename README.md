@@ -50,7 +50,7 @@ Simply run `./build.ps1` from the root directory to build the DLL, copy it into 
 
 ## Links
 
-* [Documentation](https://blueburn.cz/gmd3d11/docs)
+* [Documentation](https://blueburn.cz/gmd3d11/docs) - for the latest release, not the `main` branch!!!
 
 ## Credits
 
