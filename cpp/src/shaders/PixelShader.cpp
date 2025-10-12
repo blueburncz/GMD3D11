@@ -1,4 +1,4 @@
-#include <shaders/PShader.hpp>
+#include <shaders/PixelShader.hpp>
 
 #include <utils.hpp>
 
@@ -11,13 +11,13 @@ extern char* g_ErrorString;
 
 ID3D11PixelShader* g_OverridePS = nullptr;
 
-PShader::PShader(ID3DBlob* blob, ID3D11PixelShader* shader)
+PixelShader::PixelShader(ID3DBlob* blob, ID3D11PixelShader* shader)
     : Shader(blob)
     , Raw(shader)
 {
 }
 
-PShader::~PShader()
+PixelShader::~PixelShader()
 {
     if (Raw)
     {
@@ -25,7 +25,7 @@ PShader::~PShader()
     }
 }
 
-static PShader* CompilePS(char* file, char* entryPoint, char* profile)
+static PixelShader* CompilePS(char* file, char* entryPoint, char* profile)
 {
     ID3DBlob* blob = nullptr;
     LPCWSTR path = ConvertCharArrayToLPCWSTR(file);
@@ -49,7 +49,7 @@ static PShader* CompilePS(char* file, char* entryPoint, char* profile)
 
     std::cout << "Compiled PS " << file << std::endl;
 
-    return new PShader(blob, ps);
+    return new PixelShader(blob, ps);
 }
 
 /// @func d3d11_shader_compile_ps(_file, _entryPoint, _profile)
@@ -63,7 +63,7 @@ static PShader* CompilePS(char* file, char* entryPoint, char* profile)
 /// @return {Real} The ID of the pixel shader or -1 on fail.
 GM_EXPORT ty_real d3d11_shader_compile_ps(ty_string _file, ty_string _entryPoint, ty_string _profile)
 {
-    PShader* shader = CompilePS(_file, _entryPoint, _profile);
+    PixelShader* shader = CompilePS(_file, _entryPoint, _profile);
     if (!shader)
     {
         return -1.0;
@@ -110,7 +110,7 @@ GM_EXPORT ty_real d3d11_shader_load_ps(ty_string _file)
 
     std::cout << "Loaded PS " << _file << std::endl;
 
-    return static_cast<ty_real>((new PShader(blob, ps))->GetID());
+    return static_cast<ty_real>((new PixelShader(blob, ps))->GetID());
 }
 
 /// @func d3d11_shader_override_ps(_ps)
@@ -120,6 +120,6 @@ GM_EXPORT ty_real d3d11_shader_load_ps(ty_string _file)
 /// @param {Real} _ps The ID of the shader or -1 to disable the override.
 GM_EXPORT ty_real d3d11_shader_override_ps(ty_real _ps)
 {
-    g_OverridePS = (_ps >= 0.0) ? ((PShader*)Trackable::Get<Shader>(static_cast<size_t>(_ps)))->GetShader() : nullptr;
+    g_OverridePS = (_ps >= 0.0) ? ((PixelShader*)Trackable::Get<Shader>(static_cast<size_t>(_ps)))->GetShader() : nullptr;
     return GM_TRUE;
 }

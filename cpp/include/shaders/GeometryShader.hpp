@@ -5,12 +5,12 @@
 #include <shaders/Shader.hpp>
 
 /// @brief Geometry shader.
-class GShader final : public Shader
+class GeometryShader final : public Shader
 {
 public:
-    GShader(ID3DBlob* blob, ID3D11GeometryShader* shader);
+    GeometryShader(ID3DBlob* blob, ID3D11GeometryShader* shader);
 
-    virtual ~GShader();
+    virtual ~GeometryShader();
 
     ID3D11GeometryShader* GetShader() const { return Raw; }
 

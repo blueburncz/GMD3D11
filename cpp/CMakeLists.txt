@@ -11,11 +11,11 @@ add_library(GMD3D11 SHARED
     src/buffers/ReadbackBuffer.cpp
     src/buffers/StructuredBuffer.cpp
 
-    src/shaders/CShader.cpp
-    src/shaders/GShader.cpp
-    src/shaders/PShader.cpp
+    src/shaders/ComputeShader.cpp
+    src/shaders/GeometryShader.cpp
+    src/shaders/PixelShader.cpp
     src/shaders/Shader.cpp
-    src/shaders/VShader.cpp
+    src/shaders/VertexShader.cpp
 
     src/views/SRV.cpp
     src/views/UAV.cpp

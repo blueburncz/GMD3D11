@@ -5,12 +5,12 @@
 #include <shaders/Shader.hpp>
 
 /// @brief Pixel shader.
-class PShader final : public Shader
+class PixelShader final : public Shader
 {
 public:
-    PShader(ID3DBlob* blob, ID3D11PixelShader* shader);
+    PixelShader(ID3DBlob* blob, ID3D11PixelShader* shader);
 
-    virtual ~PShader();
+    virtual ~PixelShader();
 
     ID3D11PixelShader* GetShader() const { return Raw; }
 

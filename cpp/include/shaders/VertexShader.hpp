@@ -5,12 +5,12 @@
 #include <shaders/Shader.hpp>
 
 /// @brief Vertex shader.
-class VShader final : public Shader
+class VertexShader final : public Shader
 {
 public:
-    VShader(ID3DBlob* blob, ID3D11VertexShader* shader);
+    VertexShader(ID3DBlob* blob, ID3D11VertexShader* shader);
 
-    virtual ~VShader();
+    virtual ~VertexShader();
 
     ID3D11VertexShader* GetShader() const { return Raw; }
 

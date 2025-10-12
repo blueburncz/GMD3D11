@@ -1,4 +1,4 @@
-#include <shaders/VShader.hpp>
+#include <shaders/VertexShader.hpp>
 
 #include <utils.hpp>
 
@@ -11,13 +11,13 @@ extern char* g_ErrorString;
 
 ID3D11VertexShader* g_OverrideVS = nullptr;
 
-VShader::VShader(ID3DBlob* blob, ID3D11VertexShader* shader)
+VertexShader::VertexShader(ID3DBlob* blob, ID3D11VertexShader* shader)
     : Shader(blob)
     , Raw(shader)
 {
 }
 
-VShader::~VShader()
+VertexShader::~VertexShader()
 {
     if (Raw)
     {
@@ -25,7 +25,7 @@ VShader::~VShader()
     }
 }
 
-static VShader* CompileVS(char* file, char* entryPoint, char* profile)
+static VertexShader* CompileVS(char* file, char* entryPoint, char* profile)
 {
     ID3DBlob* blob = nullptr;
     LPCWSTR path = ConvertCharArrayToLPCWSTR(file);
@@ -49,7 +49,7 @@ static VShader* CompileVS(char* file, char* entryPoint, char* profile)
 
     std::cout << "Compiled VS " << file << std::endl;
 
-    return new VShader(blob, vs);
+    return new VertexShader(blob, vs);
 }
 
 /// @func d3d11_shader_compile_vs(_file, _entryPoint, _profile)
@@ -63,7 +63,7 @@ static VShader* CompileVS(char* file, char* entryPoint, char* profile)
 /// @return {Real} The ID of the vertex shader or -1 on fail.
 GM_EXPORT ty_real d3d11_shader_compile_vs(ty_string _file, ty_string _entryPoint, ty_string _profile)
 {
-    VShader* shader = CompileVS(_file, _entryPoint, _profile);
+    VertexShader* shader = CompileVS(_file, _entryPoint, _profile);
     if (!shader)
     {
         return -1.0;
@@ -110,7 +110,7 @@ GM_EXPORT ty_real d3d11_shader_load_vs(ty_string _file)
 
     std::cout << "Loaded VS " << _file << std::endl;
 
-    return static_cast<ty_real>((new VShader(blob, vs))->GetID());
+    return static_cast<ty_real>((new VertexShader(blob, vs))->GetID());
 }
 
 /// @func d3d11_shader_override_vs(_vs)
@@ -121,6 +121,6 @@ GM_EXPORT ty_real d3d11_shader_load_vs(ty_string _file)
 /// be compatible with the overriden shader!
 GM_EXPORT ty_real d3d11_shader_override_vs(ty_real _vs)
 {
-    g_OverrideVS = (_vs >= 0.0) ? ((VShader*)Trackable::Get<Shader>(static_cast<size_t>(_vs)))->GetShader() : nullptr;
+    g_OverrideVS = (_vs >= 0.0) ? ((VertexShader*)Trackable::Get<Shader>(static_cast<size_t>(_vs)))->GetShader() : nullptr;
     return GM_TRUE;
 }

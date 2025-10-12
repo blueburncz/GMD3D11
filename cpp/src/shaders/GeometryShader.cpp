@@ -1,4 +1,4 @@
-#include <shaders/GShader.hpp>
+#include <shaders/GeometryShader.hpp>
 
 #include <utils.hpp>
 
@@ -9,13 +9,13 @@ extern ID3D11Device* g_Device;
 extern ID3D11DeviceContext* g_Context;
 extern char* g_ErrorString;
 
-GShader::GShader(ID3DBlob* blob, ID3D11GeometryShader* shader)
+GeometryShader::GeometryShader(ID3DBlob* blob, ID3D11GeometryShader* shader)
     : Shader(blob)
     , Raw(shader)
 {
 }
 
-GShader::~GShader()
+GeometryShader::~GeometryShader()
 {
     if (Raw)
     {
@@ -23,7 +23,7 @@ GShader::~GShader()
     }
 }
 
-static GShader* CompileGS(char* file, char* entryPoint, char* profile)
+static GeometryShader* CompileGS(char* file, char* entryPoint, char* profile)
 {
     ID3DBlob* blob = nullptr;
     LPCWSTR path = ConvertCharArrayToLPCWSTR(file);
@@ -47,7 +47,7 @@ static GShader* CompileGS(char* file, char* entryPoint, char* profile)
 
     std::cout << "Compiled GS " << file << std::endl;
 
-    return new GShader(blob, gs);
+    return new GeometryShader(blob, gs);
 }
 
 /// @func d3d11_shader_compile_gs(_file, _entryPoint, _profile)
@@ -61,7 +61,7 @@ static GShader* CompileGS(char* file, char* entryPoint, char* profile)
 /// @return {Real} The ID of the geometry shader or -1 on fail.
 GM_EXPORT ty_real d3d11_shader_compile_gs(ty_string _file, ty_string _entryPoint, ty_string _profile)
 {
-    GShader* shader = CompileGS(_file, _entryPoint, _profile);
+    GeometryShader* shader = CompileGS(_file, _entryPoint, _profile);
     if (!shader)
     {
         return -1.0;
@@ -108,7 +108,7 @@ GM_EXPORT ty_real d3d11_shader_load_gs(ty_string _file)
 
     std::cout << "Loaded GS " << _file << std::endl;
 
-    return static_cast<ty_real>((new GShader(blob, gs))->GetID());
+    return static_cast<ty_real>((new GeometryShader(blob, gs))->GetID());
 }
 
 /// @func d3d11_shader_set_gs(_gs)
@@ -118,7 +118,7 @@ GM_EXPORT ty_real d3d11_shader_load_gs(ty_string _file)
 /// @param {Real} _gs The ID of the shader or -1 to disable the geometry stage.
 GM_EXPORT ty_real d3d11_shader_set_gs(ty_real _gs)
 {
-    ID3D11GeometryShader* shader = (_gs >= 0.0) ? ((GShader*)Trackable::Get<Shader>(static_cast<size_t>(_gs)))->GetShader() : nullptr;
+    ID3D11GeometryShader* shader = (_gs >= 0.0) ? ((GeometryShader*)Trackable::Get<Shader>(static_cast<size_t>(_gs)))->GetShader() : nullptr;
     g_Context->GSSetShader(shader, nullptr, 0);
     return GM_TRUE;
 }

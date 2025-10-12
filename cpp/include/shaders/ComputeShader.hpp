@@ -5,12 +5,12 @@
 #include <shaders/Shader.hpp>
 
 /// @brief Compute shader.
-class CShader final : public Shader
+class ComputeShader final : public Shader
 {
 public:
-    CShader(ID3DBlob* blob, ID3D11ComputeShader* shader);
+    ComputeShader(ID3DBlob* blob, ID3D11ComputeShader* shader);
 
-    virtual ~CShader();
+    virtual ~ComputeShader();
 
     ID3D11ComputeShader* GetShader() const { return Raw; }
 

@@ -1,4 +1,4 @@
-#include <shaders/CShader.hpp>
+#include <shaders/ComputeShader.hpp>
 
 #include <buffers/Buffer.hpp>
 #include <utils.hpp>
@@ -10,13 +10,13 @@ extern ID3D11Device* g_Device;
 extern ID3D11DeviceContext* g_Context;
 extern char* g_ErrorString;
 
-CShader::CShader(ID3DBlob* blob, ID3D11ComputeShader* shader)
+ComputeShader::ComputeShader(ID3DBlob* blob, ID3D11ComputeShader* shader)
     : Shader(blob)
     , Raw(shader)
 {
 }
 
-CShader::~CShader()
+ComputeShader::~ComputeShader()
 {
     if (Raw)
     {
@@ -24,7 +24,7 @@ CShader::~CShader()
     }
 }
 
-static CShader* CompileCS(char* file, char* entryPoint, char* profile)
+static ComputeShader* CompileCS(char* file, char* entryPoint, char* profile)
 {
     ID3DBlob* blob = nullptr;
     LPCWSTR path = ConvertCharArrayToLPCWSTR(file);
@@ -48,7 +48,7 @@ static CShader* CompileCS(char* file, char* entryPoint, char* profile)
 
     std::cout << "Compiled CS " << file << std::endl;
 
-    return new CShader(blob, gs);
+    return new ComputeShader(blob, gs);
 }
 
 /// @func d3d11_shader_compile_cs(_file, _entryPoint, _profile)
@@ -62,7 +62,7 @@ static CShader* CompileCS(char* file, char* entryPoint, char* profile)
 /// @return {Real} The ID of the compute shader or -1 on fail.
 GM_EXPORT ty_real d3d11_shader_compile_cs(ty_string _file, ty_string _entryPoint, ty_string _profile)
 {
-    CShader* shader = CompileCS(_file, _entryPoint, _profile);
+    ComputeShader* shader = CompileCS(_file, _entryPoint, _profile);
     if (!shader)
     {
         return -1.0;
@@ -109,7 +109,7 @@ GM_EXPORT ty_real d3d11_shader_load_cs(ty_string _file)
 
     std::cout << "Loaded CS " << _file << std::endl;
 
-    return static_cast<ty_real>((new CShader(blob, cs))->GetID());
+    return static_cast<ty_real>((new ComputeShader(blob, cs))->GetID());
 }
 
 /// @func d3d11_shader_set_cs(_cs)
@@ -119,7 +119,7 @@ GM_EXPORT ty_real d3d11_shader_load_cs(ty_string _file)
 /// @param {Real} _cs The ID of the shader or -1 to disable the compute stage.
 GM_EXPORT ty_real d3d11_shader_set_cs(ty_real _gs)
 {
-    ID3D11ComputeShader* shader = (_gs >= 0.0) ? ((CShader*)Trackable::Get<Shader>(static_cast<size_t>(_gs)))->GetShader() : nullptr;
+    ID3D11ComputeShader* shader = (_gs >= 0.0) ? ((ComputeShader*)Trackable::Get<Shader>(static_cast<size_t>(_gs)))->GetShader() : nullptr;
     g_Context->CSSetShader(shader, nullptr, 0);
     return GM_TRUE;
 }
