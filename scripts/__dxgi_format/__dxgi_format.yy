@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"__dxgi_format",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__dxgi_format",
+  "parent":{
+    "name":"GMD3D11",
+    "path":"folders/GMD3D11.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

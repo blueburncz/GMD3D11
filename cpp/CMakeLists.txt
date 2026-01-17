@@ -17,6 +17,11 @@ add_library(GMD3D11 SHARED
     src/shaders/Shader.cpp
     src/shaders/VertexShader.cpp
 
+    src/textures/Sampler.cpp
+    src/textures/Texture2D.cpp
+
+    src/views/DSV.cpp
+    src/views/RTV.cpp
     src/views/SRV.cpp
     src/views/UAV.cpp
 

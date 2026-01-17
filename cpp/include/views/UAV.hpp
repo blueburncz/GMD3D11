@@ -18,3 +18,5 @@ public:
 private:
     ID3D11UnorderedAccessView* Raw = nullptr;
 };
+
+void UAVDescFromBuffer(D3D11_UNORDERED_ACCESS_VIEW_DESC& desc, char* buffer);

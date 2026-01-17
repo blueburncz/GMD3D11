@@ -933,6 +933,343 @@ function d3d11_shader_override_vs(_vs)
 	return external_call(_fn, _vs);
 }
 
+/// @func d3d11_sampler_create_impl(_buffer)
+///
+/// @desc
+///
+/// @param {Pointer}
+///
+/// @return {Real}
+function d3d11_sampler_create_impl(_buffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_sampler_create_impl", dll_cdecl, ty_real,
+		1, ty_string);
+	return external_call(_fn, _buffer);
+}
+
+/// @func d3d11_sampler_exists(_id)
+///
+/// @desc Checks whether a sampler state exists.
+///
+/// @param {Real} _id The ID of the sampler state.
+///
+/// @return {Bool} Returns `true` if the sampler state exists.
+function d3d11_sampler_exists(_id)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_sampler_exists", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _id);
+}
+
+/// @func d3d11_sampler_destroy(_id)
+///
+/// @desc Destroys a sampler state.
+///
+/// @param {Real} _id The ID of the sampler state to destroy.
+function d3d11_sampler_destroy(_id)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_sampler_destroy", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _id);
+}
+
+/// @func d3d11_sampler_set_vs(_id, _slot)
+///
+/// @desc
+///
+/// @param {Real} _id
+/// @param {Real} _slot
+function d3d11_sampler_set_vs(_id, _slot)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_sampler_set_vs", dll_cdecl, ty_real,
+		2, ty_real, ty_real);
+	return external_call(_fn, _id, _slot);
+}
+
+/// @func d3d11_sampler_set_vs(_id, _slot)
+///
+/// @desc
+///
+/// @param {Real} _id
+/// @param {Real} _slot
+function d3d11_sampler_set_gs(_id, _slot)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_sampler_set_gs", dll_cdecl, ty_real,
+		2, ty_real, ty_real);
+	return external_call(_fn, _id, _slot);
+}
+
+/// @func d3d11_sampler_set_vs(_id, _slot)
+///
+/// @desc
+///
+/// @param {Real} _id
+/// @param {Real} _slot
+function d3d11_sampler_set_ps(_id, _slot)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_sampler_set_ps", dll_cdecl, ty_real,
+		2, ty_real, ty_real);
+	return external_call(_fn, _id, _slot);
+}
+
+/// @func d3d11_sampler_set_vs(_id, _slot)
+///
+/// @desc
+///
+/// @param {Real} _id
+/// @param {Real} _slot
+function d3d11_sampler_set_cs(_id, _slot)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_sampler_set_cs", dll_cdecl, ty_real,
+		2, ty_real, ty_real);
+	return external_call(_fn, _id, _slot);
+}
+
+/// @func d3d11_texture2D_create_impl(_buffer, _pSysMem, _memPitch, _memSlicePitch)
+///
+/// @desc Creates a new 2D texture.
+///
+/// @param {Pointer} _buffer A pointer to a buffer containing serialized {@link D3D11_TEXTURE2D_DESC}.
+/// @param {Pointer} _pSysMem
+/// @param {Real} _memPitch
+/// @param {Real} _memSlicePitch
+///
+/// @return {Real} The ID of the created 2D texture or {@link GMD3D11_ID_INVALID} on fail.
+function d3d11_texture2D_create_impl(_buffer, _pSysMem, _memPitch, _memSlicePitch)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_texture2D_create_impl", dll_cdecl, ty_real,
+		4, ty_string, ty_string, ty_real, ty_real);
+	return external_call(_fn, _buffer, _pSysMem, _memPitch, _memSlicePitch);
+}
+
+/// @func d3d11_texture2d_exists(_id)
+///
+/// @desc Checks whether a 2D texture exists.
+///
+/// @param {Real} _id The ID of the 2D texture.
+///
+/// @return {Bool} Returns `true` if the 2D texture exists.
+function d3d11_texture2d_exists(_id)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_texture2d_exists", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _id);
+}
+
+/// @func d3d11_texture2d_destroy(_id)
+///
+/// @desc Destroys a 2D texture.
+///
+/// @param {Real} _id The ID of the 2D texture to destroy.
+function d3d11_texture2d_destroy(_id)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_texture2d_destroy", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _id);
+}
+
+/// @func d3d11_texture2d_create_dsv_impl(_id, _buffer)
+///
+/// @desc Creates a depth stencil view (DSV) for a 2D texture.
+///
+/// @param {Real} _id The ID of the 2D texture to create an DSV for.
+/// @param {Pointer} _buffer A pointer to a buffer containing serialized {@link D3D11_DEPTH_STENCIL_VIEW_DESC} or
+/// `pointer_null`.
+///
+/// @return {Real} The ID of the create DSV on success or {@link GMD3D11_ID_INVALID} on fail.
+function d3d11_texture2d_create_dsv_impl(_id, _buffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_texture2d_create_dsv_impl", dll_cdecl, ty_real,
+		2, ty_real, ty_string);
+	return external_call(_fn, _id, _buffer);
+}
+
+/// @func d3d11_texture2d_create_rtv_impl(_id, _buffer)
+///
+/// @desc Creates an render target view (RTV) for a 2D texture.
+///
+/// @param {Real} _id The ID of the 2D texture to create an RTV for.
+/// @param {Pointer} _buffer A pointer to a buffer containing serialized {@link D3D11_RENDER_TARGET_VIEW_DESC} or
+/// `pointer_null`.
+///
+/// @return {Real} The ID of the create RTV on success or {@link GMD3D11_ID_INVALID} on fail.
+function d3d11_texture2d_create_rtv_impl(_id, _buffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_texture2d_create_rtv_impl", dll_cdecl, ty_real,
+		2, ty_real, ty_string);
+	return external_call(_fn, _id, _buffer);
+}
+
+/// @func d3d11_texture2d_create_srv_impl(_id, _buffer)
+///
+/// @desc Creates a shader resource view (SRV) for a 2D texture.
+///
+/// @param {Real} _id The ID of the 2D texture to create an SRV for.
+/// @param {Pointer} _buffer A pointer to a buffer containing serialized {@link D3D11_SHADER_RESOURCE_VIEW_DESC} or
+/// `pointer_null`.
+///
+/// @return {Real} The ID of the create SRV on success or {@link GMD3D11_ID_INVALID} on fail.
+function d3d11_texture2d_create_srv_impl(_id, _buffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_texture2d_create_srv_impl", dll_cdecl, ty_real,
+		2, ty_real, ty_string);
+	return external_call(_fn, _id, _buffer);
+}
+
+/// @func d3d11_texture2d_create_uav_impl(_id, _buffer)
+///
+/// @desc Creates an unordered access view (UAV) for a 2D texture.
+///
+/// @param {Real} _id The ID of the 2D texture to create an UAV for.
+/// @param {Pointer} _buffer A pointer to a buffer containing serialized {@link D3D11_UNORDERED_ACCESS_VIEW_DESC} or
+/// `pointer_null`.
+///
+/// @return {Real} The ID of the create UAV on success or {@link GMD3D11_ID_INVALID} on fail.
+function d3d11_texture2d_create_uav_impl(_id, _buffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_texture2d_create_uav_impl", dll_cdecl, ty_real,
+		2, ty_real, ty_string);
+	return external_call(_fn, _id, _buffer);
+}
+
+/// @func d3d11_dsv_exists(_dsv)
+///
+/// @desc Checks whether an depth stencil view (DSV) exists.
+///
+/// @param {Real} _dsv The ID of the DSV.
+///
+/// @return {Bool} Returns `true` if the DSV exists.
+function d3d11_dsv_exists(_dsv)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_dsv_exists", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _dsv);
+}
+
+/// @func d3d11_dsv_destroy(_dsv)
+///
+/// @desc Destroys an depth stencil view (DSV).
+///
+/// @param {Real} _dsv The ID of the DSV to destroy.
+function d3d11_dsv_destroy(_dsv)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_dsv_destroy", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _dsv);
+}
+
+/// @func d3d11_dsv_clear(_dsv, _r, _g, _b, _a)
+///
+/// @desc Clears a depth stencil view.
+///
+/// @param {Real} _dsv The ID of the DSV to clear.
+/// @param {Real} _clearFlags Bitwise `OR` between {@link D3D11_CLEAR_DEPTH} and/or {@link D3D11_CLEAR_STENCIL}, depending
+/// which ones should be cleared.
+/// @param {Real} _depth The depth value to clear the DSV with.
+/// @param {Real} _stencil The stencil value to clear the DSV with.
+function d3d11_dsv_clear(_dsv, _clearFlags, _depth, _stencil)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_dsv_clear", dll_cdecl, ty_real,
+		4, ty_real, ty_real, ty_real, ty_real);
+	return external_call(_fn, _dsv, _clearFlags, _depth, _stencil);
+}
+
+/// @func d3d11_rtv_exists(_rtv)
+///
+/// @desc Checks whether an render target view (RTV) exists.
+///
+/// @param {Real} _rtv The ID of the RTV.
+///
+/// @return {Bool} Returns `true` if the RTV exists.
+function d3d11_rtv_exists(_rtv)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_rtv_exists", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _rtv);
+}
+
+/// @func d3d11_rtv_destroy(_rtv)
+///
+/// @desc Destroys an render target view (RTV).
+///
+/// @param {Real} _rtv The ID of the RTV to destroy.
+function d3d11_rtv_destroy(_rtv)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_rtv_destroy", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _rtv);
+}
+
+/// @func d3d11_rtv_clear(_rtv, _r, _g, _b, _a)
+///
+/// @desc Clears a render target view to given color.
+///
+/// @param {Real} _rtv The ID of the RTV to clear.
+/// @param {Real} _r The value of the red channel.
+/// @param {Real} _g The value of the green channel.
+/// @param {Real} _b The value of the blue channel.
+/// @param {Real} _a The value of the alpha channel.
+function d3d11_rtv_clear(_rtv, _r, _g, _b, _a)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_rtv_clear", dll_cdecl, ty_real,
+		5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	return external_call(_fn, _rtv, _r, _g, _b, _a);
+}
+
+/// @func d3d11_set_render_targets_impl(_buffer)
+///
+/// @desc
+///
+/// @param {Pointer} _buffer
+function d3d11_set_render_targets_impl(_buffer)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_set_render_targets_impl", dll_cdecl, ty_real,
+		1, ty_string);
+	return external_call(_fn, _buffer);
+}
+
 /// @func d3d11_srv_exists(_srv)
 ///
 /// @desc Checks whether a shader resource view (SRV) exists.
@@ -959,6 +1296,20 @@ function d3d11_srv_destroy(_srv)
 	gml_pragma("forceinline");
 	static _fn = external_define(
 		GMD3D11_PATH, "d3d11_srv_destroy", dll_cdecl, ty_real,
+		1, ty_real);
+	return external_call(_fn, _srv);
+}
+
+/// @func d3d11_srv_generate_mips(_srv)
+///
+/// @desc Generates texture mips using given shader resource view (SRV).
+///
+/// @param {Real} _srv The ID of the SRV.
+function d3d11_srv_generate_mips(_srv)
+{
+	gml_pragma("forceinline");
+	static _fn = external_define(
+		GMD3D11_PATH, "d3d11_srv_generate_mips", dll_cdecl, ty_real,
 		1, ty_real);
 	return external_call(_fn, _srv);
 }

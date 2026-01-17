@@ -18,3 +18,5 @@ public:
 private:
     ID3D11ShaderResourceView* Raw = nullptr;
 };
+
+void SRVDescFromBuffer(D3D11_SHADER_RESOURCE_VIEW_DESC& desc, char* buffer);

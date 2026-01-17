@@ -34,13 +34,19 @@ This is a community-developed project, released under **CC0 1.0 Universal (Publi
   * [x] Readback (GPU -> CPU)
 * [ ] Textures
   * [x] `texture_set_stage_vs()` - vertex texture fetching of native GM textures (`sprite_get_texture()`, `surface_get_texture()`)
-  * [ ] Samplers
-  * [ ] 2D
+  * [x] Samplers
+  * [x] 2D
   * [ ] 3D
   * [ ] Arrays
+* [x] DSV
+* [x] RTV
+* [x] SRV
+* [x] UAV
 * [ ] Occlusion queries
 * [ ] Timestamps
 * [x] `vertex_submit_instanced()` - instanced rendering of native GM vertex buffers
+* [ ] Viewports
+* [ ] Scissor rects
 
 ## Building the DLL
 

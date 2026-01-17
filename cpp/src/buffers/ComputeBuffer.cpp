@@ -18,13 +18,13 @@ ComputeBuffer::~ComputeBuffer()
 
 SRV* ComputeBuffer::CreateSRV() const
 {
-    D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
-    srvDesc.Format = DXGI_FORMAT_UNKNOWN;
-    srvDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFER;
-    srvDesc.Buffer.NumElements = NumElements;
+    D3D11_SHADER_RESOURCE_VIEW_DESC desc = {};
+    desc.Format = DXGI_FORMAT_UNKNOWN;
+    desc.ViewDimension = D3D11_SRV_DIMENSION_BUFFER;
+    desc.Buffer.NumElements = NumElements;
 
     ID3D11ShaderResourceView* srv = nullptr;
-    HRESULT hr = g_Device->CreateShaderResourceView(Raw, &srvDesc, &srv);
+    HRESULT hr = g_Device->CreateShaderResourceView(Raw, &desc, &srv);
 
     if (FAILED(hr))
     {
@@ -37,13 +37,13 @@ SRV* ComputeBuffer::CreateSRV() const
 
 UAV* ComputeBuffer::CreateUAV() const
 {
-    D3D11_UNORDERED_ACCESS_VIEW_DESC uavDesc = {};
-    uavDesc.Format = DXGI_FORMAT_UNKNOWN;
-    uavDesc.ViewDimension = D3D11_UAV_DIMENSION_BUFFER;
-    uavDesc.Buffer.NumElements = NumElements;
+    D3D11_UNORDERED_ACCESS_VIEW_DESC desc = {};
+    desc.Format = DXGI_FORMAT_UNKNOWN;
+    desc.ViewDimension = D3D11_UAV_DIMENSION_BUFFER;
+    desc.Buffer.NumElements = NumElements;
     
     ID3D11UnorderedAccessView* uav = nullptr;
-    HRESULT hr = g_Device->CreateUnorderedAccessView(Raw, &uavDesc, &uav);
+    HRESULT hr = g_Device->CreateUnorderedAccessView(Raw, &desc, &uav);
 
     if (FAILED(hr))
     {
@@ -71,15 +71,15 @@ GM_EXPORT ty_real d3d11_compute_buffer_create(ty_real _stride, ty_real _numEleme
 
     UINT size = static_cast<UINT>(_stride) * static_cast<UINT>(_numElements);
 
-    D3D11_BUFFER_DESC sbDesc = {};
-    sbDesc.Usage = D3D11_USAGE_DEFAULT;
-    sbDesc.BindFlags = D3D11_BIND_UNORDERED_ACCESS | D3D11_BIND_SHADER_RESOURCE;
-    sbDesc.ByteWidth = size;
-    sbDesc.StructureByteStride = static_cast<UINT>(_stride);
-    sbDesc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
+    D3D11_BUFFER_DESC desc = {};
+    desc.Usage = D3D11_USAGE_DEFAULT;
+    desc.BindFlags = D3D11_BIND_UNORDERED_ACCESS | D3D11_BIND_SHADER_RESOURCE;
+    desc.ByteWidth = size;
+    desc.StructureByteStride = static_cast<UINT>(_stride);
+    desc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
 
     ID3D11Buffer* buffer = nullptr;
-    HRESULT hr = g_Device->CreateBuffer(&sbDesc, NULL, &buffer);
+    HRESULT hr = g_Device->CreateBuffer(&desc, NULL, &buffer);
 
     if (FAILED(hr))
     {

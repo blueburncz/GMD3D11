@@ -55,15 +55,15 @@ GM_EXPORT ty_real d3d11_readback_buffer_create(ty_real _stride, ty_real _numElem
 
     UINT size = static_cast<UINT>(_stride) * static_cast<UINT>(_numElements);
 
-    D3D11_BUFFER_DESC sbDesc = {};
-    sbDesc.Usage = D3D11_USAGE_STAGING;
-    sbDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
-    sbDesc.ByteWidth = size;
-    sbDesc.StructureByteStride = static_cast<UINT>(_stride);
-    sbDesc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
+    D3D11_BUFFER_DESC desc = {};
+    desc.Usage = D3D11_USAGE_STAGING;
+    desc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
+    desc.ByteWidth = size;
+    desc.StructureByteStride = static_cast<UINT>(_stride);
+    desc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
 
     ID3D11Buffer* buffer = nullptr;
-    HRESULT hr = g_Device->CreateBuffer(&sbDesc, NULL, &buffer);
+    HRESULT hr = g_Device->CreateBuffer(&desc, NULL, &buffer);
 
     if (FAILED(hr))
     {

@@ -82,15 +82,12 @@ GM_EXPORT ty_real d3d11_constant_buffer_write(ty_real _id, ty_string _data)
 /// @param {Real} _id The ID of the constant buffer or {@link GMD3D11_ID_INVALID} to unbind the slot.
 GM_EXPORT ty_real d3d11_shader_set_constant_buffer_vs(ty_real _slot, ty_real _id)
 {
+    ID3D11Buffer* buffer = nullptr;
     if (_id != GMD3D11_ID_INVALID)
     {
-        ID3D11Buffer* buffer = Trackable::Get<ConstantBuffer>(static_cast<size_t>(_id))->GetBuffer();
-        g_Context->VSSetConstantBuffers(static_cast<UINT>(_slot), 1, &buffer);
+        buffer = Trackable::Get<ConstantBuffer>(static_cast<size_t>(_id))->GetBuffer();
     }
-    else
-    {
-        g_Context->VSSetConstantBuffers(static_cast<UINT>(_slot), 0, nullptr);
-    }
+    g_Context->VSSetConstantBuffers(static_cast<UINT>(_slot), 1, &buffer);
     return GM_TRUE;
 }
 
@@ -102,15 +99,12 @@ GM_EXPORT ty_real d3d11_shader_set_constant_buffer_vs(ty_real _slot, ty_real _id
 /// @param {Real} _id The ID of the constant buffer or {@link GMD3D11_ID_INVALID} to unbind the slot.
 GM_EXPORT ty_real d3d11_shader_set_constant_buffer_gs(ty_real _slot, ty_real _id)
 {
+    ID3D11Buffer* buffer = nullptr;
     if (_id != GMD3D11_ID_INVALID)
     {
-        ID3D11Buffer* buffer = Trackable::Get<ConstantBuffer>(static_cast<size_t>(_id))->GetBuffer();
-        g_Context->GSSetConstantBuffers(static_cast<UINT>(_slot), 1, &buffer);
+        buffer = Trackable::Get<ConstantBuffer>(static_cast<size_t>(_id))->GetBuffer();
     }
-    else
-    {
-        g_Context->GSSetConstantBuffers(static_cast<UINT>(_slot), 0, nullptr);
-    }
+    g_Context->GSSetConstantBuffers(static_cast<UINT>(_slot), 1, &buffer);
     return GM_TRUE;
 }
 
@@ -122,15 +116,12 @@ GM_EXPORT ty_real d3d11_shader_set_constant_buffer_gs(ty_real _slot, ty_real _id
 /// @param {Real} _id The ID of the constant buffer or {@link GMD3D11_ID_INVALID} to unbind the slot.
 GM_EXPORT ty_real d3d11_shader_set_constant_buffer_ps(ty_real _slot, ty_real _id)
 {
+    ID3D11Buffer* buffer = nullptr;
     if (_id != GMD3D11_ID_INVALID)
     {
-        ID3D11Buffer* buffer = Trackable::Get<ConstantBuffer>(static_cast<size_t>(_id))->GetBuffer();
-        g_Context->PSSetConstantBuffers(static_cast<UINT>(_slot), 1, &buffer);
+        buffer = Trackable::Get<ConstantBuffer>(static_cast<size_t>(_id))->GetBuffer();
     }
-    else
-    {
-        g_Context->PSSetConstantBuffers(static_cast<UINT>(_slot), 0, nullptr);
-    }
+    g_Context->PSSetConstantBuffers(static_cast<UINT>(_slot), 1, &buffer);
     return GM_TRUE;
 }
 
@@ -142,15 +133,12 @@ GM_EXPORT ty_real d3d11_shader_set_constant_buffer_ps(ty_real _slot, ty_real _id
 /// @param {Real} _id The ID of the constant buffer or {@link GMD3D11_ID_INVALID} to unbind the slot.
 GM_EXPORT ty_real d3d11_shader_set_constant_buffer_cs(ty_real _slot, ty_real _id)
 {
+    ID3D11Buffer* buffer = nullptr;
     if (_id != GMD3D11_ID_INVALID)
     {
-        ID3D11Buffer* buffer = Trackable::Get<ConstantBuffer>(static_cast<size_t>(_id))->GetBuffer();
-        g_Context->CSSetConstantBuffers(static_cast<UINT>(_slot), 1, &buffer);
+        buffer = Trackable::Get<ConstantBuffer>(static_cast<size_t>(_id))->GetBuffer();
     }
-    else
-    {
-        g_Context->CSSetConstantBuffers(static_cast<UINT>(_slot), 0, nullptr);
-    }
+    g_Context->CSSetConstantBuffers(static_cast<UINT>(_slot), 1, &buffer);
     return GM_TRUE;
 }
 

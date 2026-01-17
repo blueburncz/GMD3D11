@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"__d3d11_format",
+  "%Name":"__d3d11_sampler",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__d3d11_format",
+  "name":"__d3d11_sampler",
   "parent":{
     "name":"GMD3D11",
     "path":"folders/GMD3D11.yy",

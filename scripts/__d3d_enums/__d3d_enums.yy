@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"__d3d_enums",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__d3d_enums",
+  "parent":{
+    "name":"GMD3D11",
+    "path":"folders/GMD3D11.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
